@@ -1,15 +1,46 @@
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <!-- Base App theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:background">@color/background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:statusBarColor">@color/background</item>
+        <item name="colorError">@color/color_error</item>
+        <item name="colorOnError">@color/color_error</item>
+        <item name="textInputStyle">@style/TILStyle</item>
+        <item name="colorPrimary">@color/accent_red</item>
+        <item name="colorOnSurface">@color/text_dark</item>
     </style>
 
-    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="TILStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="iconPadding">8dp</item>
+        <item name="hintTextColor">@color/text_dark</item>
+    </style>
+
+    <!-- MainActivity theme -->
+    <style name="AppTheme.Main">
+        <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
+    </style>
+
+    <style name="BottomNavStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="backgroundColor">@color/bottom_nav_background</item>
+    </style>
+
+    <!-- LoginActivity theme. -->
+    <style name="AppTheme.Login">
+        <item name="buttonStyle">@style/ButtonStyle</item>
+        <item name="textInputStyle">@style/EditTextStyle</item>
+    </style>
+    
+    <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundColor">@color/button_background</item>
+        <item name="android:textColor">@color/text_light</item>
+        <item name="iconTint">@color/white</item>
+        <item name="cornerRadius">48dp</item>
+    </style>
+
+    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="cornerRadius">48dp</item>
     </style>
 
 </resources>

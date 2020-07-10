@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_rise"
+        android:id="@+id/navigation_chats"
         android:icon="@drawable/ic_chat"
         android:title="@string/title_chats" />
 
     <item
-        android:id="@+id/navigation_chats"
-        android:icon="@drawable/ic_launch_red"
+        android:id="@+id/navigation_rise"
+        android:icon="@drawable/ic_idea_in_gear_oulined"
         android:title="@string/title_rise" />
 
     <item
         android:id="@+id/navigation_profile"
-        android:icon="@drawable/ic_user"
+        android:icon="@drawable/ic_account"
         android:title="@string/title_profile" />
 
 </menu>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/firstFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context=".login.ui.LoginActivity">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butSignUp"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_gravity="start"
+            android:layout_marginTop="48dp"
+            android:backgroundTint="@color/accent_green"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/register"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            app:cornerRadius="44dp"
+            app:layout_constraintEnd_toEndOf="@+id/butEmail"
+            app:layout_constraintStart_toStartOf="@+id/butEmail"
+            app:layout_constraintTop_toBottomOf="@+id/butEmail"
+            app:rippleColor="@color/rippleGreen" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/citadelView"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="72dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/citadel_c"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/riseView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="@string/title_rise"
+            android:textSize="66sp"
+            app:layout_constraintBottom_toBottomOf="@+id/citadelView"
+            app:layout_constraintStart_toEndOf="@+id/citadelView"
+            app:layout_constraintTop_toTopOf="@+id/citadelView"
+            app:layout_constraintVertical_bias="0.64" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="52dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/into_phrase"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/riseView" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butGoogle"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/button_background"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/sign_in_google"
+            android:textAlignment="viewStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            app:cornerRadius="44dp"
+            app:icon="@drawable/google_logo"
+            app:iconPadding="32dp"
+            app:iconSize="28dp"
+            app:iconTint="@android:color/transparent"
+            app:iconTintMode="add"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butEmail"
+            android:layout_width="0dp"
+            android:layout_height="72dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/button_background"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="@string/sign_in_email"
+            android:textAlignment="textStart"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/white"
+            app:cornerRadius="44dp"
+            app:icon="@drawable/ic_mail_outlined"
+            app:iconPadding="32dp"
+            app:iconSize="28dp"
+            app:iconTint="@color/white"
+            app:iconTintMode="src_in"
+            app:layout_constraintEnd_toEndOf="@+id/butGoogle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/butGoogle"
+            app:layout_constraintTop_toBottomOf="@+id/butGoogle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
