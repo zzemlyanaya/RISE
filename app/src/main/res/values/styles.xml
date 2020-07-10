@@ -11,6 +11,11 @@
         <item name="colorOnSurface">@color/text_dark</item>
     </style>
 
+    <style name="roundedImageViewRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <style name="TILStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:fontFamily">@font/montserrat_medium</item>
         <item name="iconPadding">8dp</item>

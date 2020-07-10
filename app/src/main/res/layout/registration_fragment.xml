@@ -16,16 +16,37 @@
 
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imagePerson"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:layout_marginTop="24dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/user_grey"
+            android:backgroundTint="@color/icon_grey"
+            android:scaleType="centerCrop"
+            android:visibility="@{viewmodel.isPersonChecked ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@style/ShapeAppearance.MaterialComponents.MediumComponent" />
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:srcCompat="@drawable/im_robot_programmer"
+            app:strokeColor="@color/text_dark"
+            app:strokeWidth="1dp" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageCompany"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/icon_grey"
+            android:scaleType="centerCrop"
+            android:visibility="@{viewmodel.isPersonChecked ? View.INVISIBLE : View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+            app:srcCompat="@drawable/im_robot_manager"
+            app:strokeColor="@color/text_dark"
+            app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/butUploadImage"
@@ -44,9 +65,9 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/text_light"
             app:cornerRadius="44dp"
-            app:layout_constraintEnd_toEndOf="@+id/imageView"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            app:layout_constraintEnd_toEndOf="@+id/imagePerson"
+            app:layout_constraintStart_toStartOf="@+id/imagePerson"
+            app:layout_constraintTop_toBottomOf="@+id/imagePerson"
             app:strokeColor="@color/button_background"
             app:strokeWidth="2dp" />
 
@@ -303,7 +324,7 @@
                 android:id="@+id/textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/ic_key_outlined"
+                android:drawableStart="@drawable/ic_key_outlined"
                 android:drawablePadding="16dp"
                 android:drawableTint="@color/text_dark"
                 android:fontFamily="@font/montserrat_medium"
@@ -331,6 +352,7 @@
             app:layout_constraintStart_toStartOf="@+id/inputPassword"
             app:layout_constraintTop_toBottomOf="@+id/inputPassword"
             app:rippleColor="@color/rippleGreen" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

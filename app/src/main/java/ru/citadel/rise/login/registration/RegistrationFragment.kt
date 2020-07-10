@@ -27,6 +27,7 @@ class RegistrationFragment : Fragment() {
         binding.viewmodel = viewModel
 
         binding.butRegistr.setOnClickListener { onCreateAccountListener?.onCreateNew() }
+
         return binding.root
     }
 
