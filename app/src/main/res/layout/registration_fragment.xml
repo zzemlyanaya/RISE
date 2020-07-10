@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            app:srcCompat="@drawable/im_robot_programmer"
+            app:srcCompat="@drawable/im_robot_with_idea"
             app:strokeColor="@color/text_dark"
             app:strokeWidth="1dp" />
         <com.google.android.material.imageview.ShapeableImageView
