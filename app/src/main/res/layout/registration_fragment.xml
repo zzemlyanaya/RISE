@@ -104,8 +104,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iconPerson"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="24dp"
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -183,8 +183,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iconCompany"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="24dp"
                     android:scaleType="fitXY"
                     app:layout_constraintEnd_toEndOf="parent"
