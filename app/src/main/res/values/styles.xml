@@ -7,8 +7,7 @@
         <item name="colorError">@color/color_error</item>
         <item name="colorOnError">@color/color_error</item>
         <item name="textInputStyle">@style/TILStyle</item>
-        <item name="colorPrimary">@color/accent_red</item>
-        <item name="colorOnSurface">@color/text_dark</item>
+        <item name="shapeAppearanceOverlay">@style/roundedImageViewRounded</item>
     </style>
 
     <style name="roundedImageViewRounded" parent="">
@@ -24,6 +23,8 @@
 
     <!-- MainActivity theme -->
     <style name="AppTheme.Main">
+        <item name="colorPrimary">@color/accent_red</item>
+        <item name="colorOnSurface">@color/icon_grey</item>
         <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
     </style>
 
@@ -33,6 +34,8 @@
 
     <!-- LoginActivity theme. -->
     <style name="AppTheme.Login">
+        <item name="colorPrimary">@color/accent_red</item>
+        <item name="colorOnSurface">@color/text_dark</item>
         <item name="buttonStyle">@style/ButtonStyle</item>
         <item name="textInputStyle">@style/EditTextStyle</item>
     </style>
