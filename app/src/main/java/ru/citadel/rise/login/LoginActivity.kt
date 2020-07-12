@@ -3,9 +3,9 @@ package ru.citadel.rise.login
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.snackbar.Snackbar
 import ru.avangard.rise.R
 import ru.citadel.rise.login.first.IOnNextListener
 import ru.citadel.rise.login.first.LoginFirstFragment
@@ -41,7 +41,9 @@ class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountList
         }
 
         doubleBackToExitPressedOnce = true
-        Toast.makeText(this, "Нажмите ещё раз для выхода", Toast.LENGTH_SHORT).show()
+        Snackbar
+            .make(findViewById(R.id.containerLogin), "Нажмите ещё раз для выхода", Snackbar.LENGTH_SHORT)
+            .show()
 
         mHandler.postDelayed(mRunnable, 2000)
     }
@@ -73,6 +75,7 @@ class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountList
     private fun goOnMain() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
     }
 
     override fun email() {

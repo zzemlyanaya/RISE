@@ -1,14 +1,29 @@
 <resources>
     <!-- Base App theme. -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:background">@color/background</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="android:backgroundTint">@color/background</item>
+        <item name="rippleColor">@color/text_light</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:statusBarColor">@color/background</item>
         <item name="colorError">@color/color_error</item>
         <item name="colorOnError">@color/color_error</item>
         <item name="textInputStyle">@style/TILStyle</item>
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button.Style</item>
         <item name="shapeAppearanceOverlay">@style/roundedImageViewRounded</item>
+        <item name="snackbarStyle">@style/Widget.MaterialComponents.Snackbar.Style</item>
     </style>
+
+    <style name="Widget.MaterialComponents.Snackbar.Style">
+        <item name="android:backgroundTint">@color/text_dark</item>
+        <item name="android:alpha">1.0</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.Button.Style">
+        <item name="fontFamily">@font/montserrat_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+    </style>
+
 
     <style name="roundedImageViewRounded" parent="">
         <item name="cornerFamily">rounded</item>
@@ -17,6 +32,7 @@
 
     <style name="TILStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="editTextBackground">@android:color/transparent</item>
         <item name="iconPadding">8dp</item>
         <item name="hintTextColor">@color/text_dark</item>
     </style>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -13,17 +14,19 @@
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/butBack"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:background="@android:color/transparent"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="4dp"
+            android:backgroundTint="@color/background"
             android:scaleType="fitXY"
             android:tint="@color/white"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_back" />
+            app:layout_constraintVertical_bias="0.5"
+            app:srcCompat="@drawable/ic_back"
+            tools:visibility="visible" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textTitle"
@@ -50,7 +53,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="invisible">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView2"
@@ -71,7 +75,84 @@
                 android:text="@string/title_rise"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="42sp" />
+
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/butMenuMore"
+            android:layout_width="48dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/background"
+            android:scaleType="fitXY"
+            android:tint="@color/white"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/butBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/butBack"
+            app:srcCompat="@drawable/ic_dot_menu_more" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/chatHeader"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/butMenuMore"
+            app:layout_constraintStart_toEndOf="@+id/butBack"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageButton
+                android:id="@+id/chatStatusIcon"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginStart="2dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:tint="@color/accent_green"
+                app:layout_constraintBottom_toBottomOf="@+id/chatStatus"
+                app:layout_constraintStart_toEndOf="@+id/chatStatus"
+                app:layout_constraintTop_toTopOf="@+id/chatStatus"
+                app:layout_constraintVertical_bias="0.68"
+                app:srcCompat="@drawable/ic_dot" />
+
+            <TextView
+                android:id="@+id/chatName"
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="Chat name"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/chatHeaderImage"
+                app:layout_constraintTop_toTopOf="@+id/chatHeaderImage" />
+
+            <TextView
+                android:id="@+id/chatStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:layout_marginTop="2dp"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="Inline"
+                android:textColor="@color/text_dark"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/chatName"
+                app:layout_constraintTop_toBottomOf="@+id/chatName" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/chatHeaderImage"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/im_robot_programmer"
+                app:strokeColor="@color/button_background"
+                app:strokeWidth="1dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="@+id/butAddProject"
             app:layout_constraintStart_toStartOf="@+id/butAddProject"
             app:layout_constraintTop_toBottomOf="@+id/butAddProject"
-            tools:listitem="@layout/item_project" />
+            tools:listitem="@layout/item_project_short" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

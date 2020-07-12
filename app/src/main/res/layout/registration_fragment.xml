@@ -31,6 +31,7 @@
             app:srcCompat="@drawable/im_robot_with_idea"
             app:strokeColor="@color/text_dark"
             app:strokeWidth="1dp" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageCompany"
             android:layout_width="96dp"
@@ -48,7 +49,7 @@
             app:strokeColor="@color/text_dark"
             app:strokeWidth="1dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/butUploadImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -352,6 +353,18 @@
             app:layout_constraintStart_toStartOf="@+id/inputPassword"
             app:layout_constraintTop_toBottomOf="@+id/inputPassword"
             app:rippleColor="@color/rippleGreen" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/butBackToFirst"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="12dp"
+            android:backgroundTint="@color/background"
+            android:scaleType="fitCenter"
+            android:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imagePerson"
+            app:srcCompat="@drawable/ic_back" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

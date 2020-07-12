@@ -15,9 +15,10 @@ import kotlin.random.Random
  * [RecyclerView.Adapter] that can display a [ChatShortView].
  * TODO: Replace the implementation with code for your data type.
  */
-class ChatsRecyclerViewAdapter(
-    private val values: List<ChatShortView>
-) : RecyclerView.Adapter<ChatsRecyclerViewAdapter.ViewHolder>() {
+class ChatsRecyclerViewAdapter(private val onCardClickListener: (ChatShortView) -> Unit)
+    : RecyclerView.Adapter<ChatsRecyclerViewAdapter.ViewHolder>() {
+
+    private var values: List<ChatShortView> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -30,9 +31,15 @@ class ChatsRecyclerViewAdapter(
         holder.from.text = item.from
         holder.time.text = item.lastMessageTime
         holder.lastMessage.text = item.lastMessage
+        holder.itemView.setOnClickListener { onCardClickListener(item) }
     }
 
     override fun getItemCount(): Int = values.size
+
+    internal fun setData(data: List<ChatShortView>){
+        values = data
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ShapeableImageView = view.findViewById(R.id.chatImage)
