@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentChatListBinding
+import ru.citadel.rise.data.model.User
 import ru.citadel.rise.main.MainActivity
-import ru.citadel.rise.model.User
 
 /**
  * A fragment representing a list of Items.

@@ -1,4 +1,4 @@
-package ru.citadel.rise.model
+package ru.citadel.rise.data.model
 
 /**
  * Data calls used for handling authentication

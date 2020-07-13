@@ -6,14 +6,19 @@ import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.snackbar.Snackbar
+import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
+import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.data.model.User
+import ru.citadel.rise.login.email.EmailLoginFragment
+import ru.citadel.rise.login.email.IOnLogin
 import ru.citadel.rise.login.first.IOnNextListener
 import ru.citadel.rise.login.first.LoginFirstFragment
 import ru.citadel.rise.login.registration.IOnCreateAccountListener
 import ru.citadel.rise.login.registration.RegistrationFragment
 import ru.citadel.rise.main.MainActivity
 
-class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountListener {
+class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountListener, IOnLogin {
 
     private var doubleBackToExitPressedOnce = false
     private val mHandler: Handler = Handler()
@@ -72,23 +77,35 @@ class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountList
             .commitAllowingStateLoss()
     }
 
-    private fun goOnMain() {
+    private fun showEmailFragment(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.containerLogin, EmailLoginFragment())
+            .commitAllowingStateLoss()
+    }
+
+    private fun goOnMain(user: User) {
         val intent = Intent(this, MainActivity::class.java)
+        val bundle: Bundle = Bundlizer.bundle(User.serializer(), user)
+        intent.putExtra(USER, bundle)
         startActivity(intent)
         finish()
     }
 
     override fun email() {
-        //showEmailFragment()
-        goOnMain()
+        showEmailFragment()
     }
 
     override fun registration() {
         showRegistrationFragment()
     }
 
-    override fun onCreateNew() {
-        goOnMain()
+    override fun onCreateNew(user: User) {
+        goOnMain(user)
+    }
+
+    override fun onLogin(user: User) {
+        goOnMain(user)
     }
 
     override fun onDestroy() {

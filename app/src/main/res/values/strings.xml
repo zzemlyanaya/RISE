@@ -10,6 +10,7 @@
     <string name="sign_in_email">Войти используя email</string>
     <string name="sign_in">Войти</string>
     <string name="invalid_username">Некорректный логин</string>
+    <string name="invalid_email">Некорректный email</string>
     <string name="invalid_password">Пароль должн содержать как минимум 8 символов</string>
     <string name="login_failed">"Не удалось войти. Попробуйте снова?"</string>
     <string name="prompt_email">Email</string>

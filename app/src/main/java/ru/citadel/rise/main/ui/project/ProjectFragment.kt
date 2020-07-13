@@ -8,10 +8,9 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentProjectBinding
+import ru.citadel.rise.Constants.PROJECT
 import ru.citadel.rise.IOnBack
-import ru.citadel.rise.model.Project
-
-private const val PROJECT = "project"
+import ru.citadel.rise.data.model.Project
 
 /**
  * A simple [Fragment] subclass.

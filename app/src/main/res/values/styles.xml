@@ -50,7 +50,7 @@
 
     <!-- LoginActivity theme. -->
     <style name="AppTheme.Login">
-        <item name="colorPrimary">@color/accent_red</item>
+        <item name="colorPrimary">@color/accent_green</item>
         <item name="colorOnSurface">@color/text_dark</item>
         <item name="buttonStyle">@style/ButtonStyle</item>
         <item name="textInputStyle">@style/EditTextStyle</item>

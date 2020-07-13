@@ -1,4 +1,4 @@
-package ru.citadel.rise.model
+package ru.citadel.rise.data.model
 
 /**
  * A generic class that holds a value with its loading status.

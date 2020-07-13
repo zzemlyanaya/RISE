@@ -7,19 +7,24 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
+import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityMainBinding
+import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.IOnBack
+import ru.citadel.rise.data.model.Project
+import ru.citadel.rise.data.model.User
 import ru.citadel.rise.main.ui.chat.ChatFragment
 import ru.citadel.rise.main.ui.chats.ChatListFragment
 import ru.citadel.rise.main.ui.profile.ProfileFragment
 import ru.citadel.rise.main.ui.project.ProjectFragment
 import ru.citadel.rise.main.ui.projects.ProjectListFragment
-import ru.citadel.rise.model.Project
-import ru.citadel.rise.model.User
+import ru.citadel.rise.main.ui.settings.SettingsFragment
 
 
 class MainActivity : FragmentActivity() {
+
+    lateinit var currentUser: User
 
     private lateinit var binding: ActivityMainBinding
 
@@ -52,6 +57,8 @@ class MainActivity : FragmentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        currentUser = Bundlizer.unbundle(User.serializer(), intent.extras?.getBundle(USER)!!)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -76,6 +83,7 @@ class MainActivity : FragmentActivity() {
             when (fragment){
                 is ChatFragment -> showChatsFragment()
                 is ProjectFragment -> showProjectsFragment()
+                is SettingsFragment -> showProfileFragment()
             }
         }
     }
@@ -158,6 +166,27 @@ class MainActivity : FragmentActivity() {
             .replace(R.id.containerMain, ProjectFragment.newInstance(project))
             .commitAllowingStateLoss()
         binding.header.butBack.visibility = View.VISIBLE
+        binding.navView.visibility = View.INVISIBLE
+    }
+
+    fun showMyProjects(){
+
+    }
+
+    fun showFavouriteProjecs(){
+
+    }
+
+    fun showSettingsFragment(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.containerMain, SettingsFragment())
+            .commitAllowingStateLoss()
+        hideAllHeaderView()
+        binding.header.textTitle.visibility = View.VISIBLE
+        binding.header.textTitle.text = "Настройки"
+        binding.header.butBack.visibility = View.VISIBLE
+        binding.navView.visibility = View.INVISIBLE
     }
 
 }

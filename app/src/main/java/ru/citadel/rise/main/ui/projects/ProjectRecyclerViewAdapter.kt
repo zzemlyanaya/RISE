@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import ru.avangard.rise.R
-import ru.citadel.rise.model.Project
+import ru.citadel.rise.data.model.Project
 
 /**
  * [RecyclerView.Adapter] that can display a [Project].
