@@ -4,11 +4,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Project(
-    val id: String,
+    val id: Int,
     var name: String,
-    var authors: List<String>, //list of author's ids
+    var contact: Int, //contact user'
     var descriptionShort: String,
     var descriptionLong: String,
     var cost: String,
-    var deadlines: String
+    var deadlines: String,
+    var website: String?
 ) : java.io.Serializable

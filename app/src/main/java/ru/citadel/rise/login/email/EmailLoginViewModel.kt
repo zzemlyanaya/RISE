@@ -13,7 +13,7 @@ import ru.citadel.rise.data.model.Resource
 class EmailLoginViewModel : ViewModel() {
     private val repository = RemoteRepository()
 
-    private val _loginForm = MutableLiveData<LoginFormState>()
+    private val _loginForm = MutableLiveData(LoginFormState())
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
     fun authorize(login: String, password: String) = liveData(Dispatchers.IO) {
@@ -41,13 +41,7 @@ class EmailLoginViewModel : ViewModel() {
     }
 
     // A placeholder username validation check
-    private fun isUserNameValid(username: String): Boolean {
-        return if (username.contains('@')) {
-            Patterns.EMAIL_ADDRESS.matcher(username).matches()
-        } else {
-            username.isNotBlank()
-        }
-    }
+    private fun isUserNameValid(username: String) = Patterns.EMAIL_ADDRESS.matcher(username).matches()
 
     // A placeholder password validation check
     private fun isPasswordValid(password: String): Boolean {

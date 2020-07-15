@@ -28,7 +28,7 @@ class ChatsRecyclerViewAdapter(private val onCardClickListener: (ChatShortView) 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.from.text = item.from
+        holder.from.text = item.toName
         holder.time.text = item.lastMessageTime
         holder.lastMessage.text = item.lastMessage
         holder.itemView.setOnClickListener { onCardClickListener(item) }

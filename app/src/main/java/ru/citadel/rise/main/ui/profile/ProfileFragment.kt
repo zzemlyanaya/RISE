@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ru.avangard.rise.R
@@ -29,14 +28,8 @@ class ProfileFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
 
         binding.butSettings.setOnClickListener { (activity as MainActivity).showSettingsFragment() }
-        binding.butFavourites.setOnClickListener {
-            Toast.makeText(context, "Функция в разработке, но мы стараемся", Toast.LENGTH_SHORT).show()
-            (activity as MainActivity).showFavouriteProjecs()
-        }
-        binding.butMyProjects.setOnClickListener {
-            Toast.makeText(context, "Функция в разработке, но мы стараемся", Toast.LENGTH_SHORT).show()
-            (activity as MainActivity).showMyProjects()
-        }
+        binding.butFavourites.setOnClickListener { (activity as MainActivity).showProjectsFragment(2) }
+        binding.butMyProjects.setOnClickListener { (activity as MainActivity).showProjectsFragment(1) }
 
         val user = (activity as MainActivity).currentUser
 

@@ -6,12 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
+import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.button.MaterialButton
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.RegistrationFragmentBinding
+import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.toInt
@@ -19,6 +23,9 @@ import ru.citadel.rise.toInt
 class RegistrationFragment : Fragment() {
 
     private var onCreateAccountListener: IOnCreateAccountListener? = null
+
+    private lateinit var progressBar: ProgressBar
+    private lateinit var butSignUp: MaterialButton
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(RegistrationViewModel::class.java) }
 
@@ -31,15 +38,18 @@ class RegistrationFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 
+        progressBar = binding.progressBar
+        butSignUp = binding.butRegistr
+
         binding.butRegistr.setOnClickListener {
-            onCreateAccountListener?.onCreateNew(
-                User(
-                    binding.textEmail.text.hashCode().toString(),
-                    binding.textName.text.toString(),
-                    viewModel.isPersonChecked.value?.toInt()!!,
-                    null, null, null, null, null
-                )
+            val user = User(
+                binding.textEmail.text.hashCode(),
+                binding.textEmail.text.toString(),
+                binding.textName.text.toString(),
+                viewModel.isPersonChecked.value?.toInt()!!,
+                null, null, null, null
             )
+            registr(user)
         }
         binding.butBackToFirst.setOnClickListener { activity?.onBackPressed() }
 
@@ -68,15 +78,16 @@ class RegistrationFragment : Fragment() {
 
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
-                    EditorInfo.IME_ACTION_DONE ->
-                        onCreateAccountListener?.onCreateNew(
-                            User(
-                                binding.textEmail.text.hashCode().toString(),
-                                binding.textName.text.toString(),
-                                viewModel.isPersonChecked.value?.toInt()!!,
-                                null, null, null, null, null
-                            )
+                    EditorInfo.IME_ACTION_DONE -> {
+                        val user = User(
+                            binding.textEmail.text.hashCode(),
+                            binding.textEmail.text.toString(),
+                            binding.textName.text.toString(),
+                            viewModel.isPersonChecked.value?.toInt()!!,
+                            null, null, null, null
                         )
+                        registr(user)
+                    }
                 }
                 false
             }
@@ -85,9 +96,6 @@ class RegistrationFragment : Fragment() {
 
         viewModel.registrationFormState.observe(viewLifecycleOwner, Observer {
             val state = it ?: return@Observer
-
-            // disable login button unless both username / password is valid
-            binding.butRegistr.isEnabled = state.isDataValid
 
             binding.inputEmail.error = getString(state.emailError)
             binding.inputName.error = getString(state.nameError)
@@ -99,6 +107,27 @@ class RegistrationFragment : Fragment() {
 
     private fun getString(id: Int?): String? {
         return if (id == null) null else getString(id)
+    }
+
+    private fun registr(user: User){
+        viewModel.createNew(user).observe(viewLifecycleOwner, Observer {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        onCreateAccountListener?.onCreateNew(user)
+                    }
+                    Status.ERROR -> {
+                        progressBar.visibility = View.GONE
+                        butSignUp.visibility = View.VISIBLE
+                        Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    }
+                    Status.LOADING -> {
+                        progressBar.visibility = View.VISIBLE
+                        butSignUp.visibility = View.INVISIBLE
+                    }
+                }
+            }
+        })
     }
 
     override fun onAttach(context: Context) {

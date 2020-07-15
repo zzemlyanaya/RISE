@@ -11,6 +11,7 @@ interface IOnBack{
 object Constants {
     const val USER = "user"
     const val PROJECT = "project"
+    const val LIST_TYPE = "type"
 }
 
 fun Boolean?.toInt(): Int = if (this != null && this) 1 else 0

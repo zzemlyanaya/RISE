@@ -4,12 +4,13 @@ import android.util.Patterns
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
 import ru.avangard.rise.R
 import ru.citadel.rise.data.RemoteRepository
+import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.User
 import kotlin.coroutines.CoroutineContext
 
@@ -17,7 +18,7 @@ class RegistrationViewModel : ViewModel() {
 
     private val remoteRepository = RemoteRepository()
 
-    private val _form = MutableLiveData<RegistrationFormState>()
+    private val _form = MutableLiveData(RegistrationFormState())
     val registrationFormState: LiveData<RegistrationFormState> = _form
 
     private val parentJob = Job()
@@ -41,8 +42,13 @@ class RegistrationViewModel : ViewModel() {
         _promptName.value = "Имя вашей компании"
     }
 
-    fun createNew(user: User) = scope.launch {
-        remoteRepository.addUser(user)
+    fun createNew(user: User) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            emit(Resource.success(data = remoteRepository.addUser(user)))
+        } catch (e: Exception){
+            emit(Resource.error(data = null, message = e.message.toString()))
+        }
     }
 
     fun loginDataChanged(email: String, name: String, password: String) {

@@ -12,10 +12,12 @@ import ru.citadel.rise.data.model.Project
  * [RecyclerView.Adapter] that can display a [Project].
  * TODO: Replace the implementation with code for your data type.
  */
-class ProjectRecyclerViewAdapter(private val onCardClickListener: (Project) -> Unit)
+class ProjectRecyclerViewAdapter(
+    private val onCardClickListener: (Project) -> Unit,
+    private val values: List<Project>
+)
     : RecyclerView.Adapter<ProjectRecyclerViewAdapter.ViewHolder>() {
 
-    private lateinit var values: List<Project>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -31,11 +33,12 @@ class ProjectRecyclerViewAdapter(private val onCardClickListener: (Project) -> U
     }
 
     override fun getItemCount(): Int = values.size
-
-    internal fun setData(data: List<Project>){
-        values = data
-        notifyDataSetChanged()
-    }
+//
+//    fun setData(data: List<Project>){
+//        values.clear()
+//        values.addAll(data)
+//        notifyDataSetChanged()
+//    }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: MaterialTextView = view.findViewById(R.id.projTitle)

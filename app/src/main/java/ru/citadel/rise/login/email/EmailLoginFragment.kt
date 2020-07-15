@@ -40,6 +40,7 @@ class EmailLoginFragment : Fragment(), IOnBack {
         val binding: EmailLoginFragmentBinding
                 = DataBindingUtil.inflate(inflater, R.layout.email_login_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewmodel = viewModel
 
         binding.butBackToFirst.setOnClickListener { (activity as LoginActivity).onBackPressed() }
 
@@ -52,17 +53,8 @@ class EmailLoginFragment : Fragment(), IOnBack {
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
             val loginState = it ?: return@Observer
 
-            // disable login button unless both username / password is valid
-            binding.butSignIn.isEnabled = loginState.isDataValid
-
-            if (loginState.usernameError != null)
-                binding.inputLogin.error = getString(loginState.usernameError)
-            else
-                binding.inputLogin.error = null
-            if (loginState.passwordError != null)
-                binding.inputPasswordLogin.error = getString(loginState.passwordError)
-            else
-                binding.inputPasswordLogin.error = null
+            binding.inputLogin.error = getString(loginState.usernameError)
+            binding.inputPasswordLogin.error = getString(loginState.passwordError)
         })
 
         binding.textLogin.afterTextChanged {
@@ -83,6 +75,7 @@ class EmailLoginFragment : Fragment(), IOnBack {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE ->
+                        if(viewModel.loginFormState.value!!.isDataValid)
                         authorize(
                             binding.textLogin.text.toString(),
                             binding.textPasswordLogin.text.toString()
@@ -93,6 +86,10 @@ class EmailLoginFragment : Fragment(), IOnBack {
         }
 
         return binding.root
+    }
+
+    private fun getString(id: Int?): String? {
+        return if (id == null) null else getString(id)
     }
 
     private fun authorize(login: String, password: String){

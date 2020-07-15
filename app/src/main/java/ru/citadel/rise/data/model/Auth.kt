@@ -7,6 +7,6 @@ package ru.citadel.rise.data.model
  */
 
 data class Auth(
-    val login: String,
+    val id: Int,
     val passwordToken: String
 )

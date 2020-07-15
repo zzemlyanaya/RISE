@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentChatListBinding
-import ru.citadel.rise.data.model.User
 import ru.citadel.rise.main.MainActivity
+import ru.citadel.rise.main.ui.chat.UserShortView
+import ru.citadel.rise.toInt
+import kotlin.random.Random
 
 /**
  * A fragment representing a list of Items.
@@ -29,13 +31,14 @@ class ChatListFragment : Fragment() {
             layoutManager = LinearLayoutManager(context)
             adapter = ChatsRecyclerViewAdapter{
                 (activity as MainActivity).showChatFragment(
-                    User("awd", it.from, 1, 27, null, null, null, null)
+                    UserShortView(it.toID, it.toName, (Random.nextInt() % 2 == 0).toInt())
                 )
             }
+            val id = (activity as MainActivity).currentUser.id
             (adapter as ChatsRecyclerViewAdapter).setData((listOf(
-                ChatShortView("Person #1", "sdf", "hi there", "00:00"),
-                ChatShortView("Person #2", "sdf", "general", "00:01"),
-                ChatShortView("Person #3", "sdf", "kenobi", "00:02")
+                ChatShortView(id, 1, "Person #1", "hi there", "00:00"),
+                ChatShortView(id, 2, "Person #2", "general", "00:01"),
+                ChatShortView(id, 3, "Person #3", "kenobi", "00:02")
             )))
         }
         return binding.root
