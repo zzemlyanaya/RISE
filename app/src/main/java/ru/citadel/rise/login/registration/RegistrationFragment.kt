@@ -53,6 +53,12 @@ class RegistrationFragment : Fragment() {
         }
         binding.butBackToFirst.setOnClickListener { activity?.onBackPressed() }
 
+        val widthDp = (resources.displayMetrics.run { widthPixels / density }).toInt()
+        val cardSize = (widthDp*1.1).toInt()
+
+        binding.cardCompany.layoutParams.width = cardSize
+        binding.cardPerson.layoutParams.width = cardSize
+
         binding.textEmail.afterTextChanged {
             viewModel.loginDataChanged(
                 binding.textEmail.text.toString(),
