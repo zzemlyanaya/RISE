@@ -29,6 +29,7 @@ class EmailLoginFragment : Fragment(), IOnBack {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var butSignIn: MaterialButton
+    private lateinit var butBackground: MaterialButton
 
     private var onLogin: IOnLogin? = null
     private val viewModel by lazy {ViewModelProviders.of(this).get(EmailLoginViewModel::class.java)}
@@ -46,6 +47,8 @@ class EmailLoginFragment : Fragment(), IOnBack {
 
         progressBar = binding.loginProgress
         butSignIn = binding.butSignIn
+        butBackground = binding.buttonBack1
+
         butSignIn.setOnClickListener {
             authorize(binding.textLogin.text.toString(), binding.textPasswordLogin.text.toString())
         }
@@ -107,6 +110,7 @@ class EmailLoginFragment : Fragment(), IOnBack {
                     Status.LOADING -> {
                         progressBar.visibility = View.VISIBLE
                         butSignIn.visibility = View.INVISIBLE
+                        butBackground.visibility = View.INVISIBLE
                     }
                 }
             }

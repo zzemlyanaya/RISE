@@ -26,6 +26,7 @@ class RegistrationFragment : Fragment() {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var butSignUp: MaterialButton
+    private lateinit var butBackgroung: MaterialButton
 
     private val viewModel by lazy { ViewModelProviders.of(this).get(RegistrationViewModel::class.java) }
 
@@ -39,9 +40,10 @@ class RegistrationFragment : Fragment() {
         binding.viewmodel = viewModel
 
         progressBar = binding.progressBar
-        butSignUp = binding.butRegistr
+        butSignUp = binding.butSignUp
+        butBackgroung = binding.buttonBack2
 
-        binding.butRegistr.setOnClickListener {
+        butSignUp.setOnClickListener {
             val user = User(
                 binding.textEmail.text.hashCode(),
                 binding.textEmail.text.toString(),
@@ -84,7 +86,7 @@ class RegistrationFragment : Fragment() {
 
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
-                    EditorInfo.IME_ACTION_DONE -> {
+                    EditorInfo.IME_ACTION_DONE -> if(viewModel.registrationFormState.value!!.isDataValid) {
                         val user = User(
                             binding.textEmail.text.hashCode(),
                             binding.textEmail.text.toString(),
@@ -130,6 +132,7 @@ class RegistrationFragment : Fragment() {
                     Status.LOADING -> {
                         progressBar.visibility = View.VISIBLE
                         butSignUp.visibility = View.INVISIBLE
+                        butBackgroung.visibility = View.INVISIBLE
                     }
                 }
             }

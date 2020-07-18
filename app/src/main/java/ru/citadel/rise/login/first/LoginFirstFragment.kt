@@ -34,6 +34,10 @@ class LoginFirstFragment : Fragment() {
             Toast.makeText(context, "Функция в разработке, но мы стараемся", Toast.LENGTH_SHORT).show()
         }
         binding.butSignUp.setOnClickListener { signUp() }
+
+//        val click = AlphaAnimation(1F, 0.8F)
+//        binding.button2.setOnClickListener { it.startAnimation(click) }
+
         return binding.root
     }
 

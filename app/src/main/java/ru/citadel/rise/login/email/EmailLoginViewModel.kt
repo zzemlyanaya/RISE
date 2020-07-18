@@ -25,26 +25,20 @@ class EmailLoginViewModel : ViewModel() {
         }
     }
 
-    fun loginDataChanged(username: String, password: String) {
-        if (!isUserNameValid(username)) {
-            _loginForm.value =
-                LoginFormState(usernameError = R.string.invalid_username)
-        } else if (!isPasswordValid(password)  ) {
-            _loginForm.value =
-                LoginFormState(usernameError = null, passwordError = R.string.invalid_password)
-        } else {
-            _loginForm.value =
-                LoginFormState(usernameError = null,
-                    passwordError = null,
-                    isDataValid = true)
-        }
+    fun loginDataChanged(email: String, password: String) {
+        _loginForm.value =
+            LoginFormState(usernameError = validateEmail(email),
+                passwordError = validatePassword(password),
+                isDataValid = isAllDataValid(email, password))
     }
 
-    // A placeholder username validation check
-    private fun isUserNameValid(username: String) = Patterns.EMAIL_ADDRESS.matcher(username).matches()
+    private fun isAllDataValid(email: String, password: String)
+            = Patterns.EMAIL_ADDRESS.matcher(email).matches() and (password.length >= 8)
 
-    // A placeholder password validation check
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 8
-    }
+    private fun validateEmail(email: String) =
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) null else R.string.invalid_email
+
+
+    private fun validatePassword(password: String) =
+        if (password.length >= 8) null else R.string.invalid_password
 }

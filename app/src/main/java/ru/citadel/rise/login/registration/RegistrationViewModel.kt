@@ -52,29 +52,22 @@ class RegistrationViewModel : ViewModel() {
     }
 
     fun loginDataChanged(email: String, name: String, password: String) {
-        if (!isEmailValid(email))
-            _form.value =
-                RegistrationFormState(emailError = R.string.invalid_email)
-        else if (name.isBlank())
-            _form.value =
-                RegistrationFormState(emailError = null, nameError = R.string.invalid_username)
-        else if (!isPasswordValid(password))
-            _form.value =
-                RegistrationFormState(emailError = null, nameError = null, passwordError = R.string.invalid_password)
-        else {
-            _form.value =
-                RegistrationFormState(emailError = null,
-                    nameError = null,
-                    passwordError = null,
-                    isDataValid = true)
-        }
+        _form.value =
+            RegistrationFormState(emailError = validateEmail(email),
+                nameError = validateName(name),
+                passwordError = validatePassword(password),
+                isDataValid = isAllDataValid(email, name, password))
     }
 
-    // A placeholder username validation check
-    private fun isEmailValid(username: String) = Patterns.EMAIL_ADDRESS.matcher(username).matches()
+    private fun isAllDataValid(email: String, name: String, password: String)
+        = Patterns.EMAIL_ADDRESS.matcher(email).matches() and name.isNotBlank() and (password.length >= 8)
 
-    // A placeholder password validation check
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 8
-    }
+    private fun validateEmail(email: String) =
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) null else R.string.invalid_email
+
+    private fun validateName(name: String) =
+        if (name.isNotBlank()) null else R.string.invalid_username
+
+    private fun validatePassword(password: String) =
+        if (password.length >= 8) null else R.string.invalid_password
 }

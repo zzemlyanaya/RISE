@@ -61,7 +61,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     // DataBinding
-    kapt 'androidx.databinding:databinding-compiler:4.0.0'
+    kapt 'androidx.databinding:databinding-compiler:4.0.1'
 
     // Retrofit 2
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
