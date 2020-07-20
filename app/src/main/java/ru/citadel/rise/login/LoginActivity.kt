@@ -4,21 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.snackbar.Snackbar
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
 import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.data.model.User
-import ru.citadel.rise.login.email.EmailLoginFragment
 import ru.citadel.rise.login.email.IOnLogin
-import ru.citadel.rise.login.first.IOnNextListener
-import ru.citadel.rise.login.first.LoginFirstFragment
 import ru.citadel.rise.login.registration.IOnCreateAccountListener
-import ru.citadel.rise.login.registration.RegistrationFragment
 import ru.citadel.rise.main.MainActivity
 
-class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountListener, IOnLogin {
+class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
+
+    private lateinit var viewPager2: ViewPager2
 
     private var doubleBackToExitPressedOnce = false
     private val mHandler: Handler = Handler()
@@ -27,61 +26,19 @@ class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        showFirstFragment()
-    }
 
-    override fun onBackPressed() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.containerLogin)
-        if(fragment is LoginFirstFragment)
-            onFirstFragmentBackPressed()
-        else {
-            showFirstFragment()
-        }
-    }
+        viewPager2 = findViewById(R.id.viewPager)
+        val tabs = findViewById<TabLayout>(R.id.tabLayout)
 
-    private fun onFirstFragmentBackPressed(){
-        if (doubleBackToExitPressedOnce) {
-            super.onBackPressed()
-            return
-        }
+        viewPager2.adapter = ViewPagerAdapter(this, 2)
 
-        doubleBackToExitPressedOnce = true
-        Snackbar
-            .make(findViewById(R.id.containerLogin), "Нажмите ещё раз для выхода", Snackbar.LENGTH_SHORT)
-            .show()
+        TabLayoutMediator(tabs, viewPager2) { tab, position ->
+            when(position){
+                0 -> tab.text = getString(R.string.sign_up_short)
+                else -> tab.text = getString(R.string.sign_in)
+            }
+        }.attach()
 
-        mHandler.postDelayed(mRunnable, 2000)
-    }
-
-    private fun showFirstFragment(){
-        supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.containerLogin, LoginFirstFragment())
-            .commitAllowingStateLoss()
-    }
-
-//    private fun showLoginEmailFragment(){
-//        supportFragmentManager.beginTransaction()
-//            .add(
-//                R.id.containerLogin,
-//                LoginEmailFragment()
-//            )
-//            .commitNow()
-//    }
-
-    private fun showRegistrationFragment(){
-        supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.containerLogin, RegistrationFragment())
-            .addToBackStack(null)
-            .commitAllowingStateLoss()
-    }
-
-    private fun showEmailFragment(){
-        supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.containerLogin, EmailLoginFragment())
-            .commitAllowingStateLoss()
     }
 
     private fun goOnMain(user: User) {
@@ -90,14 +47,6 @@ class LoginActivity : AppCompatActivity(), IOnNextListener, IOnCreateAccountList
         intent.putExtra(USER, bundle)
         startActivity(intent)
         finish()
-    }
-
-    override fun email() {
-        showEmailFragment()
-    }
-
-    override fun registration() {
-        showRegistrationFragment()
     }
 
     override fun onCreateNew(user: User) {

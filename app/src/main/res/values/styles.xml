@@ -32,9 +32,14 @@
 
     <style name="TILStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="editTextBackground">@android:color/transparent</item>
         <item name="iconPadding">8dp</item>
         <item name="hintTextColor">@color/text_dark</item>
+        <item name="boxCornerRadiusBottomStart">44dp</item>
+        <item name="boxCornerRadiusBottomEnd">44dp</item>
+        <item name="boxCornerRadiusTopStart">44dp</item>
+        <item name="boxCornerRadiusTopEnd">44dp</item>
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="android:textColorHighlight">@color/accent_red</item>
     </style>
 
     <!-- MainActivity theme -->
@@ -50,10 +55,9 @@
 
     <!-- LoginActivity theme. -->
     <style name="AppTheme.Login">
-        <item name="colorPrimary">@color/accent_green</item>
+        <item name="colorPrimary">@color/accent_red</item>
         <item name="colorOnSurface">@color/text_dark</item>
         <item name="buttonStyle">@style/ButtonStyle</item>
-        <item name="textInputStyle">@style/EditTextStyle</item>
     </style>
     
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
@@ -63,8 +67,10 @@
         <item name="cornerRadius">48dp</item>
     </style>
 
-    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <item name="cornerRadius">48dp</item>
+    <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
+        <item name="android:fontFamily">@font/montserrat_semibold</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>

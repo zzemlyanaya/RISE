@@ -19,7 +19,6 @@ import ru.citadel.rise.IOnBack
 import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
 import ru.citadel.rise.data.model.User
-import ru.citadel.rise.login.LoginActivity
 
 class EmailLoginFragment : Fragment(), IOnBack {
 
@@ -42,8 +41,6 @@ class EmailLoginFragment : Fragment(), IOnBack {
                 = DataBindingUtil.inflate(inflater, R.layout.email_login_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
-
-        binding.butBackToFirst.setOnClickListener { (activity as LoginActivity).onBackPressed() }
 
         progressBar = binding.loginProgress
         butSignIn = binding.butSignIn
@@ -105,6 +102,7 @@ class EmailLoginFragment : Fragment(), IOnBack {
                     Status.ERROR -> {
                         progressBar.visibility = View.GONE
                         butSignIn.visibility = View.VISIBLE
+                        butBackground.visibility = View.VISIBLE
                         Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -14,238 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/butBackToFirst"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="12dp"
-            android:backgroundTint="@color/background"
-            android:scaleType="fitCenter"
-            android:tint="@color/white"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imagePerson"
-            app:srcCompat="@drawable/ic_back" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imagePerson"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/icon_grey"
-            android:scaleType="centerCrop"
-            android:visibility="@{viewmodel.isPersonChecked ? View.VISIBLE : View.INVISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            app:srcCompat="@drawable/im_robot_with_idea"
-            app:strokeColor="@color/text_dark"
-            app:strokeWidth="1dp" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageCompany"
-            android:layout_width="96dp"
-            android:layout_height="96dp"
-            android:layout_marginTop="24dp"
-            android:backgroundTint="@color/icon_grey"
-            android:scaleType="centerCrop"
-            android:visibility="@{viewmodel.isPersonChecked ? View.INVISIBLE : View.VISIBLE}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-            app:srcCompat="@drawable/im_robot_manager"
-            app:strokeColor="@color/text_dark"
-            app:strokeWidth="1dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/butUploadImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:backgroundTint="@color/background"
-            android:fontFamily="@font/montserrat_medium"
-            android:includeFontPadding="true"
-            android:paddingLeft="18dp"
-            android:paddingTop="12dp"
-            android:paddingRight="18dp"
-            android:paddingBottom="12dp"
-            android:text="Загрузить изображение профиля"
-            android:textAllCaps="false"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/text_light"
-            app:cornerRadius="44dp"
-            app:layout_constraintEnd_toEndOf="@+id/imagePerson"
-            app:layout_constraintStart_toStartOf="@+id/imagePerson"
-            app:layout_constraintTop_toBottomOf="@+id/imagePerson"
-            app:strokeColor="@color/button_background"
-            app:strokeWidth="2dp" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardPerson"
-            android:layout_width="200dp"
-            android:layout_height="180dp"
-            android:layout_marginTop="24dp"
-            android:onClick="@{() -> viewmodel.onPersonChecked()}"
-            app:cardBackgroundColor="@color/background"
-            app:cardCornerRadius="24dp"
-            app:layout_constraintStart_toStartOf="@+id/scrollView"
-            app:layout_constraintTop_toBottomOf="@+id/butUploadImage"
-            app:strokeColor="@color/button_background"
-            app:strokeWidth="1dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/isPersonSelected"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:scaleType="fitXY"
-                    android:visibility="@{viewmodel.isPersonChecked ? View.VISIBLE : View.INVISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ok_green" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iconPerson"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="16dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/person" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/persontext1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="Автор"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iconPerson"
-                    app:layout_constraintHorizontal_bias="0.50
-"
-                    app:layout_constraintStart_toStartOf="@+id/iconPerson"
-                    app:layout_constraintTop_toBottomOf="@+id/iconPerson" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/persontext2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="8dp"
-                    android:text="Публикуйте свои проекты и находите инвесторов"
-                    android:textAlignment="center"
-                    android:textColor="@color/text_dark"
-                    app:autoSizeMaxTextSize="13sp"
-                    app:autoSizeMinTextSize="9sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/persontext1" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardCompany"
-            android:layout_width="200dp"
-            android:layout_height="0dp"
-            android:onClick="@{() -> viewmodel.onCompanyChecked()}"
-            app:cardBackgroundColor="@color/background"
-            app:cardCornerRadius="24dp"
-            app:checkedIconTint="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="@+id/cardPerson"
-            app:layout_constraintEnd_toEndOf="@+id/scrollView"
-            app:layout_constraintTop_toTopOf="@+id/cardPerson"
-            app:strokeColor="@color/button_background"
-            app:strokeWidth="1dp">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/isCompanySelected"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:scaleType="fitXY"
-                    android:visibility="@{viewmodel.isPersonChecked ? View.INVISIBLE : View.VISIBLE}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/ok_green" />
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/iconCompany"
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:layout_marginTop="16dp"
-                    android:scaleType="fitXY"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/company" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/companytext1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:text="Компания"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="@+id/iconCompany"
-                    app:layout_constraintHorizontal_bias="0.50"
-                    app:layout_constraintStart_toStartOf="@+id/iconCompany"
-                    app:layout_constraintTop_toBottomOf="@+id/iconCompany" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/companytext2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="4dp"
-                    android:fontFamily="@font/montserrat_medium"
-                    android:paddingLeft="8dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="8dp"
-                    android:paddingBottom="16dp"
-                    android:text="Найдите проект, в который вы готовы вложится"
-                    android:textAlignment="center"
-                    android:textColor="@color/text_dark"
-                    app:autoSizeMaxTextSize="13sp"
-                    app:autoSizeMinTextSize="9sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/companytext1" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
 
         <ScrollView
             android:id="@+id/scrollView"
@@ -258,7 +27,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardPerson">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -266,16 +35,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputEmail"
-                    style="@style/TILStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
                     android:hint="@string/prompt_email"
                     android:textColorHint="@color/text_dark"
-                    app:boxBackgroundColor="@color/background"
-                    app:boxCornerRadiusBottomEnd="44dp"
-                    app:boxCornerRadiusBottomStart="44dp"
-                    app:boxCornerRadiusTopEnd="44dp"
-                    app:boxCornerRadiusTopStart="44dp"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    android:background="@android:color/transparent"
                     app:boxStrokeWidth="2dp"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/color_error"
@@ -287,9 +53,10 @@
                         android:id="@+id/textEmail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:backgroundTint="@color/black"
                         android:drawableStart="@drawable/ic_mail_outlined"
                         android:drawablePadding="16dp"
-                        android:drawableTint="@color/text_dark"
+                        android:drawableTint="@color/accent_red"
                         android:fontFamily="@font/montserrat_medium"
                         android:inputType="textEmailAddress"
                         android:paddingStart="28dp"
@@ -300,16 +67,11 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputName"
-                    style="@style/TILStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
                     android:hint="@{viewmodel.promptName}"
                     android:textColorHint="@color/text_dark"
-                    app:boxBackgroundColor="@color/background"
-                    app:boxCornerRadiusBottomEnd="44dp"
-                    app:boxCornerRadiusBottomStart="44dp"
-                    app:boxCornerRadiusTopEnd="44dp"
-                    app:boxCornerRadiusTopStart="44dp"
                     app:boxStrokeWidth="2dp"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/color_error"
@@ -321,30 +83,24 @@
                         android:id="@+id/textName"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:drawableLeft="@drawable/ic_user_outlined"
+                        android:drawableStart="@drawable/ic_user_outlined"
                         android:drawablePadding="16dp"
-                        android:drawableTint="@color/text_dark"
+                        android:drawableTint="@color/accent_red"
                         android:fontFamily="@font/montserrat_medium"
                         android:inputType="textEmailAddress"
                         android:paddingStart="28dp"
                         android:selectAllOnFocus="true"
                         android:singleLine="true"
-                        android:textColor="@color/text_dark"
-                        android:textColorHighlight="@android:color/transparent" />
+                        android:textColor="@color/text_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputPassword"
-                    style="@style/TILStyle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="@color/black"
                     android:hint="@string/prompt_password"
                     android:textColorHint="@color/text_dark"
-                    app:boxBackgroundColor="@color/background"
-                    app:boxCornerRadiusBottomEnd="44dp"
-                    app:boxCornerRadiusBottomStart="44dp"
-                    app:boxCornerRadiusTopEnd="44dp"
-                    app:boxCornerRadiusTopStart="44dp"
                     app:boxStrokeWidth="2dp"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/color_error"
@@ -357,19 +113,18 @@
                         android:id="@+id/textPassword"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:backgroundTint="@color/black"
                         android:drawableStart="@drawable/ic_key_outlined"
                         android:drawablePadding="16dp"
-                        android:drawableTint="@color/text_dark"
+                        android:drawableTint="@color/accent_red"
                         android:fontFamily="@font/montserrat_medium"
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:paddingStart="28dp"
-                        android:password="false"
+                        android:password="true"
                         android:selectAllOnFocus="true"
                         android:singleLine="true"
-                        android:textColor="@color/text_dark"
-                        android:textColorHighlight="@android:color/transparent" />
-
+                        android:textColor="@color/text_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -406,9 +161,9 @@
                     android:insetBottom="0dp"
                     android:text="Создать аккаунт"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    android:textColor="@color/white"
+                    android:textColor="@{viewmodel.registrationFormState.dataValid ? @color/white : @color/text_dark}"
                     android:textSize="16sp"
-                    android:visibility="@{viewmodel.registrationFormState.dataValid ? View.VISIBLE : View.INVISIBLE}"
+                    android:enabled="@{viewmodel.registrationFormState.dataValid ? true : false}"
                     app:cornerRadius="10dp"
                     app:layout_constraintEnd_toEndOf="@+id/inputPassword"
                     app:layout_constraintStart_toStartOf="@+id/inputPassword"
@@ -434,6 +189,186 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardPerson"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginEnd="12dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewmodel.onPersonChecked()}"
+                app:cardBackgroundColor="@color/background"
+                app:cardCornerRadius="24dp"
+                app:layout_constraintStart_toStartOf="@+id/scrollView"
+                app:strokeColor="@color/button_background"
+                app:strokeWidth="1dp"
+                tools:layout_editor_absoluteY="207dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/isPersonSelected"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:scaleType="fitXY"
+                        android:visibility="@{viewmodel.isPersonChecked ? View.VISIBLE : View.INVISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ok_green" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iconPerson"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/person" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/persontext1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Автор"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/iconPerson"
+                        app:layout_constraintHorizontal_bias="0.50
+"
+                        app:layout_constraintStart_toStartOf="@+id/iconPerson"
+                        app:layout_constraintTop_toBottomOf="@+id/iconPerson" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/persontext2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="8dp"
+                        android:text="Публикуйте свои проекты и находите инвесторов"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_dark"
+                        app:autoSizeMaxTextSize="13sp"
+                        app:autoSizeMinTextSize="9sp"
+                        app:autoSizeTextType="uniform"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/persontext1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCompany"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:onClick="@{() -> viewmodel.onCompanyChecked()}"
+                app:cardBackgroundColor="@color/background"
+                app:cardCornerRadius="24dp"
+                app:checkedIconTint="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="@+id/cardPerson"
+                app:layout_constraintEnd_toEndOf="@+id/scrollView"
+                app:layout_constraintTop_toTopOf="@+id/cardPerson"
+                app:strokeColor="@color/button_background"
+                app:strokeWidth="1dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/isCompanySelected"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:scaleType="fitXY"
+                        android:visibility="@{viewmodel.isPersonChecked ? View.INVISIBLE : View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/ok_green" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iconCompany"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="fitXY"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/company" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/companytext1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Компания"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        app:layout_constraintEnd_toEndOf="@+id/iconCompany"
+                        app:layout_constraintHorizontal_bias="0.50"
+                        app:layout_constraintStart_toStartOf="@+id/iconCompany"
+                        app:layout_constraintTop_toBottomOf="@+id/iconCompany" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/companytext2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:paddingLeft="8dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="8dp"
+                        android:paddingBottom="16dp"
+                        android:text="Найдите проект, в который вы готовы вложится"
+                        android:textAlignment="center"
+                        android:textColor="@color/text_dark"
+                        app:autoSizeMaxTextSize="13sp"
+                        app:autoSizeMinTextSize="9sp"
+                        app:autoSizeTextType="uniform"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/companytext1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -62,7 +62,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/citadel_c" />
+                app:srcCompat="@drawable/rise_r" />
 
             <TextView
                 android:id="@+id/textView2"
