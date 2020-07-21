@@ -20,12 +20,13 @@
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/imageView">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView5"
                 android:layout_width="46dp"
                 android:layout_height="46dp"
                 android:layout_gravity="center_vertical"
-                app:srcCompat="@drawable/rise_r" />
+                app:srcCompat="@drawable/rise_r"
+                app:shapeAppearanceOverlay="@style/roundedImageViewSquare"/>
 
             <TextView
                 android:id="@+id/textView4"
@@ -35,7 +36,6 @@
                 android:layout_marginStart="6dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/title_rise"
-                android:textAlignment="center"
                 android:textSize="38sp" />
         </LinearLayout>
 

@@ -1,15 +1,14 @@
 <resources>
     <!-- Base App theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.NoActionBar">
-        <item name="android:backgroundTint">@color/background</item>
+        <item name="android:backgroundTint">@color/app_background</item>
         <item name="rippleColor">@color/text_light</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:statusBarColor">@color/background</item>
+        <item name="android:statusBarColor">@color/app_background</item>
         <item name="colorError">@color/color_error</item>
         <item name="colorOnError">@color/color_error</item>
         <item name="textInputStyle">@style/TILStyle</item>
         <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button.Style</item>
-        <item name="shapeAppearanceOverlay">@style/roundedImageViewRounded</item>
         <item name="snackbarStyle">@style/Widget.MaterialComponents.Snackbar.Style</item>
     </style>
 
@@ -25,9 +24,14 @@
     </style>
 
 
-    <style name="roundedImageViewRounded" parent="">
+    <style name="roundedImageViewOval" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="roundedImageViewSquare" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
     </style>
 
     <style name="TILStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -70,7 +74,7 @@
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
         <item name="android:fontFamily">@font/montserrat_semibold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16sp  </item>
     </style>
 
 </resources>

@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#16171B</color>
+    <color name="app_background">#22272C</color>
+    <color name="edit_text_background">#16171B</color>
+    <color name="border_dark">#33343A</color>
+    <color name="border_light">#707070</color>
     <color name="bottom_nav_background">#161616</color>
     <color name="icon_grey">#989898</color>
-    <color name="accent_red">#DD3B3B</color>
+    <color name="accent_red">#FF0000</color>
     <color name="color_error">#950404</color>
     <color name="button_background">#2F2E2E</color>
-    <color name="accent_green">#5E9A57</color>
-    <color name="accent_green_disable">#839F80</color>
+    <color name="green_light">#56DC83</color>
+    <color name="green_normal">#349E46</color>
     <color name="text_light">#C8C8C9</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
-    <color name="text_dark">#5F5F5F</color>
-    <color name="rippleGreen">#A6D3A2</color>
+    <color name="text_dark">#69696F</color>
 </resources>

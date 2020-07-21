@@ -36,9 +36,9 @@ class ChatListFragment : Fragment() {
             }
             val id = (activity as MainActivity).currentUser.id
             (adapter as ChatsRecyclerViewAdapter).setData((listOf(
-                ChatShortView(id, 1, "Person #1", "hi there", "00:00"),
-                ChatShortView(id, 2, "Person #2", "general", "00:01"),
-                ChatShortView(id, 3, "Person #3", "kenobi", "00:02")
+                ChatShortView(id, 1, "Person #1", "hi there"),
+                ChatShortView(id, 2, "Person #2", "general"),
+                ChatShortView(id, 3, "Person #3", "kenobi")
             )))
         }
         return binding.root

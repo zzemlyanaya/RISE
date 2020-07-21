@@ -29,7 +29,6 @@ class ChatsRecyclerViewAdapter(private val onCardClickListener: (ChatShortView) 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.from.text = item.toName
-        holder.time.text = item.lastMessageTime
         holder.lastMessage.text = item.lastMessage
         holder.itemView.setOnClickListener { onCardClickListener(item) }
     }
@@ -44,14 +43,19 @@ class ChatsRecyclerViewAdapter(private val onCardClickListener: (ChatShortView) 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ShapeableImageView = view.findViewById(R.id.chatImage)
         val from: TextView = view.findViewById(R.id.textFrom)
-        val time: MaterialTextView = view.findViewById(R.id.textTime)
         val lastMessage: MaterialTextView = view.findViewById(R.id.textLastMes)
+        val status: ShapeableImageView = view.findViewById(R.id.userStatus)
 
         init {
             if (Random.nextInt() % 2 == 0)
                 image.setImageResource(R.drawable.im_robot_with_idea)
             else
                 image.setImageResource(R.drawable.im_robot_manager)
+
+            if(Random.nextInt() % 3 == 0)
+                status.visibility = View.VISIBLE
+            else
+                status.visibility = View.INVISIBLE
         }
 
     }

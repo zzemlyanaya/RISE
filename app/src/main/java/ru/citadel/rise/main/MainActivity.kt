@@ -168,15 +168,8 @@ class MainActivity : FragmentActivity() {
         binding.header.butMenuMore.visibility = View.VISIBLE
         binding.header.chatName.text = user.name
         when(user.status){
-            1 -> {
-                binding.header.chatStatus.text = "online"
-                binding.header.chatStatusIcon.visibility = View.VISIBLE
-            }
-            else -> {
-                binding.header.chatStatus.text = "gone"
-                binding.header.chatStatusIcon.visibility = View.INVISIBLE
-            }
-
+            1 -> binding.header.chatStatus.text = "online"
+            else -> binding.header.chatStatus.text = "gone"
         }
     }
 

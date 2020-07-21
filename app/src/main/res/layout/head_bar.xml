@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_gravity="top"
-        android:background="@color/background"
+        android:background="@color/app_background"
         android:elevation="12dp">
 
 
@@ -17,7 +17,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="4dp"
-            android:backgroundTint="@color/background"
+            android:backgroundTint="@color/app_background"
             android:scaleType="fitXY"
             android:tint="@color/white"
             android:visibility="invisible"
@@ -54,15 +54,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="invisible">
+            tools:visibility="visible">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imageView2"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/rise_r" />
+                app:srcCompat="@drawable/rise_r"
+                app:shapeAppearanceOverlay="@style/roundedImageViewSquare"/>
 
             <TextView
                 android:id="@+id/textView2"
@@ -83,7 +84,7 @@
             android:layout_width="48dp"
             android:layout_height="44dp"
             android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/background"
+            android:backgroundTint="@color/app_background"
             android:scaleType="fitXY"
             android:tint="@color/white"
             android:visibility="invisible"
@@ -104,20 +105,6 @@
             app:layout_constraintStart_toEndOf="@+id/butBack"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <ImageButton
-                android:id="@+id/chatStatusIcon"
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:layout_marginStart="2dp"
-                android:background="@android:color/transparent"
-                android:scaleType="fitXY"
-                android:tint="@color/accent_green"
-                app:layout_constraintBottom_toBottomOf="@+id/chatStatus"
-                app:layout_constraintStart_toEndOf="@+id/chatStatus"
-                app:layout_constraintTop_toTopOf="@+id/chatStatus"
-                app:layout_constraintVertical_bias="0.68"
-                app:srcCompat="@drawable/ic_dot" />
 
             <TextView
                 android:id="@+id/chatName"

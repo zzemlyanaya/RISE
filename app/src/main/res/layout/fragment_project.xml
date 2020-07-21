@@ -125,7 +125,7 @@
                     android:layout_marginStart="44dp"
                     android:layout_marginEnd="44dp"
                     android:layout_marginBottom="16dp"
-                    android:backgroundTint="@color/accent_green"
+                    android:backgroundTint="@color/green_light"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="contact"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
