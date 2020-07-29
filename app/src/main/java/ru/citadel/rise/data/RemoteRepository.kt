@@ -20,8 +20,10 @@ class RemoteRepository {
         )
     )
 
-    //suspend fun getAllProjects() = service.getAllProjects()
-    suspend fun getAllProjects() = fakeData
+    suspend fun getAllProjects() = service.getAllProjects()
+    //suspend fun getAllProjects() = fakeData
+
+    suspend fun getProjectByID(id: Int) = service.getProjectByID(id)
 
     //suspend fun getMyProjectsById(id: Int) = service.getMyProjectsByUser(id)
     suspend fun getMyProjectsById(id: Int) = fakeData

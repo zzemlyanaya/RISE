@@ -4,6 +4,7 @@ import android.app.Application
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.citadel.rise.data.IServerService
+import ru.citadel.rise.data.SynchronousCallAdapterFactory
 
 class App : Application(){
 
@@ -13,6 +14,7 @@ class App : Application(){
         val retrofit = Retrofit.Builder()
             .baseUrl(IServerService.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(SynchronousCallAdapterFactory.create())
             .build()
 
         service = retrofit.create(IServerService::class.java)

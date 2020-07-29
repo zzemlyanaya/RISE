@@ -11,10 +11,10 @@ interface IServerService {
         const val CODE_SUCCESS = -1
         const val CODE_AUTH_ERROR = 1
         const val CODE_SERVER_ERROR = 2
-        const val BASE_URL = "http://f15e7698cee8.ngrok.io/"
+        const val BASE_URL = " http://67c5bb8c5215.ngrok.io"
     }
 
-    @GET("")
+    @GET("/projects")
     fun getAllProjects(): List<Project>
 
     @GET("")

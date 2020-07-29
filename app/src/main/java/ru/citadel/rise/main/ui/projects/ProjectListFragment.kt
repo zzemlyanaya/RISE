@@ -1,6 +1,7 @@
 package ru.citadel.rise.main.ui.projects
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -98,6 +99,7 @@ class ProjectListFragment : Fragment() {
                 Status.ERROR -> {
                     progressBar.visibility = View.INVISIBLE
                     recyclerView.visibility = View.VISIBLE
+                    Log.d("SERVER", it.message.toString())
                     Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                 }
                 Status.LOADING -> {
