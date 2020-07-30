@@ -17,6 +17,7 @@ import ru.avangard.rise.R
 import ru.avangard.rise.databinding.RegistrationFragmentBinding
 import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
+import ru.citadel.rise.data.model.Auth
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.toInt
 
@@ -44,14 +45,14 @@ class RegistrationFragment : Fragment() {
         butBackgroung = binding.buttonBack2
 
         butSignUp.setOnClickListener {
-            val user = User(
+            val auth = Auth(
                 binding.textEmail.text.hashCode(),
-                binding.textEmail.text.toString(),
+                binding.textPassword.text.hashCode())
+            registr(auth,
                 binding.textName.text.toString(),
                 viewModel.isPersonChecked.value?.toInt()!!,
-                null, null, null, null
+                binding.textEmail.text.toString()
             )
-            registr(user)
         }
 
 
@@ -81,14 +82,14 @@ class RegistrationFragment : Fragment() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE -> if(viewModel.registrationFormState.value!!.isDataValid) {
-                        val user = User(
+                        val auth = Auth(
                             binding.textEmail.text.hashCode(),
-                            binding.textEmail.text.toString(),
+                            binding.textPassword.text.hashCode())
+                        registr(auth,
                             binding.textName.text.toString(),
                             viewModel.isPersonChecked.value?.toInt()!!,
-                            null, null, null, null
+                            binding.textEmail.text.toString()
                         )
-                        registr(user)
                     }
                 }
                 false
@@ -111,16 +112,17 @@ class RegistrationFragment : Fragment() {
         return if (id == null) null else getString(id)
     }
 
-    private fun registr(user: User){
-        viewModel.createNew(user).observe(viewLifecycleOwner, Observer {
+    private fun registr(auth: Auth, name: String, type: Int, email: String){
+        viewModel.createNew(auth, name, type, email).observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        onCreateAccountListener?.onCreateNew(user)
+                        onCreateAccountListener?.onCreateNew(it.data!!)
                     }
                     Status.ERROR -> {
                         progressBar.visibility = View.GONE
                         butSignUp.visibility = View.VISIBLE
+                        butBackgroung.visibility = View.VISIBLE
                         Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
                     }
                     Status.LOADING -> {

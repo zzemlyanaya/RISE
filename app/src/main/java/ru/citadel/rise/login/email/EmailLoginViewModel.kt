@@ -16,10 +16,10 @@ class EmailLoginViewModel : ViewModel() {
     private val _loginForm = MutableLiveData(LoginFormState())
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    fun authorize(login: String, password: String) = liveData(Dispatchers.IO) {
+    fun authorize(id: Int, password: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = repository.authorize(login, password.hashCode().toString())))
+            emit(Resource.success(data = repository.authorize(id, password.hashCode().toString())))
         } catch (e: Exception) {
             emit(Resource.error(data = null, message = e.message ?: "Ошибка сервера! Попробуйте снова."))
         }

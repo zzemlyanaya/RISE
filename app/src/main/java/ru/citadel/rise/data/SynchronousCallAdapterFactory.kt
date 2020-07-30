@@ -13,7 +13,6 @@ class SynchronousCallAdapterFactory : CallAdapter.Factory() {
         annotations: Array<Annotation?>?,
         retrofit: Retrofit?
     ): CallAdapter<Any?, Any?>? {
-        // if returnType is retrofit2.Call, do nothing
         return if (returnType.toString().contains("retrofit2.Call")) {
             null
         } else object : CallAdapter<Any?, Any?> {
@@ -25,7 +24,10 @@ class SynchronousCallAdapterFactory : CallAdapter.Factory() {
                 return try {
                     call.execute().body()!!
                 } catch (e: Exception) {
-                    throw RuntimeException(e) // do something better
+                    if (e is NullPointerException)
+                        throw RuntimeException("Не удалось связаться с сервером")
+                    else
+                        throw RuntimeException(e)
                 }
             }
         }

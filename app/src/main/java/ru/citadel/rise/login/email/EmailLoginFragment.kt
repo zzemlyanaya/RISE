@@ -47,7 +47,7 @@ class EmailLoginFragment : Fragment(), IOnBack {
         butBackground = binding.buttonBack1
 
         butSignIn.setOnClickListener {
-            authorize(binding.textLogin.text.toString(), binding.textPasswordLogin.text.toString())
+            authorize(binding.textLogin.text.toString().hashCode(), binding.textPasswordLogin.text.toString())
         }
 
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
@@ -77,7 +77,7 @@ class EmailLoginFragment : Fragment(), IOnBack {
                     EditorInfo.IME_ACTION_DONE ->
                         if(viewModel.loginFormState.value!!.isDataValid)
                         authorize(
-                            binding.textLogin.text.toString(),
+                            binding.textLogin.text.toString().hashCode(),
                             binding.textPasswordLogin.text.toString()
                         )
                 }
@@ -92,8 +92,8 @@ class EmailLoginFragment : Fragment(), IOnBack {
         return if (id == null) null else getString(id)
     }
 
-    private fun authorize(login: String, password: String){
-        viewModel.authorize(login, password).observe(viewLifecycleOwner, Observer {
+    private fun authorize(id: Int, password: String){
+        viewModel.authorize(id, password).observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
