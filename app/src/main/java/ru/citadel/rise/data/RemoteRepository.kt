@@ -2,6 +2,7 @@ package ru.citadel.rise.data
 
 import ru.citadel.rise.App
 import ru.citadel.rise.data.model.Project
+import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User
 
 class RemoteRepository {
@@ -25,9 +26,9 @@ class RemoteRepository {
     //suspend fun getMyProjectsById(id: Int) = fakeData
 
     //suspend fun getFavProjectsById(id: Int) = service.getFavProjectsByUser(id)
-    suspend fun getFavProjectsById(id: Int) = listOf(fakeData[0])
+    suspend fun getFavProjectsById(id: Int) = Result(error= null, data = listOf(fakeData[0]))
 
-    suspend fun authorize(login: Int, passwordToken: String)
+    suspend fun authorize(login: Int, passwordToken: Int)
             = service.authorize(login, passwordToken)
 
 //    fun authorize(email: String, passwordToken: String) : User{
@@ -43,7 +44,7 @@ class RemoteRepository {
 //        )
 //    }
 
-    suspend fun registr(id: Int, name: String, passwordToken: Int, type: Int, email: String)
+    suspend fun registr(id: Int, name: String, passwordToken: Int, type: Int, email: String) : Result<User>
             = service.registr(id, name, passwordToken, type, email)
 
     suspend fun getUserById(id: Int) = service.getUserById(id)

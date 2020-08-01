@@ -9,6 +9,8 @@ import kotlinx.coroutines.Dispatchers
 import ru.avangard.rise.R
 import ru.citadel.rise.data.RemoteRepository
 import ru.citadel.rise.data.model.Resource
+import ru.citadel.rise.data.model.Result
+import ru.citadel.rise.data.model.User
 
 class EmailLoginViewModel : ViewModel() {
     private val repository = RemoteRepository()
@@ -19,7 +21,11 @@ class EmailLoginViewModel : ViewModel() {
     fun authorize(id: Int, password: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = repository.authorize(id, password.hashCode().toString())))
+            val result: Result<User> = repository.authorize(id, password.hashCode())
+            if (result.error == null)
+                emit(Resource.success(data = result.data))
+            else
+                emit(Resource.error(data = null, message = result.error))
         } catch (e: Exception) {
             emit(Resource.error(data = null, message = e.message ?: "Ошибка сервера! Попробуйте снова."))
         }

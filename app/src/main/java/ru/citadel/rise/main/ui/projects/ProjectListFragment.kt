@@ -82,8 +82,8 @@ class ProjectListFragment : Fragment() {
         }
     }
 
-    private fun showData(it: Resource<List<Project>>?){
-        it?.let { resource ->
+    private fun showData(it: Resource<List<Project>?>){
+        it.let { resource ->
             when (resource.status) {
                 Status.SUCCESS -> {
                     recyclerView.visibility = View.VISIBLE

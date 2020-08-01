@@ -2,44 +2,46 @@ package ru.citadel.rise.data
 
 import retrofit2.http.*
 import ru.citadel.rise.data.model.Project
+import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User
 
 interface IServerService {
     companion object {
-        const val BASE_URL = " http://6b49ed6f3536.ngrok.io"
+        const val BASE_URL = "https://0c13c4977a5c.ngrok.io"
     }
 
     @GET("/projects")
-    fun getAllProjects(): List<Project>
+    fun getAllProjects(): Result<List<Project>>
 
     @GET("/projects/my/{id}")
-    fun getMyProjectsByUser(@Path("id")id: Int): List<Project>
+    fun getMyProjectsByUser(@Path("id")id: Int): Result<List<Project>>
 
     @GET("/projects/fav/{id}")
-    fun getFavProjectsByUser(@Path("id")id: Int): List<Project>
+    fun getFavProjectsByUser(@Path("id")id: Int): Result<List<Project>>
 
     @POST("/projects")
-    fun addProject(project: Project)
+    fun addProject(project: Project): Result<String>
 
     @PUT("/projects/{id}")
-    fun editProject(@Path("id")id: Int, new: Project)
+    fun editProject(@Path("id")id: Int, new: Project): Result<String>
 
     @GET("/login")
-    fun authorize(@Query("id")id: Int, @Query("passwordToken")passwordToken: String): User
+    fun authorize(@Query("id")id: Int,
+                  @Query("passwordToken")passwordToken: Int): Result<User>
 
     @GET("/registr")
     fun registr(@Query("id")id: Int,
                 @Query("name")name: String,
                 @Query("passwordToken")token: Int,
                 @Query("type")type: Int,
-                @Query("email")email: String): User
+                @Query("email")email: String): Result<User>
 
     @GET("/logout")
-    fun logout()
+    fun logout(): Result<String>
 
     @GET("/users/{id}")
-    fun getUserById(@Path("id")id: Int): User
+    fun getUserById(@Path("id")id: Int): Result<User>
 
     @PUT("/users/{id}")
-    fun editUser(@Path("id")id:Int, new: User)
+    fun editUser(@Path("id")id:Int, new: User): Result<String>
 }

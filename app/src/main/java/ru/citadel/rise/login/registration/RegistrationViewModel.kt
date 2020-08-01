@@ -12,6 +12,8 @@ import ru.avangard.rise.R
 import ru.citadel.rise.data.RemoteRepository
 import ru.citadel.rise.data.model.Auth
 import ru.citadel.rise.data.model.Resource
+import ru.citadel.rise.data.model.Result
+import ru.citadel.rise.data.model.User
 import kotlin.coroutines.CoroutineContext
 
 class RegistrationViewModel : ViewModel() {
@@ -45,7 +47,11 @@ class RegistrationViewModel : ViewModel() {
     fun createNew(auth: Auth, name: String, type: Int, email: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            emit(Resource.success(data = remoteRepository.registr(auth.id, name, auth.passwordToken, type, email)))
+            val result: Result<User> = remoteRepository.registr(auth.id, name, auth.passwordToken, type, email)
+            if (result.error == null)
+                emit(Resource.success(data = result.data))
+            else
+                emit(Resource.error(data = null, message = result.error))
         } catch (e: Exception){
             emit(Resource.error(data = null, message = e.message.toString()))
         }

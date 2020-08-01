@@ -24,10 +24,7 @@ class SynchronousCallAdapterFactory : CallAdapter.Factory() {
                 return try {
                     call.execute().body()!!
                 } catch (e: Exception) {
-                    if (e is NullPointerException)
-                        throw RuntimeException("Не удалось связаться с сервером")
-                    else
-                        throw RuntimeException(e)
+                    throw RuntimeException(e.localizedMessage)
                 }
             }
         }
