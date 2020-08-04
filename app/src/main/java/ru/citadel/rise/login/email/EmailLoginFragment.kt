@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import ru.avangard.rise.R
-import ru.avangard.rise.databinding.EmailLoginFragmentBinding
+import ru.avangard.rise.databinding.LoginFragmentBinding
 import ru.citadel.rise.IOnBack
 import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
@@ -37,8 +37,8 @@ class EmailLoginFragment : Fragment(), IOnBack {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: EmailLoginFragmentBinding
-                = DataBindingUtil.inflate(inflater, R.layout.email_login_fragment, container, false)
+        val binding: LoginFragmentBinding
+                = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 

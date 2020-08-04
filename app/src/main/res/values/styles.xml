@@ -31,7 +31,7 @@
 
     <style name="roundedImageViewSquare" parent="">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">15dp</item>
+        <item name="cornerSize">10dp</item>
     </style>
 
     <style name="TILStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -74,7 +74,17 @@
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
         <item name="android:textAppearance">@style/TextAppearance.AppCompat.Small</item>
         <item name="android:fontFamily">@font/montserrat_semibold</item>
-        <item name="android:textSize">16sp  </item>
+        <item name="android:textSize">16sp</item>
+        <item name="tabTextColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+    </style>
+
+    <style name="ChipTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/transparent</item>
+        <item name="tabBackground">@drawable/tab_background</item>
+        <item name="tabSelectedTextColor">@color/accent_red</item>
+        <item name="tabTextAppearance">@style/tab_text</item>
+        <item name="tabRippleColor">@android:color/transparent</item>
     </style>
 
 </resources>

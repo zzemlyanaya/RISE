@@ -4,16 +4,20 @@
     <item
         android:id="@+id/navigation_chats"
         android:icon="@drawable/ic_chat"
-        android:title="@string/title_chats" />
+        android:title="@string/title_chats"
+        android:iconTint="@color/accent_red"/>
 
     <item
         android:id="@+id/navigation_rise"
         android:icon="@drawable/ic_idea_in_gear_oulined"
-        android:title="@string/title_rise" />
+        android:title="@string/title_rise"
+        android:checked="true"
+        android:iconTint="@color/accent_red"/>
 
     <item
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_account"
-        android:title="@string/title_profile" />
+        android:title="@string/title_profile"
+        android:iconTint="@color/accent_red"/>
 
 </menu>

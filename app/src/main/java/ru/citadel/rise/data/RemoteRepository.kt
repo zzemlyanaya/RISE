@@ -19,6 +19,8 @@ class RemoteRepository {
         )
     )
 
+    fun getServerStatus() = service.getServerStatus()
+
     suspend fun getAllProjects() = service.getAllProjects()
     //suspend fun getAllProjects() = fakeData
 

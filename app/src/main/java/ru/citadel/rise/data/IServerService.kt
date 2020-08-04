@@ -7,8 +7,11 @@ import ru.citadel.rise.data.model.User
 
 interface IServerService {
     companion object {
-        const val BASE_URL = "https://0c13c4977a5c.ngrok.io"
+        const val BASE_URL = "http://50a7fbda1e7f.ngrok.io"
     }
+
+    @GET("/")
+    fun getServerStatus(): Result<String>
 
     @GET("/projects")
     fun getAllProjects(): Result<List<Project>>

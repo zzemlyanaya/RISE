@@ -38,10 +38,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:backgroundTint="@color/black"
                     android:hint="@string/prompt_email"
                     android:textColorHint="@color/text_dark"
-                    app:boxBackgroundColor="@android:color/transparent"
                     app:boxStrokeWidth="2dp"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/color_error"
@@ -53,7 +51,6 @@
                         android:id="@+id/textEmail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:backgroundTint="@color/black"
                         android:drawableStart="@drawable/ic_mail_outlined"
                         android:drawablePadding="16dp"
                         android:drawableTint="@color/accent_red"
@@ -70,7 +67,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:backgroundTint="@color/black"
                     android:hint="@{viewmodel.promptName}"
                     android:textColorHint="@color/text_dark"
                     app:boxStrokeWidth="2dp"
@@ -100,7 +96,6 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:backgroundTint="@color/black"
                     android:hint="@string/prompt_password"
                     android:textColorHint="@color/text_dark"
                     app:boxStrokeWidth="2dp"
@@ -115,7 +110,6 @@
                         android:id="@+id/textPassword"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:backgroundTint="@color/black"
                         android:drawableStart="@drawable/ic_key_outlined"
                         android:drawablePadding="16dp"
                         android:drawableTint="@color/accent_red"
@@ -188,6 +182,20 @@
                     app:layout_constraintEnd_toEndOf="@+id/buttonBack2"
                     app:layout_constraintStart_toStartOf="@+id/buttonBack2"
                     app:layout_constraintTop_toTopOf="@+id/buttonBack2" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Продолжая вы даёте согласие на хранение и обработку персональных данных."
+                    android:textAlignment="center"
+                    android:textColor="@color/text_dark"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonBack2" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

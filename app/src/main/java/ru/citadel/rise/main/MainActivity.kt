@@ -5,7 +5,7 @@ import android.os.Handler
 import android.view.View
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.fxn.OnBubbleClickListener
 import com.google.android.material.snackbar.Snackbar
 import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
@@ -32,28 +32,6 @@ class MainActivity : FragmentActivity() {
     private val mHandler: Handler = Handler()
     private val mRunnable = Runnable { backPressedOnce = false }
 
-    private val mOnNavigationItemSelectedListener
-            = BottomNavigationView.OnNavigationItemSelectedListener {
-            menuItem -> when (menuItem.itemId) {
-        R.id.navigation_chats -> {
-            if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ChatListFragment)
-                showChatsFragment()
-            return@OnNavigationItemSelectedListener true
-        }
-        R.id.navigation_profile -> {
-            if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProfileFragment)
-                showProfileFragment()
-            return@OnNavigationItemSelectedListener true
-        }
-        R.id.navigation_rise -> {
-            if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProjectListFragment)
-                showProjectsFragment(0)
-            return@OnNavigationItemSelectedListener true
-        }
-    }
-        false
-    }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,10 +45,27 @@ class MainActivity : FragmentActivity() {
             .replace(R.id.containerMain, ProjectListFragment.newInstance(0), "projects_0")
             .commitAllowingStateLoss()
 
-        binding.navView.apply {
-            setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-            selectedItemId = R.id.navigation_rise
-        }
+
+
+        binding.navView.addBubbleListener(object : OnBubbleClickListener {
+            override fun onBubbleClick(id: Int) {
+                when (id) {
+                    R.id.navigation_chats -> {
+                        if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ChatListFragment)
+                            showChatsFragment()
+                    }
+                    R.id.navigation_profile -> {
+                        if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProfileFragment)
+                            showProfileFragment()
+                    }
+                    R.id.navigation_rise -> {
+                        if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProjectListFragment)
+                            showProjectsFragment(0)
+                    }
+                }
+            }
+        })
+
 
         binding.header.butBack.setOnClickListener { onBackPressed() }
     }

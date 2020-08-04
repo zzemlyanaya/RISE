@@ -19,22 +19,29 @@
             android:id="@+id/containerMain"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/nav_view"
+            app:layout_constraintBottom_toTopOf="@+id/navView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/nav_view"
+        <com.fxn.BubbleTabBar
+            android:id="@+id/navView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/bottom_nav_background"
-            android:fitsSystemWindows="true"
-            app:itemBackground="@color/bottom_nav_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@android:color/transparent"
+            android:elevation="16dp"
+            android:padding="7dp"
+            app:bubbletab_menuResource="@menu/bottom_nav_menu"
+            app:bubbletab_custom_font="@font/montserrat_semibold"
+            app:bubbletab_disabled_icon_color="@color/white"
+            app:bubbletab_horizontal_padding="16dp"
+            app:bubbletab_icon_size="28dp"
+            app:bubbletab_title_size="17sp"
+            app:bubbletab_icon_padding="8sp"
+            app:bubbletab_vertical_padding="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav_menu" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
