@@ -6,7 +6,6 @@ import android.os.Handler
 import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
@@ -41,8 +40,15 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
             viewPager.visibility = View.INVISIBLE
             tabLayout.visibility = View.INVISIBLE
             textLoginDescr.visibility = View.VISIBLE
+            textConnect.text = "Соединяем с сервером..."
+            textConnect.visibility = View.VISIBLE
         }
 
+        connect()
+    }
+
+    private fun connect(){
+        binding.textConnect.text = "Соединяем с сервером..."
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val status = RemoteRepository().getServerStatus().data
@@ -53,15 +59,11 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
             }
 
         }
-
     }
 
     private fun showExp(){
-        Toast.makeText(
-            this@LoginActivity,
-            "Сервер временно недоступен. Приносим свои извинения",
-            Toast.LENGTH_LONG)
-            .show()
+        binding.textConnect.text = "Сервер не доступен. Нажмите для повторного соединения."
+        binding.textConnect.setOnClickListener { connect() }
     }
 
     private fun showTabs(){
@@ -77,6 +79,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
             viewPager.visibility = View.VISIBLE
             tabLayout.visibility = View.VISIBLE
             textLoginDescr.visibility = View.INVISIBLE
+            textConnect.visibility = View.INVISIBLE
         }
 
         binding.viewPager.adapter = ViewPagerAdapter(this, 2)

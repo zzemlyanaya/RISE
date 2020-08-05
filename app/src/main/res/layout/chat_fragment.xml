@@ -8,49 +8,56 @@
         android:layout_height="match_parent">
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/messageInput"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/messageRecyclerView"
             android:layout_width="0dp"
-            android:layout_height="60dp"
+            android:layout_height="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/butSend"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginEnd="16dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:scaleType="fitXY"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/butClip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_send" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/butClip"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="10dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:scaleType="fitXY"
+            android:tint="@color/icon_grey"
+            app:layout_constraintBottom_toBottomOf="@+id/textMessage"
+            app:layout_constraintEnd_toStartOf="@+id/butSend"
+            app:layout_constraintTop_toTopOf="@+id/textMessage"
+            app:srcCompat="@drawable/ic_clip" />
+
+        <EditText
+            android:id="@+id/textMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:hint="Ваше сообщение"
-            app:boxCornerRadiusBottomEnd="44dp"
-            app:boxCornerRadiusBottomStart="44dp"
-            app:boxCornerRadiusTopEnd="44dp"
-            app:boxCornerRadiusTopStart="44dp"
-            app:boxStrokeColor="@color/border_light"
-            app:hintAnimationEnabled="true"
-            app:hintEnabled="true"
-            app:layout_constraintBottom_toBottomOf="@+id/butSend"
-            app:layout_constraintEnd_toStartOf="@+id/butSend"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/messageEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fontFamily="@font/montserrat_medium"
-                android:imeOptions="actionSend"
-                android:inputType="textShortMessage|textLongMessage"
-                android:linksClickable="true"
-                android:singleLine="false"
-                android:textColorHighlight="@color/accent_red" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/butSend"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="12dp"
-            android:backgroundTint="@color/accent_red"
-            android:src="@drawable/ic_send"
-            app:borderWidth="0dp"
-            app:fabCustomSize="56dp"
-            app:tint="@android:color/white"
+            android:layout_marginBottom="16dp"
+            android:ems="10"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="start|top"
+            android:hint=" Ваше сообщение"
+            android:inputType="textLongMessage|textMultiLine"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/butClip"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

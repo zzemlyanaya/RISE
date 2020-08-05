@@ -49,8 +49,10 @@
     <!-- MainActivity theme -->
     <style name="AppTheme.Main">
         <item name="colorPrimary">@color/accent_red</item>
+        <item name="colorAccent">@color/accent_red</item>
         <item name="colorOnSurface">@color/icon_grey</item>
         <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
+        <item name="colorSurface">@color/border_light</item>
     </style>
 
     <style name="BottomNavStyle" parent="Widget.MaterialComponents.BottomNavigationView">

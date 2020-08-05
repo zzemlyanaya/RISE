@@ -10,7 +10,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import ru.avangard.rise.R
 import ru.citadel.rise.data.RemoteRepository
-import ru.citadel.rise.data.model.Auth
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User
@@ -44,10 +43,10 @@ class RegistrationViewModel : ViewModel() {
         _promptName.value = "Имя вашей компании"
     }
 
-    fun createNew(auth: Auth, name: String, type: Int, email: String) = liveData(Dispatchers.IO) {
+    fun createNew(name: String, type: Int, email: String, password: String) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
-            val result: Result<User> = remoteRepository.registr(auth.id, name, auth.passwordToken, type, email)
+            val result: Result<User> = remoteRepository.registr(email.hashCode(), name, password.hashCode(), type, email)
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else

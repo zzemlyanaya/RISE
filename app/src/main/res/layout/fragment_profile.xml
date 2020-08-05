@@ -38,67 +38,76 @@
             app:layout_constraintStart_toStartOf="@id/profileImage"
             app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/butMyProjects"
+        <ScrollView
             android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:layout_marginStart="48dp"
+            android:layout_height="0dp"
             android:layout_marginTop="72dp"
-            android:layout_marginEnd="48dp"
-            android:backgroundTint="@color/button_background"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="Мои проекты"
-            android:textAlignment="textStart"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            app:cornerRadius="14dp"
-            app:icon="@drawable/ic_idea_in_gear_oulined"
-            app:iconPadding="16dp"
-            app:iconSize="32dp"
-            app:iconTint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileName" />
+            app:layout_constraintTop_toBottomOf="@+id/profileName">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/butFavourites"
-            android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="22dp"
-            android:backgroundTint="@color/button_background"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="Избранное"
-            android:textAlignment="textStart"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textSize="16sp"
-            app:cornerRadius="14dp"
-            app:icon="@drawable/ic_star_outlined"
-            app:iconPadding="16dp"
-            app:iconSize="32dp"
-            app:layout_constraintEnd_toEndOf="@+id/butMyProjects"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/butMyProjects"
-            app:layout_constraintTop_toBottomOf="@+id/butMyProjects" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/butSettings"
-            android:layout_width="0dp"
-            android:layout_height="72dp"
-            android:layout_marginTop="22dp"
-            android:backgroundTint="@color/button_background"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="Настройки"
-            android:textAlignment="textStart"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textSize="16sp"
-            app:cornerRadius="14dp"
-            app:icon="@drawable/ic_settings_outlined"
-            app:iconPadding="16dp"
-            app:iconSize="32dp"
-            app:layout_constraintEnd_toEndOf="@+id/butFavourites"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/butFavourites"
-            app:layout_constraintTop_toBottomOf="@+id/butFavourites" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/butMyProjects"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginEnd="42dp"
+                    android:backgroundTint="@color/button_background"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="О себе"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_user"
+                    app:iconPadding="16dp"
+                    app:iconSize="32dp"
+                    app:iconTint="@color/white" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/butFavourites"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="42dp"
+                    android:backgroundTint="@color/button_background"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Избранное"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textSize="16sp"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_star_outlined"
+                    app:iconPadding="16dp"
+                    app:iconSize="32dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/butSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="42dp"
+                    android:backgroundTint="@color/button_background"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Настройки"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textSize="16sp"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_settings_outlined"
+                    app:iconPadding="16dp"
+                    app:iconSize="32dp" />
+            </LinearLayout>
+        </ScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

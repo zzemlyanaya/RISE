@@ -105,7 +105,6 @@ class MainActivity : FragmentActivity() {
     }
 
     private fun hideAllHeaderView(){
-        binding.header.labelRise.visibility = View.INVISIBLE
         binding.header.textTitle.visibility = View.INVISIBLE
         binding.header.butBack.visibility = View.INVISIBLE
         binding.header.chatHeader.visibility = View.INVISIBLE
@@ -120,7 +119,6 @@ class MainActivity : FragmentActivity() {
         hideAllHeaderView()
         when(type) {
             0 -> {
-                binding.header.labelRise.visibility = View.VISIBLE
                 binding.navView.visibility = View.VISIBLE
             }
             1 -> {
@@ -162,10 +160,6 @@ class MainActivity : FragmentActivity() {
         binding.header.chatHeader.visibility = View.VISIBLE
         binding.header.butMenuMore.visibility = View.VISIBLE
         binding.header.chatName.text = user.name
-        when(user.status){
-            1 -> binding.header.chatStatus.text = "online"
-            else -> binding.header.chatStatus.text = "gone"
-        }
     }
 
     fun showProjectFragment(project: Project, typeFrom: Int){

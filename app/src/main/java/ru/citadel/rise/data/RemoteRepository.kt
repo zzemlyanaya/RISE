@@ -10,11 +10,9 @@ class RemoteRepository {
 
     private val fakeData = listOf(
         Project(1, "RISE", 1, "The best startup platform ever",
-            "Some very long text which i definitely don't won't to type so it's kinda short text",
             "1000000 рублей", "1 месяц", "http://bestApp.ever/RISE"
         ),
         Project(2, "CITADEL Education", 1, "The best education platform ever",
-            "Some very long text which i definitely don't won't to type so it's kinda short text",
             "1100000 рублей", "2 месяца", "http://bestApp.ever/Education"
         )
     )

@@ -7,7 +7,6 @@ data class Project(
     val id: Int,
     var name: String,
     var contact: Int, //contact user'
-    var descriptionShort: String,
     var descriptionLong: String,
     var cost: String,
     var deadlines: String,

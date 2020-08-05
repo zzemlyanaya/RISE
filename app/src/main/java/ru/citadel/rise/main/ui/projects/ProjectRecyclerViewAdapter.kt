@@ -28,7 +28,7 @@ class ProjectRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.title.text = item.name
-        holder.description.text = item.descriptionShort
+        holder.description.text = item.descriptionLong
         holder.itemView.setOnClickListener { onCardClickListener(item) }
     }
 

@@ -43,55 +43,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:id="@+id/labelRise"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/imageView2"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/rise_r"
-                app:shapeAppearanceOverlay="@style/roundedImageViewSquare"/>
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_bold"
-                android:gravity="top"
-                android:paddingStart="8dp"
-                android:text="@string/title_rise"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textSize="42sp" />
-
-        </LinearLayout>
-
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/butMenuMore"
-            android:layout_width="48dp"
-            android:layout_height="44dp"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@color/app_background"
-            android:scaleType="fitXY"
+            android:scaleType="fitCenter"
             android:tint="@color/white"
             android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/butBack"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/butBack"
-            app:srcCompat="@drawable/ic_dot_menu_more" />
+            app:srcCompat="@drawable/ic_dot_menu_more"
+            tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/chatHeader"
@@ -103,31 +68,21 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/butMenuMore"
             app:layout_constraintStart_toEndOf="@+id/butBack"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible">
 
 
             <TextView
                 android:id="@+id/chatName"
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Chat name"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/chatHeaderImage"
                 app:layout_constraintStart_toEndOf="@+id/chatHeaderImage"
                 app:layout_constraintTop_toTopOf="@+id/chatHeaderImage" />
-
-            <TextView
-                android:id="@+id/chatStatus"
-                android:layout_width="wrap_content"
-                android:layout_height="16dp"
-                android:layout_marginTop="2dp"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Inline"
-                android:textColor="@color/text_dark"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/chatName"
-                app:layout_constraintTop_toBottomOf="@+id/chatName" />
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/chatHeaderImage"

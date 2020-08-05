@@ -17,7 +17,6 @@ import ru.avangard.rise.R
 import ru.avangard.rise.databinding.RegistrationFragmentBinding
 import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
-import ru.citadel.rise.data.model.Auth
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.toInt
 
@@ -45,13 +44,11 @@ class RegistrationFragment : Fragment() {
         butBackgroung = binding.buttonBack2
 
         butSignUp.setOnClickListener {
-            val auth = Auth(
-                binding.textEmail.text.hashCode(),
-                binding.textPassword.text.hashCode())
-            registr(auth,
+            registr(
                 binding.textName.text.toString(),
                 viewModel.isPersonChecked.value?.toInt()!!,
-                binding.textEmail.text.toString()
+                binding.textEmail.text.toString(),
+                binding.textPassword.text.toString()
             )
         }
 
@@ -82,13 +79,11 @@ class RegistrationFragment : Fragment() {
             setOnEditorActionListener { _, actionId, _ ->
                 when (actionId) {
                     EditorInfo.IME_ACTION_DONE -> if(viewModel.registrationFormState.value!!.isDataValid) {
-                        val auth = Auth(
-                            binding.textEmail.text.hashCode(),
-                            binding.textPassword.text.hashCode())
-                        registr(auth,
+                        registr(
                             binding.textName.text.toString(),
                             viewModel.isPersonChecked.value?.toInt()!!,
-                            binding.textEmail.text.toString()
+                            binding.textEmail.text.toString(),
+                            binding.textPassword.text.toString()
                         )
                     }
                 }
@@ -112,8 +107,8 @@ class RegistrationFragment : Fragment() {
         return if (id == null) null else getString(id)
     }
 
-    private fun registr(auth: Auth, name: String, type: Int, email: String){
-        viewModel.createNew(auth, name, type, email).observe(viewLifecycleOwner, Observer {
+    private fun registr(name: String, type: Int, email: String, password: String){
+        viewModel.createNew(name, type, email, password).observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

@@ -16,4 +16,6 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="text_dark">#69696F</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color">#707070</color>
 </resources>
