@@ -1,22 +1,22 @@
 package ru.citadel.rise.main.ui.projects
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textview.MaterialTextView
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentProjectListBinding
 import ru.citadel.rise.Constants.LIST_TYPE
+import ru.citadel.rise.Constants.PROJECTS_ALL
+import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Status
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.Resource
@@ -32,33 +32,24 @@ class ProjectListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
+    private lateinit var textConnect: MaterialTextView
 
-    private var type: Int = 0 //0 = all, 1 = my, 2 = favourites
+    private var type: Int = PROJECTS_ALL
+    private var userId: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        type = arguments?.getInt(LIST_TYPE) ?: 0
+        type = arguments?.getInt(LIST_TYPE) ?: PROJECTS_ALL
         val binding: FragmentProjectListBinding
                 = DataBindingUtil.inflate(inflater, R.layout.fragment_project_list, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
         progressBar = binding.listProgress
         recyclerView = binding.projectList
-
-        if(type == 1) {
-            binding.butAddProject.visibility = View.VISIBLE
-        } else{
-            binding.butAddProject.visibility = View.GONE
-            val newLayoutParams =
-                recyclerView.layoutParams as ConstraintLayout.LayoutParams
-            newLayoutParams.topMargin = 24
-            newLayoutParams.leftMargin = 16
-            newLayoutParams.rightMargin = 16
-            newLayoutParams.bottomMargin = 16
-            recyclerView.layoutParams = newLayoutParams
-        }
+        textConnect = binding.textConnect
+        textConnect.setOnClickListener { getData() }
 
         with(binding.projectList) {
             layoutManager = LinearLayoutManager(context)
@@ -74,11 +65,22 @@ class ProjectListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val id = (activity as MainActivity).currentUser.id
+        userId = (activity as MainActivity).currentUser.id
         when (type) {
-            0 -> viewModel.fetchAllData().observe(viewLifecycleOwner, Observer { showData(it) })
-            1 -> viewModel.fetchMyData(id).observe(viewLifecycleOwner, Observer { showData(it) })
-            else -> viewModel.fetchFavouriteData(id).observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_ALL -> viewModel.fetchAllData().observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_MY -> viewModel.fetchMyData(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+            else -> viewModel.fetchFavouriteData(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+        }
+    }
+
+    private fun getData() {
+//        viewModel.fetchAllData().removeObservers(viewLifecycleOwner)
+//        viewModel.fetchFavouriteData(id).removeObservers(viewLifecycleOwner)
+//        viewModel.fetchMyData(id).removeObservers(viewLifecycleOwner)
+        when (type) {
+            PROJECTS_ALL -> viewModel.fetchAllData()
+            PROJECTS_MY -> viewModel.fetchMyData(userId)
+            else -> viewModel.fetchFavouriteData(userId)
         }
     }
 
@@ -99,12 +101,12 @@ class ProjectListFragment : Fragment() {
                 Status.ERROR -> {
                     progressBar.visibility = View.INVISIBLE
                     recyclerView.visibility = View.VISIBLE
-                    Log.d("SERVER", it.message.toString())
-                    Toast.makeText(context, it.message, Toast.LENGTH_LONG).show()
+                    textConnect.visibility = View.VISIBLE
                 }
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
                     recyclerView.visibility = View.INVISIBLE
+                    textConnect.visibility = View.INVISIBLE
                 }
             }
         }

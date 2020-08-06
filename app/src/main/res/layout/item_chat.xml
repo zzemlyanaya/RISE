@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="100dp">
+    android:layout_height="100dp"
+    android:background="@android:color/transparent">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/chatImage"
@@ -12,9 +13,9 @@
         android:layout_marginTop="4dp"
         android:background="@color/icon_grey"
         android:padding="1dp"
-        app:shapeAppearanceOverlay="@style/roundedImageViewOval"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/roundedImageViewOval"
         app:srcCompat="@drawable/im_robot_programmer"
         app:strokeColor="@color/border_light"
         app:strokeWidth="1dp" />
@@ -52,9 +53,9 @@
         android:padding="3dp"
         android:scaleType="centerInside"
         android:tint="@color/green_light"
-        app:shapeAppearanceOverlay="@style/roundedImageViewOval"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/chatImage"
+        app:shapeAppearanceOverlay="@style/roundedImageViewOval"
         app:srcCompat="@drawable/ic_dot"
         app:strokeColor="@color/app_background"
         app:strokeWidth="3dp" />

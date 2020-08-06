@@ -12,6 +12,10 @@ object Constants {
     const val USER = "user"
     const val PROJECT = "project"
     const val LIST_TYPE = "type"
+
+    const val PROJECTS_ALL = 0
+    const val PROJECTS_MY = 1
+    const val PROJECTS_FAV = 2
 }
 
 fun Boolean?.toInt(): Int = if (this != null && this) 1 else 0

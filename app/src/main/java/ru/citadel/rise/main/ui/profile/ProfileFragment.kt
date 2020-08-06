@@ -29,6 +29,8 @@ class ProfileFragment : Fragment() {
 
         binding.butSettings.setOnClickListener { (activity as MainActivity).showSettingsFragment() }
         binding.butFavourites.setOnClickListener { (activity as MainActivity).showProjectsFragment(2) }
+        binding.butAbout.setOnClickListener { (activity as MainActivity).showAboutFragment() }
+
         binding.butMyProjects.setOnClickListener { (activity as MainActivity).showProjectsFragment(1) }
 
         val user = (activity as MainActivity).currentUser

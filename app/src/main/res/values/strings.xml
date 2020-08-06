@@ -1,20 +1,53 @@
 <resources>
     <string name="app_name">RISE</string>
+
     <string name="title_chats">Диалоги</string>
     <string name="title_rise">RISE</string>
     <string name="title_profile">Профиль</string>
-    <string name="into_phrase">Время RISE</string>
-    <string name="profile_phrare">It\'s a revolution, </string>
-    <string name="sign_up">Создать аккаунт</string>
-    <string name="sign_up_short">Создать</string>
-    <string name="sign_in_google">Войти с </string>
-    <string name="sign_in_email">Войти используя email</string>
+
+    <string name="intro_phrase">Время RISE</string>
+    <string name="profile_phrase">It\'s a revolution, </string>
+    <string name="description">Платформа для прямой коммуникации между авторами идей и компаниями-инвесторами.</string>
+
+
+    <string name="sign_up">Создать</string>
     <string name="sign_in">Войти</string>
+    <string name="create_account">Создать аккаунт</string>
     <string name="invalid_username">Имя не может быть пустым</string>
     <string name="invalid_email">Некорректный email</string>
     <string name="invalid_password">Пароль должен содержать как минимум 8 символов</string>
     <string name="login_failed">"Не удалось войти. Попробуйте снова?"</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Пароль</string>
+    <string name="connecting">Соединяем с сервером…</string>
+    <string name="connection_failed">"Что-то пошло не так. Нажмите для повторного подключения."</string>
 
+    <string name="russian">Русский</string>
+    <string name="english">English</string>
+
+    <string name="about_me">О себе</string>
+    <string name="about_app">О нас</string>
+    <string name="favourites">Избранное</string>
+    <string name="settings">Настройки</string>
+
+
+    <string name="projects">Проекты</string>
+    <string name="about_me_about">Сведения</string>
+    <string name="location">Местоположение</string>
+    <string name="contacs">Контакты</string>
+    <string name="empty">Здесь ничего не написано :)</string>
+
+    <string name="version">Версия 1.3</string>
+    <string name="about_app_networks">Мы в соцсетях</string>
+
+    <string name="dialogs">Диалоги</string>
+    <string name="search">Найти</string>
+    <string name="add_project">Добавить свой проект</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="proj_name">Название проекта</string>
+    <string name="proj_about">Описание</string>
+    <string name="proj_time">Время реализации</string>
+    <string name="proj_cost">Стоимость</string>
 </resources>

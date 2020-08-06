@@ -13,7 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_background">
 
 
         <ScrollView
@@ -37,12 +38,13 @@
                     android:id="@+id/inputEmail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/transparent"
                     android:hint="@string/prompt_email"
                     android:textColorHint="@color/text_dark"
+                    app:boxBackgroundColor="@color/bottom_nav_background"
                     app:boxStrokeWidth="2dp"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/color_error"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -59,7 +61,10 @@
                         android:paddingStart="28dp"
                         android:selectAllOnFocus="true"
                         android:singleLine="true"
-                        android:textColor="@color/text_dark" />
+                        android:text="@string/prompt_email"
+                        android:textColor="@color/text_dark"
+                        android:textColorHighlight="@color/ripple_red"
+                        android:textColorLink="@color/ripple_red" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -67,11 +72,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:hint="@{viewmodel.promptName}"
                     android:textColorHint="@color/text_dark"
+                    app:boxBackgroundColor="@color/bottom_nav_background"
                     app:boxStrokeWidth="2dp"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/color_error"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="@+id/inputEmail"
                     app:layout_constraintStart_toStartOf="@+id/inputEmail"
                     app:layout_constraintTop_toBottomOf="@+id/inputEmail">
@@ -88,7 +94,10 @@
                         android:paddingStart="28dp"
                         android:selectAllOnFocus="true"
                         android:singleLine="true"
-                        android:textColor="@color/text_dark" />
+                        android:text="@{viewmodel.promptName}"
+                        android:textColor="@color/text_dark"
+                        android:textColorHighlight="@color/ripple_red"
+                        android:textColorLink="@color/ripple_red" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -96,11 +105,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:hint="@string/prompt_password"
                     android:textColorHint="@color/text_dark"
+                    app:boxBackgroundColor="@color/bottom_nav_background"
                     app:boxStrokeWidth="2dp"
                     app:errorEnabled="true"
                     app:errorTextColor="@color/color_error"
+                    app:hintEnabled="false"
                     app:layout_constraintEnd_toEndOf="@+id/inputName"
                     app:layout_constraintStart_toStartOf="@+id/inputName"
                     app:layout_constraintTop_toBottomOf="@+id/inputName"
@@ -120,7 +130,10 @@
                         android:password="true"
                         android:selectAllOnFocus="true"
                         android:singleLine="true"
-                        android:textColor="@color/text_dark" />
+                        android:text="@string/prompt_password"
+                        android:textColor="@color/text_dark"
+                        android:textColorHighlight="@color/ripple_red"
+                        android:textColorLink="@color/ripple_red" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -156,7 +169,7 @@
                     android:foreground="?attr/selectableItemBackgroundBorderless"
                     android:insetTop="0dp"
                     android:insetBottom="0dp"
-                    android:text="Создать аккаунт"
+                    android:text="@string/create_account"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@{viewmodel.registrationFormState.dataValid ? @color/white : @color/text_dark}"
                     android:textSize="16sp"

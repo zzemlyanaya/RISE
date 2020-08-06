@@ -10,9 +10,14 @@ import com.google.android.material.snackbar.Snackbar
 import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityMainBinding
+import ru.citadel.rise.Constants.PROJECTS_ALL
+import ru.citadel.rise.Constants.PROJECTS_FAV
+import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.main.ui.aboutapp.AboutAppFragment
+import ru.citadel.rise.main.ui.addeditproject.AddEditProjectFragment
 import ru.citadel.rise.main.ui.chat.ChatFragment
 import ru.citadel.rise.main.ui.chat.UserShortView
 import ru.citadel.rise.main.ui.chats.ChatListFragment
@@ -40,11 +45,7 @@ class MainActivity : FragmentActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.containerMain, ProjectListFragment.newInstance(0), "projects_0")
-            .commitAllowingStateLoss()
-
+        showProjectsFragment(PROJECTS_ALL)
 
 
         binding.navView.addBubbleListener(object : OnBubbleClickListener {
@@ -60,7 +61,7 @@ class MainActivity : FragmentActivity() {
                     }
                     R.id.navigation_rise -> {
                         if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProjectListFragment)
-                            showProjectsFragment(0)
+                            showProjectsFragment(PROJECTS_ALL)
                     }
                 }
             }
@@ -68,6 +69,8 @@ class MainActivity : FragmentActivity() {
 
 
         binding.header.butBack.setOnClickListener { onBackPressed() }
+
+        binding.projectListBar.butAddProject.setOnClickListener { showAddEditProject() }
     }
 
     override fun onBackPressed() {
@@ -75,10 +78,10 @@ class MainActivity : FragmentActivity() {
         when(fragment!!.tag) {
             "chat" -> showChatsFragment()
             "profile", "projects_0", "chats" -> { onBackPressedDouble() }
-            "projects_1", "projects_2", "settings" -> showProfileFragment()
-            "project_0" -> showProjectsFragment(0)
-            "project_1" -> showProjectsFragment(1)
-            "project_2" -> showProjectsFragment(2)
+            "projects_$PROJECTS_FAV", "settings", "about_app" -> showProfileFragment()
+            "project_$PROJECTS_ALL", "add_edit_project" -> showProjectsFragment(PROJECTS_ALL)
+            "project_$PROJECTS_MY" -> showProjectsFragment(PROJECTS_MY)
+            "project_$PROJECTS_FAV" -> showProjectsFragment(PROJECTS_FAV)
             else -> {}
         }
     }
@@ -99,8 +102,9 @@ class MainActivity : FragmentActivity() {
             .replace(R.id.containerMain, ChatListFragment(), "chats")
             .commitAllowingStateLoss()
         hideAllHeaderView()
+        binding.header.root.visibility = View.VISIBLE
         binding.header.textTitle.visibility = View.VISIBLE
-        binding.header.textTitle.text = "Диалоги"
+        binding.header.textTitle.text = resources.getText(R.string.dialogs)
         binding.navView.visibility = View.VISIBLE
     }
 
@@ -109,6 +113,7 @@ class MainActivity : FragmentActivity() {
         binding.header.butBack.visibility = View.INVISIBLE
         binding.header.chatHeader.visibility = View.INVISIBLE
         binding.header.butMenuMore.visibility = View.INVISIBLE
+        binding.projectListBar.root.visibility = View.GONE
     }
 
     fun showProjectsFragment(type: Int){
@@ -118,20 +123,18 @@ class MainActivity : FragmentActivity() {
             .commitAllowingStateLoss()
         hideAllHeaderView()
         when(type) {
-            0 -> {
+            PROJECTS_ALL -> {
+                binding.header.root.visibility = View.GONE
                 binding.navView.visibility = View.VISIBLE
+                binding.projectListBar.root.visibility = View.VISIBLE
             }
-            1 -> {
-                binding.navView.visibility = View.INVISIBLE
+            PROJECTS_MY -> { }
+            PROJECTS_FAV -> {
+                binding.header.root.visibility = View.VISIBLE
+                binding.navView.visibility = View.GONE
                 binding.header.butBack.visibility = View.VISIBLE
                 binding.header.textTitle.visibility = View.VISIBLE
-                binding.header.textTitle.text = "Мои проекты"
-            }
-            else -> {
-                binding.navView.visibility = View.INVISIBLE
-                binding.header.butBack.visibility = View.VISIBLE
-                binding.header.textTitle.visibility = View.VISIBLE
-                binding.header.textTitle.text = "Избранное"
+                binding.header.textTitle.text = resources.getText(R.string.favourites)
             }
         }
     }
@@ -142,8 +145,7 @@ class MainActivity : FragmentActivity() {
             .replace(R.id.containerMain, ProfileFragment(), "profile")
             .commitAllowingStateLoss()
         hideAllHeaderView()
-        binding.header.textTitle.visibility = View.VISIBLE
-        binding.header.textTitle.text = "Профиль"
+        binding.header.root.visibility = View.GONE
 
         binding.navView.visibility = View.VISIBLE
     }
@@ -168,6 +170,8 @@ class MainActivity : FragmentActivity() {
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.containerMain, ProjectFragment.newInstance(project), "project_$typeFrom")
             .commitAllowingStateLoss()
+        binding.header.root.visibility = View.VISIBLE
+        binding.projectListBar.root.visibility = View.GONE
         binding.header.butBack.visibility = View.VISIBLE
         binding.navView.visibility = View.INVISIBLE
     }
@@ -178,10 +182,31 @@ class MainActivity : FragmentActivity() {
             .replace(R.id.containerMain, SettingsFragment(), "settings")
             .commitAllowingStateLoss()
         hideAllHeaderView()
+        binding.header.root.visibility = View.VISIBLE
         binding.header.textTitle.visibility = View.VISIBLE
-        binding.header.textTitle.text = "Настройки"
+        binding.header.textTitle.text = resources.getText(R.string.settings)
         binding.header.butBack.visibility = View.VISIBLE
         binding.navView.visibility = View.INVISIBLE
+    }
+
+    fun showAboutFragment(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .replace(R.id.containerMain, AboutAppFragment(), "about_app")
+            .commitAllowingStateLoss()
+        binding.header.root.visibility = View.GONE
+        binding.navView.visibility = View.GONE
+    }
+
+    fun showAddEditProject(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .replace(R.id.containerMain,
+                AddEditProjectFragment(), "add_edit_project")
+            .commitAllowingStateLoss()
+        binding.header.root.visibility = View.GONE
+        binding.projectListBar.root.visibility = View.GONE
+        binding.navView.visibility = View.GONE
     }
 
 }

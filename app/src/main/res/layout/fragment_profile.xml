@@ -8,7 +8,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_background">
 
 
         <com.google.android.material.imageview.ShapeableImageView
@@ -27,16 +28,27 @@
             app:strokeWidth="1dp" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/profileName"
+            android:id="@+id/textViewN"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Current User"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/profile_phrase"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="@id/profileImage"
             app:layout_constraintStart_toStartOf="@id/profileImage"
             app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Current User"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="@+id/textViewN"
+            app:layout_constraintStart_toStartOf="@+id/textViewN"
+            app:layout_constraintTop_toBottomOf="@+id/textViewN" />
 
         <ScrollView
             android:layout_width="0dp"
@@ -50,7 +62,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/butMyProjects"
@@ -60,7 +72,7 @@
                     android:layout_marginEnd="42dp"
                     android:backgroundTint="@color/button_background"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="О себе"
+                    android:text="@string/about_me"
                     android:textAlignment="textStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/white"
@@ -80,7 +92,7 @@
                     android:layout_marginEnd="42dp"
                     android:backgroundTint="@color/button_background"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="Избранное"
+                    android:text="@string/favourites"
                     android:textAlignment="textStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textSize="16sp"
@@ -98,12 +110,30 @@
                     android:layout_marginEnd="42dp"
                     android:backgroundTint="@color/button_background"
                     android:fontFamily="@font/montserrat_semibold"
-                    android:text="Настройки"
+                    android:text="@string/settings"
                     android:textAlignment="textStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textSize="16sp"
                     app:cornerRadius="14dp"
                     app:icon="@drawable/ic_settings_outlined"
+                    app:iconPadding="16dp"
+                    app:iconSize="32dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/butAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:layout_marginStart="42dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="42dp"
+                    android:backgroundTint="@color/button_background"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="@string/about_app"
+                    android:textAlignment="textStart"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textSize="16sp"
+                    app:cornerRadius="14dp"
+                    app:icon="@drawable/ic_about"
                     app:iconPadding="16dp"
                     app:iconSize="32dp" />
             </LinearLayout>

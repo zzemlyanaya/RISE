@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
             viewPager.visibility = View.INVISIBLE
             tabLayout.visibility = View.INVISIBLE
             textLoginDescr.visibility = View.VISIBLE
-            textConnect.text = "Соединяем с сервером..."
+            textConnect.text = resources.getText(R.string.connecting)
             textConnect.visibility = View.VISIBLE
         }
 
@@ -48,7 +48,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
     }
 
     private fun connect(){
-        binding.textConnect.text = "Соединяем с сервером..."
+        binding.textConnect.text = resources.getText(R.string.connecting)
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val status = RemoteRepository().getServerStatus().data
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
     }
 
     private fun showExp(){
-        binding.textConnect.text = "Сервер не доступен. Нажмите для повторного соединения."
+        binding.textConnect.text = resources.getText(R.string.connection_failed)
         binding.textConnect.setOnClickListener { connect() }
     }
 
@@ -86,7 +86,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when(position){
-                0 -> tab.text = getString(R.string.sign_up_short)
+                0 -> tab.text = getString(R.string.sign_up)
                 else -> tab.text = getString(R.string.sign_in)
             }
         }.attach()

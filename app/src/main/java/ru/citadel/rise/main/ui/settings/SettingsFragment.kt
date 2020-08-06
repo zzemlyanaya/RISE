@@ -4,14 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.AdapterView.OnItemSelectedListener
+import android.widget.ArrayAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ru.avangard.rise.R
+import ru.avangard.rise.databinding.FragmentSettingsBinding
 import ru.citadel.rise.IOnBack
+import ru.citadel.rise.data.LocalRepository
+import ru.citadel.rise.data.PrefsConst
+
 
 /**
  * A simple [Fragment] subclass.
  */
 class SettingsFragment : Fragment(), IOnBack {
+
+    private val localRepository = LocalRepository()
 
     override fun onBackPressed(): Boolean {
         return true
@@ -21,27 +31,36 @@ class SettingsFragment : Fragment(), IOnBack {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_settings, container, false)
-    }
+        val binding: FragmentSettingsBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
 
-//    companion object {
-//        /**
-//         * Use this factory method to create a new instance of
-//         * this fragment using the provided parameters.
-//         *
-//         * @param param1 Parameter 1.
-//         * @param param2 Parameter 2.
-//         * @return A new instance of fragment SettingsFragment.
-//         */
-//        // TODO: Rename and change types and number of parameters
-//        @JvmStatic
-//        fun newInstance(param1: String, param2: String) =
-//            SettingsFragment().apply {
-//                arguments = Bundle().apply {
-//                    putString(ARG_PARAM1, param1)
-//                    putString(ARG_PARAM2, param2)
-//                }
-//            }
-//    }
+        binding.notificationSwitcher.setChecked(localRepository.getPref(PrefsConst.PREF_NOTIFICATIONS) as Boolean)
+        binding.notificationSwitcher.setOnCheckedChangeListener { checked ->
+            localRepository.setPref(PrefsConst.PREF_NOTIFICATIONS, checked)
+        }
+
+        val lang = localRepository.getPref(PrefsConst.PREF_LANGUAGE) as String
+        val index = resources.getStringArray(R.array.languages).indexOf(lang)
+
+        binding.languageSpinner.adapter =
+            ArrayAdapter<CharSequence>(
+                requireContext(),
+                R.layout.spinner_text_item,
+                resources.getStringArray(R.array.languages)
+            )
+        binding.languageSpinner.setSelection(index, true)
+
+        binding.languageSpinner.onItemSelectedListener = object : OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>, view: View, pos: Int,
+                id: Long
+            ) {
+                localRepository.setPref(PrefsConst.PREF_LANGUAGE, parent.getItemAtPosition(pos))
+            }
+
+            override fun onNothingSelected(arg0: AdapterView<*>?) {}
+        }
+
+        return binding.root
+    }
 }
