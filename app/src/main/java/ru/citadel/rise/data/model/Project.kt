@@ -10,6 +10,5 @@ data class Project(
     var descriptionLong: String,
     var cost: String?,
     var deadlines: String?,
-    var website: String?,
-    var tags: List<String>?
+    var website: String?
 ) : java.io.Serializable

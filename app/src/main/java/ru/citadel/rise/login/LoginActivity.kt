@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
@@ -26,9 +27,19 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
 
     private lateinit var binding: ActivityLoginBinding
 
-    private var doubleBackToExitPressedOnce = false
+    private var backPressedOnce = false
     private val mHandler: Handler = Handler()
-    private val mRunnable = Runnable { doubleBackToExitPressedOnce = false }
+    private val mRunnable = Runnable { backPressedOnce = false }
+
+    override fun onBackPressed() {
+        if (backPressedOnce) {
+            finish()
+        }
+
+        backPressedOnce = true
+        Toast.makeText(this, "Нажмите ещё раз для выхода из приложения", Toast.LENGTH_SHORT).show()
+        mHandler.postDelayed(mRunnable, 1500)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

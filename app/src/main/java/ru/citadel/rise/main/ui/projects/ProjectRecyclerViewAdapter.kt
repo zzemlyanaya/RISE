@@ -17,7 +17,7 @@ class ProjectRecyclerViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_project_short, parent, false)
+            .inflate(R.layout.item_project, parent, false)
         return ViewHolder(view)
     }
 

@@ -1,12 +1,13 @@
 package ru.citadel.rise.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.fxn.OnBubbleClickListener
-import com.google.android.material.snackbar.Snackbar
 import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityMainBinding
@@ -16,6 +17,7 @@ import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.login.LoginActivity
 import ru.citadel.rise.main.ui.aboutapp.AboutAppFragment
 import ru.citadel.rise.main.ui.aboutme.AboutMeFragment
 import ru.citadel.rise.main.ui.addeditproject.AddEditProjectFragment
@@ -89,11 +91,13 @@ class MainActivity : AppCompatActivity() {
 
     private fun onBackPressedDouble(){
         if (backPressedOnce) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
             finish()
         }
 
         backPressedOnce = true
-        Snackbar.make(binding.root, "Нажмите ещё раз для выхода", Snackbar.LENGTH_SHORT).show()
+        Toast.makeText(this@MainActivity, "Нажмите ещё раз для выхода из аккаунта", Toast.LENGTH_SHORT).show()
         mHandler.postDelayed(mRunnable, 2000)
     }
 
