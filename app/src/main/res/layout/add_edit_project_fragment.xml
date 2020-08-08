@@ -15,7 +15,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".main.ui.AddEditProjectFragment">
 
             <androidx.cardview.widget.CardView
@@ -64,6 +64,37 @@
                 app:layout_constraintTop_toTopOf="@+id/cardView" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputProjWebsite"
+                style="@style/TILWhite"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:backgroundTint="@color/white"
+                android:textColorHint="@color/black"
+                app:boxBackgroundColor="@color/white"
+                app:hintEnabled="false"
+                app:layout_constraintEnd_toEndOf="@+id/inputProjTime"
+                app:layout_constraintStart_toStartOf="@+id/inputProjCost"
+                app:layout_constraintTop_toBottomOf="@+id/inputProjCost"
+                app:prefixText="*"
+                app:prefixTextColor="@color/accent_red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/textProjWebsite"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:inputType="textShortMessage"
+                    android:paddingStart="18dp"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:text="@string/proj_website"
+                    android:textColor="@color/black"
+                    android:textColorHighlight="@color/ripple_red"
+                    android:textColorLink="@color/ripple_red" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputProjCost"
                 style="@style/TILWhite"
                 android:layout_width="0dp"
@@ -75,7 +106,9 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="@+id/inputProjTime"
                 app:layout_constraintStart_toStartOf="@+id/inputProjTime"
-                app:layout_constraintTop_toBottomOf="@+id/inputProjTime">
+                app:layout_constraintTop_toBottomOf="@+id/inputProjTime"
+                app:prefixText="*"
+                app:prefixTextColor="@color/accent_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textProjCost"
@@ -95,7 +128,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputProjTime"
                 style="@style/TILWhite"
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/white"
@@ -105,7 +138,9 @@
                 app:layout_constraintEnd_toEndOf="@+id/inputProjAbout"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/inputProjAbout"
-                app:layout_constraintTop_toBottomOf="@+id/inputProjAbout">
+                app:layout_constraintTop_toBottomOf="@+id/inputProjAbout"
+                app:prefixText="*"
+                app:prefixTextColor="@color/accent_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textProjTime"
@@ -136,7 +171,9 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="@+id/inputProjName"
                 app:layout_constraintStart_toStartOf="@+id/inputProjName"
-                app:layout_constraintTop_toBottomOf="@+id/inputProjName">
+                app:layout_constraintTop_toBottomOf="@+id/inputProjName"
+                app:prefixText="*"
+                app:prefixTextColor="@color/accent_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textProjAbout"
@@ -168,7 +205,9 @@
                 app:hintEnabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/cardView">
+                app:layout_constraintTop_toBottomOf="@+id/cardView"
+                app:prefixText="*"
+                app:prefixTextColor="@color/accent_red">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textProjName"
@@ -203,7 +242,7 @@
                 app:cornerRadius="44dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputProjCost"
+                app:layout_constraintTop_toBottomOf="@+id/inputProjWebsite"
                 app:rippleColor="@color/ripple_red" />
 
             <com.google.android.material.button.MaterialButton

@@ -6,7 +6,7 @@
     <string name="title_profile">Профиль</string>
 
     <string name="intro_phrase">Время RISE</string>
-    <string name="profile_phrase">It\'s a revolution, </string>
+    <string name="profile_phrase">Vive la révolution, </string>
     <string name="description">Платформа для прямой коммуникации между авторами идей и компаниями-инвесторами.</string>
 
 
@@ -16,11 +16,16 @@
     <string name="invalid_username">Имя не может быть пустым</string>
     <string name="invalid_email">Некорректный email</string>
     <string name="invalid_password">Пароль должен содержать как минимум 8 символов</string>
-    <string name="login_failed">"Не удалось войти. Попробуйте снова?"</string>
+    <string name="login_failed">Не удалось войти. Попробуйте снова?</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Пароль</string>
     <string name="connecting">Соединяем с сервером…</string>
-    <string name="connection_failed">"Что-то пошло не так. Нажмите для повторного подключения."</string>
+    <string name="connection_failed">Что-то пошло не так. Нажмите для повторного подключения.</string>
+    <string name="personal_data">Продолжая вы даёте согласие на хранение и обработку персональных данных.</string>
+    <string name="author_promo">Публикуйте свои проекты и находите инвесторов</string>
+    <string name="author">Автор</string>
+    <string name="company_promo">Найдите проект, в который вы готовы вложится</string>
+    <string name="company">Компания</string>
 
     <string name="russian">Русский</string>
     <string name="english">English</string>
@@ -30,12 +35,15 @@
     <string name="favourites">Избранное</string>
     <string name="settings">Настройки</string>
 
+    <string name="empty_proj">Не указано</string>
 
     <string name="projects">Проекты</string>
     <string name="about_me_about">Сведения</string>
     <string name="location">Местоположение</string>
-    <string name="contacs">Контакты</string>
-    <string name="empty">Здесь ничего не написано :)</string>
+    <string name="contacts">Контакты</string>
+    <string name="age">Возраст</string>
+    <string name="but_contact">Написать</string>
+    <string name="empty_about">Здесь ничего не написано :)</string>
 
     <string name="version">Версия 1.3</string>
     <string name="about_app_networks">Мы в соцсетях</string>
@@ -50,4 +58,7 @@
     <string name="proj_about">Описание</string>
     <string name="proj_time">Время реализации</string>
     <string name="proj_cost">Стоимость</string>
+    <string name="proj_tags">Тэги</string>
+    <string name="proj_website">Сайт</string>
+
 </resources>

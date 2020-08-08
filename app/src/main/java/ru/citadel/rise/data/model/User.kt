@@ -14,7 +14,8 @@ data class User(
     var name: String,
     var type: Int, //1 = author, 0 = company
     var age: Int?,
-    var location: Location?,
+    var city: String?,
+    var country: String?,
     var projects: List<Int>?, //list of project's array
     var about: String?
 )

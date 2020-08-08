@@ -8,7 +8,8 @@ data class Project(
     var name: String,
     var contact: Int, //contact user'
     var descriptionLong: String,
-    var cost: String,
-    var deadlines: String,
-    var website: String?
+    var cost: String?,
+    var deadlines: String?,
+    var website: String?,
+    var tags: List<String>?
 ) : java.io.Serializable

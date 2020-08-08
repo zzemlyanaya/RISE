@@ -10,7 +10,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_background">
+        android:background="@drawable/im_background_login"
+        android:backgroundTint="#ED22272C"
+        android:backgroundTintMode="src_over"
+        android:fitsSystemWindows="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -56,7 +59,7 @@
                 android:layout_marginEnd="32dp"
                 android:fontFamily="@font/montserrat_medium"
                 android:text="@string/description"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

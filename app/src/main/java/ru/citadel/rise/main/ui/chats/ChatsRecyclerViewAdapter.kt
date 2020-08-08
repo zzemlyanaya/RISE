@@ -13,7 +13,6 @@ import kotlin.random.Random
 
 /**
  * [RecyclerView.Adapter] that can display a [ChatShortView].
- * TODO: Replace the implementation with code for your data type.
  */
 class ChatsRecyclerViewAdapter(private val onCardClickListener: (ChatShortView) -> Unit)
     : RecyclerView.Adapter<ChatsRecyclerViewAdapter.ViewHolder>() {

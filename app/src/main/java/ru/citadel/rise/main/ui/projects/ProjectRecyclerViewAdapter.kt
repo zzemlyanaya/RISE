@@ -8,10 +8,6 @@ import com.google.android.material.textview.MaterialTextView
 import ru.avangard.rise.R
 import ru.citadel.rise.data.model.Project
 
-/**
- * [RecyclerView.Adapter] that can display a [Project].
- * TODO: Replace the implementation with code for your data type.
- */
 class ProjectRecyclerViewAdapter(
     private val onCardClickListener: (Project) -> Unit,
     private val values: List<Project>
@@ -28,7 +24,6 @@ class ProjectRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.title.text = item.name
-        holder.description.text = item.descriptionLong
         holder.itemView.setOnClickListener { onCardClickListener(item) }
     }
 
@@ -42,7 +37,5 @@ class ProjectRecyclerViewAdapter(
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val title: MaterialTextView = view.findViewById(R.id.projTitle)
-        val description: MaterialTextView = view.findViewById(R.id.projShortDesr)
-
     }
 }

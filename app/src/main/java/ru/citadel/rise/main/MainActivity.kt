@@ -3,7 +3,7 @@ package ru.citadel.rise.main
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
 import com.fxn.OnBubbleClickListener
 import com.google.android.material.snackbar.Snackbar
@@ -17,6 +17,7 @@ import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.main.ui.aboutapp.AboutAppFragment
+import ru.citadel.rise.main.ui.aboutme.AboutMeFragment
 import ru.citadel.rise.main.ui.addeditproject.AddEditProjectFragment
 import ru.citadel.rise.main.ui.chat.ChatFragment
 import ru.citadel.rise.main.ui.chat.UserShortView
@@ -27,7 +28,7 @@ import ru.citadel.rise.main.ui.projects.ProjectListFragment
 import ru.citadel.rise.main.ui.settings.SettingsFragment
 
 
-class MainActivity : FragmentActivity() {
+class MainActivity : AppCompatActivity() {
 
     lateinit var currentUser: User
 
@@ -78,9 +79,9 @@ class MainActivity : FragmentActivity() {
         when(fragment!!.tag) {
             "chat" -> showChatsFragment()
             "profile", "projects_0", "chats" -> { onBackPressedDouble() }
-            "projects_$PROJECTS_FAV", "settings", "about_app" -> showProfileFragment()
+            "projects_$PROJECTS_FAV", "settings", "about_app", "about_me" -> showProfileFragment()
             "project_$PROJECTS_ALL", "add_edit_project" -> showProjectsFragment(PROJECTS_ALL)
-            "project_$PROJECTS_MY" -> showProjectsFragment(PROJECTS_MY)
+            "project_$PROJECTS_MY" -> showAboutMeFragment()
             "project_$PROJECTS_FAV" -> showProjectsFragment(PROJECTS_FAV)
             else -> {}
         }
@@ -189,10 +190,19 @@ class MainActivity : FragmentActivity() {
         binding.navView.visibility = View.INVISIBLE
     }
 
-    fun showAboutFragment(){
+    fun showAboutAppFragment(){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             .replace(R.id.containerMain, AboutAppFragment(), "about_app")
+            .commitAllowingStateLoss()
+        binding.header.root.visibility = View.GONE
+        binding.navView.visibility = View.GONE
+    }
+
+    fun showAboutMeFragment(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .replace(R.id.containerMain, AboutMeFragment(), "about_me")
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.navView.visibility = View.GONE

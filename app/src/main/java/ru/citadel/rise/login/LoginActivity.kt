@@ -3,7 +3,6 @@ package ru.citadel.rise.login
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.DisplayMetrics
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -82,7 +81,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
             textConnect.visibility = View.INVISIBLE
         }
 
-        binding.viewPager.adapter = ViewPagerAdapter(this, 2)
+        binding.viewPager.adapter = ViewPagerAdapterLogin(this, 2)
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             when(position){
@@ -95,11 +94,6 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
             val tab = (binding.tabLayout.getChildAt(0) as ViewGroup).getChildAt(i)
             setMarginsInDp(tab, 12, 0, 12, 0)
         }
-    }
-
-    private fun dpToPx(dp: Int): Float {
-        val displayMetrics: DisplayMetrics = resources.displayMetrics
-        return (dp * (displayMetrics.xdpi / DisplayMetrics.DENSITY_DEFAULT))
     }
 
 

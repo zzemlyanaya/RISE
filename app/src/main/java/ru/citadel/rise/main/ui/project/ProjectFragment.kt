@@ -19,7 +19,6 @@ import ru.citadel.rise.data.model.Project
  */
 class ProjectFragment : Fragment(), IOnBack {
 
-    // TODO: Rename and change types of parameters
     private lateinit var project: Project
 
     override fun onBackPressed(): Boolean {
@@ -40,9 +39,9 @@ class ProjectFragment : Fragment(), IOnBack {
         val binding: FragmentProjectBinding
                     = DataBindingUtil.inflate(inflater, R.layout.fragment_project, container, false)
 
-        binding.projTitleLong.text = project.name
-        binding.projCost.text = project.cost
-        binding.projTime.text = project.deadlines
+        binding.projCost.text = project.cost ?: resources.getString(R.string.empty_proj)
+        binding.projTime.text = project.deadlines ?: resources.getString(R.string.empty_proj)
+        binding.projWebsite.text = project.website ?: resources.getString(R.string.empty_proj)
         binding.projDescrLong.text = project.descriptionLong
 
         return binding.root

@@ -72,14 +72,14 @@
                     android:layout_marginEnd="42dp"
                     android:backgroundTint="@color/button_background"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="start|center_vertical"
                     android:text="@string/about_me"
-                    android:textAlignment="textStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     app:cornerRadius="14dp"
                     app:icon="@drawable/ic_user"
-                    app:iconPadding="16dp"
+                    app:iconPadding="18dp"
                     app:iconSize="32dp"
                     app:iconTint="@color/white" />
 
@@ -92,13 +92,14 @@
                     android:layout_marginEnd="42dp"
                     android:backgroundTint="@color/button_background"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="start|center_vertical"
                     android:text="@string/favourites"
                     android:textAlignment="textStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textSize="16sp"
                     app:cornerRadius="14dp"
                     app:icon="@drawable/ic_star_outlined"
-                    app:iconPadding="16dp"
+                    app:iconPadding="18dp"
                     app:iconSize="32dp" />
 
                 <com.google.android.material.button.MaterialButton
@@ -110,13 +111,14 @@
                     android:layout_marginEnd="42dp"
                     android:backgroundTint="@color/button_background"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="start|center_vertical"
                     android:text="@string/settings"
                     android:textAlignment="textStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textSize="16sp"
                     app:cornerRadius="14dp"
                     app:icon="@drawable/ic_settings_outlined"
-                    app:iconPadding="16dp"
+                    app:iconPadding="18dp"
                     app:iconSize="32dp" />
 
                 <com.google.android.material.button.MaterialButton
@@ -128,13 +130,14 @@
                     android:layout_marginEnd="42dp"
                     android:backgroundTint="@color/button_background"
                     android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="start|center_vertical"
                     android:text="@string/about_app"
                     android:textAlignment="textStart"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textSize="16sp"
                     app:cornerRadius="14dp"
                     app:icon="@drawable/ic_about"
-                    app:iconPadding="16dp"
+                    app:iconPadding="18dp"
                     app:iconSize="32dp" />
             </LinearLayout>
         </ScrollView>

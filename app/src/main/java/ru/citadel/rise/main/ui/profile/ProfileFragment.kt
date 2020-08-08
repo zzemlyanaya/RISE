@@ -10,7 +10,6 @@ import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentProfileBinding
 import ru.citadel.rise.main.MainActivity
 
-// TODO: Rename parameter arguments, choose names that match
 
 
 /**
@@ -29,9 +28,9 @@ class ProfileFragment : Fragment() {
 
         binding.butSettings.setOnClickListener { (activity as MainActivity).showSettingsFragment() }
         binding.butFavourites.setOnClickListener { (activity as MainActivity).showProjectsFragment(2) }
-        binding.butAbout.setOnClickListener { (activity as MainActivity).showAboutFragment() }
+        binding.butAbout.setOnClickListener { (activity as MainActivity).showAboutAppFragment() }
 
-        binding.butMyProjects.setOnClickListener { (activity as MainActivity).showProjectsFragment(1) }
+        binding.butMyProjects.setOnClickListener { (activity as MainActivity).showAboutMeFragment() }
 
         val user = (activity as MainActivity).currentUser
 

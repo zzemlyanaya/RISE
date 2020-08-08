@@ -11,8 +11,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/app_background">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonBack1"
@@ -79,18 +78,16 @@
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:startIconDrawable="@drawable/ic_mail_outlined"
+            app:startIconTint="@color/accent_red">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/ic_mail_outlined"
-                android:drawablePadding="16dp"
-                android:drawableTint="@color/accent_red"
                 android:fontFamily="@font/montserrat_medium"
                 android:inputType="textEmailAddress"
-                android:paddingStart="28dp"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:text="@string/prompt_email"
@@ -119,15 +116,14 @@
             app:layout_constraintEnd_toEndOf="@+id/inputLogin"
             app:layout_constraintStart_toStartOf="@+id/inputLogin"
             app:layout_constraintTop_toBottomOf="@+id/inputLogin"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:startIconDrawable="@drawable/ic_key_outlined"
+            app:startIconTint="@color/accent_red">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/textPasswordLogin"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableStart="@drawable/ic_key_outlined"
-                android:drawablePadding="16dp"
-                android:drawableTint="@color/accent_red"
                 android:fontFamily="@font/montserrat_medium"
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"

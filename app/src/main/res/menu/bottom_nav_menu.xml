@@ -5,7 +5,7 @@
         android:id="@+id/navigation_chats"
         android:icon="@drawable/ic_chat"
         android:title="@string/title_chats"
-        android:iconTint="@color/accent_red"/>
+        android:iconTint="@color/white"/>
 
     <item
         android:id="@+id/navigation_rise"
@@ -18,6 +18,6 @@
         android:id="@+id/navigation_profile"
         android:icon="@drawable/ic_profile"
         android:title="@string/title_profile"
-        android:iconTint="@color/accent_red"/>
+        android:iconTint="@color/white"/>
 
 </menu>

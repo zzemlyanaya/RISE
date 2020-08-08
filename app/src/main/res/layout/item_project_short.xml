@@ -2,69 +2,53 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="194dp"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:paddingBottom="16dp">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="24dp"
-        app:cardUseCompatPadding="false">
+        app:cardUseCompatPadding="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/projImage"
-                android:layout_width="150dp"
-                android:layout_height="0dp"
-                android:background="@color/accent_red"
-                android:backgroundTint="@color/accent_red"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/roundedImageViewProjects"
+                app:srcCompat="@drawable/im_project_default" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/projTitle"
                 android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@android:color/transparent"
+                android:layout_height="52dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="12dp"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Title"
+                tools:text="CITADEL Education"
                 android:textColor="@color/black"
-                android:textSize="32sp"
-                android:textStyle="bold"
                 app:autoSizeMaxTextSize="32sp"
                 app:autoSizeMinTextSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.15"
-                app:layout_constraintStart_toEndOf="@+id/projImage"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/projShortDesr"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:background="@android:color/transparent"
-                android:fontFamily="@font/montserrat_medium"
-                android:text="Short text with a main idea of a project"
-                android:textColor="@color/black"
-                android:textSize="16sp"
+                app:autoSizeTextType="uniform"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/projTitle"
-                app:layout_constraintTop_toBottomOf="@+id/projTitle"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/projImage"
+                android:gravity="center"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
