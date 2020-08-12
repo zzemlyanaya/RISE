@@ -1,8 +1,8 @@
 package ru.citadel.rise.main.ui.chats
 
 data class ChatShortView(
-    var currentUser: Int, //id
-    var toID: Int, //id
+    var chat_id: Int,
+    var toID: Int,
     var toName: String,
     var lastMessage: String
 )

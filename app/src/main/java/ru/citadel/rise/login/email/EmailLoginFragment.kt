@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import ru.avangard.rise.R
-import ru.avangard.rise.databinding.LoginFragmentBinding
+import ru.avangard.rise.databinding.FragmentLoginBinding
 import ru.citadel.rise.IOnBack
 import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
@@ -37,8 +37,8 @@ class EmailLoginFragment : Fragment(), IOnBack {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: LoginFragmentBinding
-                = DataBindingUtil.inflate(inflater, R.layout.login_fragment, container, false)
+        val binding: FragmentLoginBinding
+                = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 
@@ -47,7 +47,11 @@ class EmailLoginFragment : Fragment(), IOnBack {
         butBackground = binding.buttonBack1
 
         butSignIn.setOnClickListener {
-            authorize(binding.textLogin.text.toString().hashCode(), binding.textPasswordLogin.text.toString())
+            authorize(
+                binding.textLogin.text.toString().hashCode(),
+                binding.textPasswordLogin.text.toString(),
+                binding.checkKeepLogin.isChecked
+            )
         }
 
         viewModel.loginFormState.observe(viewLifecycleOwner, Observer {
@@ -78,12 +82,14 @@ class EmailLoginFragment : Fragment(), IOnBack {
                         if(viewModel.loginFormState.value!!.isDataValid)
                         authorize(
                             binding.textLogin.text.toString().hashCode(),
-                            binding.textPasswordLogin.text.toString()
+                            binding.textPasswordLogin.text.toString(),
+                            binding.checkKeepLogin.isChecked
                         )
                 }
                 false
             }
         }
+
 
         return binding.root
     }
@@ -92,8 +98,8 @@ class EmailLoginFragment : Fragment(), IOnBack {
         return if (id == null) null else getString(id)
     }
 
-    private fun authorize(id: Int, password: String){
-        viewModel.authorize(id, password).observe(viewLifecycleOwner, Observer {
+    private fun authorize(id: Int, password: String, isKeepLogin: Boolean){
+        viewModel.authorize(id, password, isKeepLogin).observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
 import ru.avangard.rise.R
-import ru.avangard.rise.databinding.RegistrationFragmentBinding
+import ru.avangard.rise.databinding.FragmentRegistrationBinding
 import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
 import ru.citadel.rise.data.model.User
@@ -34,8 +34,8 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding: RegistrationFragmentBinding = DataBindingUtil.inflate(
-                inflater, R.layout.registration_fragment, container, false)
+        val binding: FragmentRegistrationBinding = DataBindingUtil.inflate(
+                inflater, R.layout.fragment_registration, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewmodel = viewModel
 

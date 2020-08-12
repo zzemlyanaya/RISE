@@ -30,19 +30,6 @@ class RemoteRepository {
     suspend fun authorize(login: Int, passwordToken: Int)
             = service.authorize(login, passwordToken)
 
-//    fun authorize(email: String, passwordToken: String) : User{
-//        Log.i("AUTH", email.hashCode().toString()+"SF"+passwordToken)
-//
-//        return User(
-//            email.hashCode(),
-//            email,
-//            "CITADEL",
-//            0,
-//            null, Location("Russia", "Yekaterinburg"),
-//            listOf(1), null
-//        )
-//    }
-
     suspend fun registr(id: Int, name: String, passwordToken: Int, type: Int, email: String) : Result<User>
             = service.registr(id, name, passwordToken, type, email)
 
@@ -53,4 +40,8 @@ class RemoteRepository {
     suspend fun editProject(id: Int, new: Project) = service.editProject(id, new)
 
     suspend fun editUser(id: Int, new: User) = service.editUser(id, new)
+
+    fun getChatsByUser(id: Int) = service.getAllUserChats(id)
+
+    fun getMessagesByChat(id: Int) = service.getMessagesByChat(id)
 }

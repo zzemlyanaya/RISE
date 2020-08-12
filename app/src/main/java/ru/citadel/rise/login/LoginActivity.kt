@@ -15,7 +15,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityLoginBinding
+import ru.citadel.rise.App
 import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.data.PrefsConst.PREF_KEEP_LOGGIN
+import ru.citadel.rise.data.PrefsConst.PREF_USER_AUTH
 import ru.citadel.rise.data.RemoteRepository
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.login.email.IOnLogin
@@ -62,12 +65,29 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
         lifecycleScope.launch(Dispatchers.IO) {
             try {
                 val status = RemoteRepository().getServerStatus().data
-                withContext(Dispatchers.Main) { showTabs() }
             }
             catch (e: Exception) {
                 withContext(Dispatchers.Main) { showExp() }
             }
+        }
+        val keep = App.prefs.getPref(PREF_KEEP_LOGGIN) as Boolean
+        if (keep) {
+            val auth = (App.prefs.getPref(PREF_USER_AUTH) as String).split('|')
+            val id = Integer.parseInt(auth[0])
+            val hash = Integer.parseInt(auth[1])
+            login(id, hash)
+        }
+        else
+            showTabs()
+    }
 
+    fun login(id: Int, passHash: Int) {
+        lifecycleScope.launch(Dispatchers.IO) {
+            val result = RemoteRepository().authorize(id, passHash)
+            if (result.error == null)
+                withContext(Dispatchers.Main) { result.data?.let { goOnMain(it) } }
+            else
+                withContext(Dispatchers.Main) { showTabs() }
         }
     }
 

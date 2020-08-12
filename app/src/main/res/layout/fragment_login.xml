@@ -19,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:clickable="false"
             android:insetTop="0dp"
@@ -28,7 +28,7 @@
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/inputPasswordLogin"
             app:layout_constraintStart_toStartOf="@+id/inputPasswordLogin"
-            app:layout_constraintTop_toBottomOf="@+id/inputPasswordLogin"
+            app:layout_constraintTop_toBottomOf="@+id/checkKeepLogin"
             app:strokeColor="@color/accent_red"
             app:strokeWidth="2dp" />
 
@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:backgroundTint="@android:color/transparent"
             android:enabled="@{viewmodel.loginFormState.dataValid ? true : false}"
@@ -53,7 +53,7 @@
             app:cornerRadius="10dp"
             app:layout_constraintEnd_toEndOf="@+id/inputPasswordLogin"
             app:layout_constraintStart_toStartOf="@+id/inputPasswordLogin"
-            app:layout_constraintTop_toBottomOf="@+id/inputPasswordLogin"
+            app:layout_constraintTop_toBottomOf="@+id/checkKeepLogin"
             app:rippleColor="@color/white"
             app:strokeColor="@color/white"
             app:strokeWidth="2dp" />
@@ -149,6 +149,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/buttonBack1" />
+
+        <CheckBox
+            android:id="@+id/checkKeepLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:buttonTint="@color/accent_red"
+            android:checked="true"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="@string/keep_login"
+            app:layout_constraintStart_toStartOf="@+id/inputPasswordLogin"
+            app:layout_constraintTop_toBottomOf="@+id/inputPasswordLogin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -85,4 +85,7 @@ dependencies {
     // Prefs
     implementation 'com.github.rumboalla.KryptoPrefs:kryptoprefs:0.4.3'
 
+    // Socket.IO
+    implementation 'com.github.nkzawa:socket.io-client:0.6.0'
+
 }

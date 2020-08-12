@@ -14,10 +14,10 @@ import kotlin.random.Random
 /**
  * [RecyclerView.Adapter] that can display a [ChatShortView].
  */
-class ChatsRecyclerViewAdapter(private val onCardClickListener: (ChatShortView) -> Unit)
-    : RecyclerView.Adapter<ChatsRecyclerViewAdapter.ViewHolder>() {
-
-    private var values: List<ChatShortView> = emptyList()
+class ChatsRecyclerViewAdapter(
+    private val onCardClickListener: (ChatShortView) -> Unit,
+    private var values: List<ChatShortView>
+) : RecyclerView.Adapter<ChatsRecyclerViewAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -43,18 +43,12 @@ class ChatsRecyclerViewAdapter(private val onCardClickListener: (ChatShortView) 
         val image: ShapeableImageView = view.findViewById(R.id.chatImage)
         val from: TextView = view.findViewById(R.id.textFrom)
         val lastMessage: MaterialTextView = view.findViewById(R.id.textLastMes)
-        val status: ShapeableImageView = view.findViewById(R.id.userStatus)
 
         init {
             if (Random.nextInt() % 2 == 0)
                 image.setImageResource(R.drawable.im_robot_with_idea)
             else
                 image.setImageResource(R.drawable.im_robot_manager)
-
-            if(Random.nextInt() % 3 == 0)
-                status.visibility = View.VISIBLE
-            else
-                status.visibility = View.INVISIBLE
         }
 
     }

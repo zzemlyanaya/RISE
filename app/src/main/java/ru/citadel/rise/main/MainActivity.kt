@@ -11,10 +11,12 @@ import com.fxn.OnBubbleClickListener
 import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityMainBinding
+import ru.citadel.rise.App
 import ru.citadel.rise.Constants.PROJECTS_ALL
 import ru.citadel.rise.Constants.PROJECTS_FAV
 import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.data.PrefsConst.PREF_KEEP_LOGGIN
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.login.LoginActivity
@@ -91,6 +93,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun onBackPressedDouble(){
         if (backPressedOnce) {
+            App.prefs.setPref(PREF_KEEP_LOGGIN, false)
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finish()
@@ -155,12 +158,12 @@ class MainActivity : AppCompatActivity() {
         binding.navView.visibility = View.VISIBLE
     }
 
-    fun showChatFragment(user: UserShortView){
+    fun showChatFragment(user: UserShortView, chatId: Int){
         binding.navView.visibility = View.GONE
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.containerMain, ChatFragment(), "chat")
+            .replace(R.id.containerMain, ChatFragment.newInstance(user, chatId), "chat")
             .commitAllowingStateLoss()
         hideAllHeaderView()
         binding.header.butBack.visibility = View.VISIBLE
@@ -222,5 +225,4 @@ class MainActivity : AppCompatActivity() {
         binding.projectListBar.root.visibility = View.GONE
         binding.navView.visibility = View.GONE
     }
-
 }

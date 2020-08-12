@@ -12,6 +12,7 @@
 
     <string name="sign_up">Создать</string>
     <string name="sign_in">Войти</string>
+    <string name="keep_login">Запомнить меня</string>
     <string name="create_account">Создать аккаунт</string>
     <string name="invalid_username">Имя не может быть пустым</string>
     <string name="invalid_email">Некорректный email</string>

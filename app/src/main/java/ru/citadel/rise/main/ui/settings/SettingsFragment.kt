@@ -45,7 +45,7 @@ class SettingsFragment : Fragment(), IOnBack {
         binding.languageSpinner.adapter =
             ArrayAdapter<CharSequence>(
                 requireContext(),
-                R.layout.spinner_text_item,
+                R.layout.item_spinner_text,
                 resources.getStringArray(R.array.languages)
             )
         binding.languageSpinner.setSelection(index, true)

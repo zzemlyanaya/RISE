@@ -1,13 +1,15 @@
 package ru.citadel.rise.data
 
 import retrofit2.http.*
+import ru.citadel.rise.data.model.Message
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.main.ui.chats.ChatShortView
 
 interface IServerService {
     companion object {
-        const val BASE_URL = "http://8872a7b52637.ngrok.io"
+        const val BASE_URL = "http://d5fbdfe30f8d.ngrok.io"
     }
 
     @GET("/")
@@ -47,4 +49,10 @@ interface IServerService {
 
     @PUT("/users/{id}")
     fun editUser(@Path("id")id:Int, new: User): Result<String>
+
+    @GET("/chats/by_user/{id}")
+    fun getAllUserChats(@Path("id")id: Int): Result<List<ChatShortView>>
+
+    @GET("/chats/{id}")
+    fun getMessagesByChat(@Path("id")id: Int): Result<List<Message>>
 }

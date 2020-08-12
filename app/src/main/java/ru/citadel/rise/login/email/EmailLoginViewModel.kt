@@ -7,6 +7,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import ru.avangard.rise.R
+import ru.citadel.rise.App
+import ru.citadel.rise.data.PrefsConst.PREF_KEEP_LOGGIN
+import ru.citadel.rise.data.PrefsConst.PREF_USER_AUTH
 import ru.citadel.rise.data.RemoteRepository
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.Result
@@ -18,7 +21,8 @@ class EmailLoginViewModel : ViewModel() {
     private val _loginForm = MutableLiveData(LoginFormState())
     val loginFormState: LiveData<LoginFormState> = _loginForm
 
-    fun authorize(id: Int, password: String) = liveData(Dispatchers.IO) {
+    fun authorize(id: Int, password: String, isKeepLogin: Boolean) = liveData(Dispatchers.IO) {
+        saveLogin(isKeepLogin, id, password.hashCode())
         emit(Resource.loading(data = null))
         try {
             val result: Result<User> = repository.authorize(id, password.hashCode())
@@ -29,6 +33,12 @@ class EmailLoginViewModel : ViewModel() {
         } catch (e: Exception) {
             emit(Resource.error(data = null, message = e.message ?: "Ошибка сервера! Попробуйте снова."))
         }
+    }
+
+    private fun saveLogin(isKeep: Boolean, id: Int, passHash: Int){
+        App.prefs.setPref(PREF_KEEP_LOGGIN, isKeep)
+        if (isKeep)
+            App.prefs.setPref(PREF_USER_AUTH, "$id|$passHash")
     }
 
     fun loginDataChanged(email: String, password: String) {
