@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.ViewModelProviders
 import com.fxn.OnBubbleClickListener
 import dev.ahmedmourad.bundlizer.Bundlizer
 import ru.avangard.rise.R
@@ -16,7 +17,9 @@ import ru.citadel.rise.Constants.PROJECTS_ALL
 import ru.citadel.rise.Constants.PROJECTS_FAV
 import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.USER
-import ru.citadel.rise.data.PrefsConst.PREF_KEEP_LOGGIN
+import ru.citadel.rise.data.local.LocalDatabase
+import ru.citadel.rise.data.local.LocalRepository
+import ru.citadel.rise.data.local.PrefsConst.PREF_KEEP_LOGGIN
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.login.LoginActivity
@@ -35,6 +38,7 @@ import ru.citadel.rise.main.ui.settings.SettingsFragment
 class MainActivity : AppCompatActivity() {
 
     lateinit var currentUser: User
+    private lateinit var viewModel: MainViewModel
 
     private lateinit var binding: ActivityMainBinding
 
@@ -47,11 +51,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         currentUser = Bundlizer.unbundle(User.serializer(), intent.extras?.getBundle(USER)!!)
 
+        val dao = LocalDatabase.getDatabase(this)!!.dao()
+        viewModel = ViewModelProviders.of(this, MainViewModelFactory(LocalRepository(dao), currentUser)).get(MainViewModel::class.java)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         showProjectsFragment(PROJECTS_ALL)
-
 
         binding.navView.addBubbleListener(object : OnBubbleClickListener {
             override fun onBubbleClick(id: Int) {
@@ -77,6 +83,8 @@ class MainActivity : AppCompatActivity() {
 
         binding.projectListBar.butAddProject.setOnClickListener { showAddEditProject() }
     }
+
+
 
     override fun onBackPressed() {
         val fragment = supportFragmentManager.findFragmentById(R.id.containerMain)

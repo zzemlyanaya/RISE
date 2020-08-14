@@ -39,7 +39,7 @@
                         android:layout_height="52dp"
                         android:backgroundTint="@color/accent_red"
                         android:scaleType="fitXY"
-                        android:src="@drawable/ic_plus_circle"
+                        app:srcCompat="@drawable/ic_plus_circle"
                         android:tint="@color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -57,11 +57,11 @@
                 android:layout_marginStart="24dp"
                 android:backgroundTint="@android:color/transparent"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_plus_circle"
                 android:tint="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/cardView"
                 app:layout_constraintStart_toEndOf="@+id/cardView"
-                app:layout_constraintTop_toTopOf="@+id/cardView" />
+                app:layout_constraintTop_toTopOf="@+id/cardView"
+                app:srcCompat="@drawable/ic_plus_circle" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inputProjWebsite"
@@ -223,6 +223,19 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.skyhope.materialtagview.TagView
+                android:id="@+id/tagTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/inputProjWebsite"
+                app:layout_constraintStart_toStartOf="@+id/inputProjWebsite"
+                app:layout_constraintTop_toBottomOf="@id/inputProjWebsite"
+                app:tag_background_color="@color/accent_red"
+                app:tag_limit="10000"
+                app:tag_separator="HASH_SEPARATOR"
+                app:tag_text_color="@color/white" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/butSaveProj"
                 android:layout_width="wrap_content"
@@ -242,7 +255,7 @@
                 app:cornerRadius="44dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inputProjWebsite"
+                app:layout_constraintTop_toBottomOf="@+id/tagTextView"
                 app:rippleColor="@color/ripple_red" />
 
             <com.google.android.material.button.MaterialButton

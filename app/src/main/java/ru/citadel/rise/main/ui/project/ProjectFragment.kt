@@ -11,6 +11,8 @@ import ru.avangard.rise.databinding.FragmentProjectBinding
 import ru.citadel.rise.Constants.PROJECT
 import ru.citadel.rise.IOnBack
 import ru.citadel.rise.data.model.Project
+import ru.citadel.rise.main.MainActivity
+import ru.citadel.rise.main.ui.chat.UserShortView
 
 /**
  * A simple [Fragment] subclass.
@@ -43,6 +45,13 @@ class ProjectFragment : Fragment(), IOnBack {
         binding.projTime.text = project.deadlines ?: resources.getString(R.string.empty_proj)
         binding.projWebsite.text = project.website ?: resources.getString(R.string.empty_proj)
         binding.projDescrLong.text = project.descriptionLong
+
+        binding.butContact.setOnClickListener {
+            if (project.contact != (requireActivity() as MainActivity).currentUser.userId) {
+                val shortView = UserShortView(project.contact, project.contactName)
+                (requireActivity() as MainActivity).showChatFragment(shortView, 0)
+            }
+        }
 
         return binding.root
     }

@@ -11,17 +11,15 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentSettingsBinding
+import ru.citadel.rise.App
 import ru.citadel.rise.IOnBack
-import ru.citadel.rise.data.LocalRepository
-import ru.citadel.rise.data.PrefsConst
+import ru.citadel.rise.data.local.PrefsConst
 
 
 /**
  * A simple [Fragment] subclass.
  */
 class SettingsFragment : Fragment(), IOnBack {
-
-    private val localRepository = LocalRepository()
 
     override fun onBackPressed(): Boolean {
         return true
@@ -34,12 +32,12 @@ class SettingsFragment : Fragment(), IOnBack {
         val binding: FragmentSettingsBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
 
-        binding.notificationSwitcher.setChecked(localRepository.getPref(PrefsConst.PREF_NOTIFICATIONS) as Boolean)
+        binding.notificationSwitcher.setChecked(App.prefs.getPref(PrefsConst.PREF_NOTIFICATIONS) as Boolean)
         binding.notificationSwitcher.setOnCheckedChangeListener { checked ->
-            localRepository.setPref(PrefsConst.PREF_NOTIFICATIONS, checked)
+            App.prefs.setPref(PrefsConst.PREF_NOTIFICATIONS, checked)
         }
 
-        val lang = localRepository.getPref(PrefsConst.PREF_LANGUAGE) as String
+        val lang = App.prefs.getPref(PrefsConst.PREF_LANGUAGE) as String
         val index = resources.getStringArray(R.array.languages).indexOf(lang)
 
         binding.languageSpinner.adapter =
@@ -55,7 +53,7 @@ class SettingsFragment : Fragment(), IOnBack {
                 parent: AdapterView<*>, view: View, pos: Int,
                 id: Long
             ) {
-                localRepository.setPref(PrefsConst.PREF_LANGUAGE, parent.getItemAtPosition(pos))
+                App.prefs.setPref(PrefsConst.PREF_LANGUAGE, parent.getItemAtPosition(pos))
             }
 
             override fun onNothingSelected(arg0: AdapterView<*>?) {}

@@ -1,4 +1,4 @@
-package ru.citadel.rise.data
+package ru.citadel.rise.data.remote
 
 import retrofit2.Call
 import retrofit2.CallAdapter

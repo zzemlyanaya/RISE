@@ -1,20 +1,34 @@
 package ru.citadel.rise.data.model
 
+import androidx.annotation.NonNull
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import kotlinx.serialization.Serializable
 
 
-/**
- * Data class that captures user information for logged in users retrieved from LoginRepository
- * [id] is a hashcode of user's login
- */
 @Serializable
+@Entity(tableName = "users")
 data class User(
-    val id: Int,
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo
+    val userId: Int,
+    @NonNull
+    @ColumnInfo
     var email: String,
+    @NonNull
+    @ColumnInfo
     var name: String,
+    @NonNull
+    @ColumnInfo
     var type: Int, //1 = person, 0 = company
+    @ColumnInfo
     var age: Int?,
+    @ColumnInfo
     var city: String?,
+    @ColumnInfo
     var country: String?,
+    @ColumnInfo
     var about: String?
 )

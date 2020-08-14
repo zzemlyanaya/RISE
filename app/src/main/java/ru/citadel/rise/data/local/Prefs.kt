@@ -1,4 +1,4 @@
-package ru.citadel.rise.data
+package ru.citadel.rise.data.local
 
 import com.kryptoprefs.context.KryptoContext
 import com.kryptoprefs.preferences.KryptoPrefs
@@ -12,7 +12,7 @@ object PrefsConst {
 }
 
 class Prefs(prefs: KryptoPrefs): KryptoContext(prefs) {
-    private val isKeepLoggin = boolean(PrefsConst.PREF_KEEP_LOGGIN, true)
+    private val isKeepLoggin = boolean(PrefsConst.PREF_KEEP_LOGGIN, false)
     private val language = string(PrefsConst.PREF_LANGUAGE, "Русский", true)
     private val notifications = boolean(PrefsConst.PREF_NOTIFICATIONS, true)
     private val userAuth = string(PrefsConst.PREF_USER_AUTH, "1|1")

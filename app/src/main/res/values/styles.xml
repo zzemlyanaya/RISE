@@ -11,6 +11,26 @@
         <item name="snackbarStyle">@style/Widget.MaterialComponents.Snackbar.Style</item>
     </style>
 
+    <!-- LoginActivity theme. -->
+    <style name="AppTheme.Login">
+        <item name="colorPrimary">@color/accent_red</item>
+        <item name="colorOnSurface">@color/accent_red</item>
+        <item name="buttonStyle">@style/ButtonStyle</item>
+    </style>
+
+    <!-- MainActivity theme. -->
+    <style name="AppTheme.Main">
+        <item name="colorPrimary">@color/accent_red</item>
+        <item name="colorAccent">@color/accent_red</item>
+        <item name="colorOnSurface">@color/icon_grey</item>
+        <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
+        <item name="colorSurface">@color/border_light</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItemStyle</item>
+        <item name="spinnerDropDownItemStyle">@style/SpinnerDropDownItemStyle</item>
+    </style>
+
+    <!-- some styles -->
+
     <style name="Widget.MaterialComponents.Snackbar.Style">
         <item name="android:backgroundTint">@color/text_dark</item>
         <item name="android:alpha">1.0</item>
@@ -48,28 +68,10 @@
         <item name="android:textColorHighlight">@color/ripple_red</item>
     </style>
 
-    <!-- MainActivity theme -->
-    <style name="AppTheme.Main">
-        <item name="colorPrimary">@color/accent_red</item>
-        <item name="colorAccent">@color/accent_red</item>
-        <item name="colorOnSurface">@color/icon_grey</item>
-        <item name="bottomNavigationStyle">@style/BottomNavStyle</item>
-        <item name="colorSurface">@color/border_light</item>
-        <item name="android:spinnerItemStyle">@style/SpinnerItemStyle</item>
-        <item name="spinnerDropDownItemStyle">@style/SpinnerDropDownItemStyle</item>
-    </style>
-
     <style name="BottomNavStyle" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="backgroundColor">@color/bottom_nav_background</item>
     </style>
 
-    <!-- LoginActivity theme. -->
-    <style name="AppTheme.Login">
-        <item name="colorPrimary">@color/accent_red</item>
-        <item name="colorOnSurface">@color/text_dark</item>
-        <item name="buttonStyle">@style/ButtonStyle</item>
-    </style>
-    
     <style name="ButtonStyle" parent="Widget.MaterialComponents.Button">
         <item name="backgroundColor">@color/button_background</item>
         <item name="android:textColor">@color/text_light</item>

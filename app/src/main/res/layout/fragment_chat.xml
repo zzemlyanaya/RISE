@@ -59,7 +59,8 @@
             android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/butClip"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_send" />
+            app:srcCompat="@drawable/ic_send"
+            android:focusable="true" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/butClip"
@@ -73,9 +74,10 @@
             app:layout_constraintBottom_toBottomOf="@+id/textMessage"
             app:layout_constraintEnd_toStartOf="@+id/butSend"
             app:layout_constraintTop_toTopOf="@+id/textMessage"
-            app:srcCompat="@drawable/ic_clip" />
+            app:srcCompat="@drawable/ic_clip"
+            android:focusable="true" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/textMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -85,7 +87,6 @@
             android:ems="10"
             android:fontFamily="@font/montserrat_regular"
             android:gravity="start|top"
-            android:hint=" Ваше сообщение"
             android:inputType="textLongMessage|textMultiLine"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/butClip"

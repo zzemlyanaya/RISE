@@ -17,10 +17,10 @@ import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityLoginBinding
 import ru.citadel.rise.App
 import ru.citadel.rise.Constants.USER
-import ru.citadel.rise.data.PrefsConst.PREF_KEEP_LOGGIN
-import ru.citadel.rise.data.PrefsConst.PREF_USER_AUTH
-import ru.citadel.rise.data.RemoteRepository
+import ru.citadel.rise.data.local.PrefsConst.PREF_KEEP_LOGGIN
+import ru.citadel.rise.data.local.PrefsConst.PREF_USER_AUTH
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.data.remote.RemoteRepository
 import ru.citadel.rise.login.email.IOnLogin
 import ru.citadel.rise.login.registration.IOnCreateAccountListener
 import ru.citadel.rise.main.MainActivity
@@ -83,7 +83,8 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
 
     fun login(id: Int, passHash: Int) {
         lifecycleScope.launch(Dispatchers.IO) {
-            val result = RemoteRepository().authorize(id, passHash)
+            val result = RemoteRepository()
+                .authorize(id, passHash)
             if (result.error == null)
                 withContext(Dispatchers.Main) { result.data?.let { goOnMain(it) } }
             else

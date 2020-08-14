@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.nkzawa.socketio.client.Socket
@@ -48,10 +49,21 @@ class ChatFragment : Fragment(), IOnBack {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        currentUserId = (this.requireActivity() as MainActivity).currentUser.id
+        currentUserId = (this.requireActivity() as MainActivity).currentUser.userId
 
         otherUserShortView = this.requireArguments()[Constants.USER] as UserShortView
         chatId = this.requireArguments()[Constants.CHAT_ID] as Int
+//        if(chatId == 0)
+//            viewModel.createNewChat(currentUserId, otherUserShortView.id, "")
+//                .observe(viewLifecycleOwner, Observer {
+//                    when(it.status){
+//                        Status.LOADING -> {}
+//                        Status.SUCCESS -> { chatId = it.data!! }
+//                        Status.ERROR -> {
+//                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+//                        }
+//                    }
+//                })
 
         val binding: FragmentChatBinding
                 = DataBindingUtil.inflate(inflater, R.layout.fragment_chat, container, false)
@@ -62,6 +74,13 @@ class ChatFragment : Fragment(), IOnBack {
             layoutManager = LinearLayoutManager(context)
             adapter = MessageRecyclerAdapter(emptyList(), currentUserId)
         }
+
+        val itemAnimator = DefaultItemAnimator()
+        itemAnimator.addDuration = 400
+        itemAnimator.removeDuration = 400
+        itemAnimator.moveDuration = 400
+
+        recyclerView.itemAnimator = itemAnimator
 
         progressBar = binding.progressBar
         textConnect = binding.textConnect
@@ -126,6 +145,7 @@ class ChatFragment : Fragment(), IOnBack {
                     resource.data?.let { list ->
                         recyclerView.adapter =
                             MessageRecyclerAdapter(list, currentUserId)
+                        recyclerView.smoothScrollToPosition((recyclerView.adapter as MessageRecyclerAdapter).itemCount-1)
                     }
                 }
                 Status.ERROR -> {

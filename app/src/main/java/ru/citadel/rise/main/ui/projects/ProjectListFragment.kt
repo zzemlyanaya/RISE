@@ -65,7 +65,7 @@ class ProjectListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        userId = (activity as MainActivity).currentUser.id
+        userId = (activity as MainActivity).currentUser.userId
         when (type) {
             PROJECTS_ALL -> viewModel.fetchAllData().observe(viewLifecycleOwner, Observer { showData(it) })
             PROJECTS_MY -> viewModel.fetchMyData(userId).observe(viewLifecycleOwner, Observer { showData(it) })

@@ -36,6 +36,9 @@
     <string name="favourites">Избранное</string>
     <string name="settings">Настройки</string>
 
+    <string name="notifications">Уведомления</string>
+    <string name="language">Язык</string>
+
     <string name="empty_proj">Не указано</string>
 
     <string name="projects">Проекты</string>

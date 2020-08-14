@@ -1,11 +1,11 @@
-package ru.citadel.rise.data
+package ru.citadel.rise.data.remote
 
-import retrofit2.http.*
-import ru.citadel.rise.data.model.Message
-import ru.citadel.rise.data.model.Project
-import ru.citadel.rise.data.model.Result
-import ru.citadel.rise.data.model.User
-import ru.citadel.rise.main.ui.chats.ChatShortView
+import org.json.JSONObject
+import retrofit2.http.GET
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
+import ru.citadel.rise.data.model.*
 
 interface IServerService {
     companion object {
@@ -25,9 +25,9 @@ interface IServerService {
     fun getFavProjectsByUser(@Path("id")id: Int): Result<List<Project>>
 
     @POST("/projects")
-    fun addProject(project: Project): Result<String>
+    fun addProject(project: JSONObject): Result<String>
 
-    @PUT("/projects/{id}")
+    @POST("/projects/{id}")
     fun editProject(@Path("id")id: Int, new: Project): Result<String>
 
     @GET("/login")
@@ -47,7 +47,7 @@ interface IServerService {
     @GET("/users/{id}")
     fun getUserById(@Path("id")id: Int): Result<User>
 
-    @PUT("/users/{id}")
+    @POST("/users/{id}")
     fun editUser(@Path("id")id:Int, new: User): Result<String>
 
     @GET("/chats/by_user/{id}")
@@ -55,4 +55,11 @@ interface IServerService {
 
     @GET("/chats/{id}")
     fun getMessagesByChat(@Path("id")id: Int): Result<List<Message>>
+
+    @POST("/chats")
+    fun addChat(
+        @Query("user1")user1: Int,
+        @Query("user2")user2: Int,
+        @Query("lastMessage")lastMessage: String
+    ) : Result<Int>
 }

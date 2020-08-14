@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/logo_square"
-        android:roundIcon="@mipmap/logo_circle">
+        android:roundIcon="@mipmap/logo_circle"
+        android:supportsRtl="true">
         <activity
             android:name="ru.citadel.rise.login.LoginActivity"
             android:theme="@style/AppTheme.Login"

@@ -8,12 +8,12 @@ import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
 import ru.avangard.rise.R
 import ru.citadel.rise.App
-import ru.citadel.rise.data.PrefsConst.PREF_KEEP_LOGGIN
-import ru.citadel.rise.data.PrefsConst.PREF_USER_AUTH
-import ru.citadel.rise.data.RemoteRepository
+import ru.citadel.rise.data.local.PrefsConst.PREF_KEEP_LOGGIN
+import ru.citadel.rise.data.local.PrefsConst.PREF_USER_AUTH
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.data.remote.RemoteRepository
 
 class EmailLoginViewModel : ViewModel() {
     private val repository = RemoteRepository()

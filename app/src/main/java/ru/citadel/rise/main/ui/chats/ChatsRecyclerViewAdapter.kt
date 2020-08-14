@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import ru.avangard.rise.R
+import ru.citadel.rise.data.model.ChatShortView
 import kotlin.random.Random
 
 

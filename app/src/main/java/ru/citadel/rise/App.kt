@@ -6,11 +6,11 @@ import com.github.nkzawa.socketio.client.Socket
 import com.kryptoprefs.preferences.KryptoBuilder
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import ru.citadel.rise.data.IServerService
-import ru.citadel.rise.data.IServerService.Companion.BASE_URL
-import ru.citadel.rise.data.Prefs
-import ru.citadel.rise.data.PrefsConst
-import ru.citadel.rise.data.SynchronousCallAdapterFactory
+import ru.citadel.rise.data.local.Prefs
+import ru.citadel.rise.data.local.PrefsConst
+import ru.citadel.rise.data.remote.IServerService
+import ru.citadel.rise.data.remote.IServerService.Companion.BASE_URL
+import ru.citadel.rise.data.remote.SynchronousCallAdapterFactory
 
 class App : Application(){
 
@@ -25,7 +25,12 @@ class App : Application(){
 
         service = retrofit.create(IServerService::class.java)
 
-        preferences = Prefs(KryptoBuilder.hybrid(this, PrefsConst.PREFS_NAME))
+        preferences = Prefs(
+            KryptoBuilder.hybrid(
+                this,
+                PrefsConst.PREFS_NAME
+            )
+        )
 
         val opts = IO.Options().apply {
             reconnection = true

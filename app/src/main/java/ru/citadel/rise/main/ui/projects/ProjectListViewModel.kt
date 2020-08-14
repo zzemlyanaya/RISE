@@ -3,10 +3,10 @@ package ru.citadel.rise.main.ui.projects
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import ru.citadel.rise.data.RemoteRepository
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.Result
+import ru.citadel.rise.data.remote.RemoteRepository
 
 class ProjectListViewModel : ViewModel() {
     private val repository = RemoteRepository()

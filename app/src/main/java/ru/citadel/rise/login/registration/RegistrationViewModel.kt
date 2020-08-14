@@ -9,10 +9,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import ru.avangard.rise.R
-import ru.citadel.rise.data.RemoteRepository
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.data.remote.RemoteRepository
 import kotlin.coroutines.CoroutineContext
 
 class RegistrationViewModel : ViewModel() {

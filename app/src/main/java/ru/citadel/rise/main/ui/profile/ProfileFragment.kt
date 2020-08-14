@@ -15,12 +15,6 @@ import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentProfileBinding
 import ru.citadel.rise.main.MainActivity
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
 
     override fun onCreateView(

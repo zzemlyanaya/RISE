@@ -276,7 +276,6 @@
                     android:fontFamily="@font/montserrat_medium"
                     android:imeOptions="actionDone"
                     android:inputType="textPassword"
-                    android:password="true"
                     android:selectAllOnFocus="true"
                     android:singleLine="true"
                     android:text="@string/prompt_password"

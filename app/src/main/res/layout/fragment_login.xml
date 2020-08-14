@@ -128,7 +128,6 @@
                 android:imeOptions="actionDone"
                 android:inputType="textPassword"
                 android:paddingStart="28dp"
-                android:password="false"
                 android:selectAllOnFocus="true"
                 android:singleLine="true"
                 android:text="@string/prompt_password"
@@ -150,7 +149,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/buttonBack1" />
 
-        <CheckBox
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:id="@+id/checkKeepLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,6 +158,8 @@
             android:checked="true"
             android:fontFamily="@font/montserrat_regular"
             android:text="@string/keep_login"
+            android:textColorHighlight="@color/ripple_red"
+            android:textColorLink="@color/ripple_red"
             app:layout_constraintStart_toStartOf="@+id/inputPasswordLogin"
             app:layout_constraintTop_toBottomOf="@+id/inputPasswordLogin" />
 
