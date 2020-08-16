@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentProjectBinding
 import ru.citadel.rise.Constants.PROJECT
+import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.IOnBack
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.main.MainActivity
@@ -22,6 +23,7 @@ import ru.citadel.rise.main.ui.chat.UserShortView
 class ProjectFragment : Fragment(), IOnBack {
 
     private lateinit var project: Project
+    private var curUserId = 0
 
     override fun onBackPressed(): Boolean {
         return true
@@ -31,6 +33,7 @@ class ProjectFragment : Fragment(), IOnBack {
         super.onCreate(savedInstanceState)
         arguments?.let {
             project = it.getSerializable(PROJECT) as Project
+            curUserId = it.getInt(USER)
         }
     }
 
@@ -46,10 +49,20 @@ class ProjectFragment : Fragment(), IOnBack {
         binding.projWebsite.text = project.website ?: resources.getString(R.string.empty_proj)
         binding.projDescrLong.text = project.descriptionLong
 
-        binding.butContact.setOnClickListener {
-            if (project.contact != (requireActivity() as MainActivity).currentUser.userId) {
-                val shortView = UserShortView(project.contact, project.contactName)
-                (requireActivity() as MainActivity).showChatFragment(shortView, 0)
+        if (project.contact == curUserId) {
+            binding.butContact.apply {
+                text = getString(R.string.edit_project)
+                setOnClickListener {
+                    (requireActivity() as MainActivity).showAddEditProject(project)
+                }
+            }
+        } else {
+            binding.butContact.apply {
+                text = getString(R.string.but_contact)
+                setOnClickListener {
+                    val shortView = UserShortView(project.contact, project.contactName)
+                    (requireActivity() as MainActivity).showChatFragment(shortView, 0)
+                }
             }
         }
 
@@ -57,18 +70,12 @@ class ProjectFragment : Fragment(), IOnBack {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param project Parameter 1.
-         * @return A new instance of fragment ProjectFragment.
-         */
         @JvmStatic
-        fun newInstance(project: Project) =
+        fun newInstance(project: Project, id: Int) =
             ProjectFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(PROJECT, project)
+                    putInt(USER, id)
                 }
             }
     }

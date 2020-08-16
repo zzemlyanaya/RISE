@@ -17,6 +17,7 @@ object Constants {
     const val PROJECTS_ALL = 0
     const val PROJECTS_MY = 1
     const val PROJECTS_FAV = 2
+    const val PROJECTS_BY_USER = 3
 
 }
 

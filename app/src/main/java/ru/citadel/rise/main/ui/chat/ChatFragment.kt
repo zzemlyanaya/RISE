@@ -91,7 +91,7 @@ class ChatFragment : Fragment(), IOnBack {
             if(text.isBlank())
                 return@setOnClickListener
                 socket
-                    .send(Message(null, chatId, currentUserId, otherUserShortView.id, text,
+                    .send(Message(0, chatId, currentUserId, otherUserShortView.id, text,
                             DateFormat
                                 .getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT)
                                 .format(Date()).toString()

@@ -11,28 +11,31 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textview.MaterialTextView
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentProjectListBinding
 import ru.citadel.rise.Constants.LIST_TYPE
 import ru.citadel.rise.Constants.PROJECTS_ALL
+import ru.citadel.rise.Constants.PROJECTS_BY_USER
 import ru.citadel.rise.Constants.PROJECTS_MY
+import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.Status
+import ru.citadel.rise.data.local.LocalDatabase
+import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.main.MainActivity
+import ru.citadel.rise.main.ProjectListViewModelFactory
 
 /**
  * A fragment representing a list of Items.
  */
 class ProjectListFragment : Fragment() {
 
-    private val viewModel
-            by lazy { ViewModelProviders.of(this).get(ProjectListViewModel::class.java) }
+    private lateinit var viewModel: ProjectListViewModel
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
-    private lateinit var textConnect: MaterialTextView
+    //private lateinit var textConnect: MaterialTextView
 
     private var type: Int = PROJECTS_ALL
     private var userId: Int = 0
@@ -42,14 +45,22 @@ class ProjectListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         type = arguments?.getInt(LIST_TYPE) ?: PROJECTS_ALL
+        userId = arguments?.getInt(USER) ?: 0
+
         val binding: FragmentProjectListBinding
                 = DataBindingUtil.inflate(inflater, R.layout.fragment_project_list, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
+
+        val dao = LocalDatabase.getDatabase(requireContext())!!.dao()
+        viewModel = ViewModelProviders
+            .of(this, ProjectListViewModelFactory(LocalRepository(dao)))
+            .get(ProjectListViewModel::class.java)
+
         progressBar = binding.listProgress
         recyclerView = binding.projectList
-        textConnect = binding.textConnect
-        textConnect.setOnClickListener { getData() }
+//        textConnect = binding.textConnect
+//        textConnect.setOnClickListener { getData() }
 
         with(binding.projectList) {
             layoutManager = LinearLayoutManager(context)
@@ -65,11 +76,11 @@ class ProjectListFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        userId = (activity as MainActivity).currentUser.userId
         when (type) {
             PROJECTS_ALL -> viewModel.fetchAllData().observe(viewLifecycleOwner, Observer { showData(it) })
-            PROJECTS_MY -> viewModel.fetchMyData(userId).observe(viewLifecycleOwner, Observer { showData(it) })
-            else -> viewModel.fetchFavouriteData(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_MY -> viewModel.fetchMyProjectsLocaly(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+            else -> viewModel.fetchFavProjectsLocaly(userId).observe(viewLifecycleOwner, Observer { showData(it) })
         }
     }
 
@@ -79,8 +90,9 @@ class ProjectListFragment : Fragment() {
 //        viewModel.fetchMyData(id).removeObservers(viewLifecycleOwner)
         when (type) {
             PROJECTS_ALL -> viewModel.fetchAllData()
-            PROJECTS_MY -> viewModel.fetchMyData(userId)
-            else -> viewModel.fetchFavouriteData(userId)
+            PROJECTS_MY -> viewModel.fetchMyProjectsLocaly(userId)
+            PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId)
+            else -> viewModel.fetchFavProjectsLocaly(userId)
         }
     }
 
@@ -101,12 +113,12 @@ class ProjectListFragment : Fragment() {
                 Status.ERROR -> {
                     progressBar.visibility = View.INVISIBLE
                     recyclerView.visibility = View.VISIBLE
-                    textConnect.visibility = View.VISIBLE
+//                    textConnect.visibility = View.VISIBLE
                 }
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
                     recyclerView.visibility = View.INVISIBLE
-                    textConnect.visibility = View.INVISIBLE
+//                    textConnect.visibility = View.INVISIBLE
                 }
             }
         }
@@ -114,8 +126,11 @@ class ProjectListFragment : Fragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(type: Int): ProjectListFragment {
-            val args = Bundle().apply { putInt(LIST_TYPE, type) }
+        fun newInstance(type: Int, userId: Int): ProjectListFragment {
+            val args = Bundle().apply {
+                putInt(LIST_TYPE, type)
+                putInt(USER, userId)
+            }
             val fragment = ProjectListFragment()
             fragment.arguments = args
             return fragment

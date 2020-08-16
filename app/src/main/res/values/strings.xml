@@ -55,6 +55,7 @@
     <string name="dialogs">Диалоги</string>
     <string name="search">Найти</string>
     <string name="add_project">Добавить свой проект</string>
+    <string name="edit_project">Редактировать</string>
     <string name="save">Сохранить</string>
     <string name="cancel">Отмена</string>
 
@@ -64,5 +65,8 @@
     <string name="proj_cost">Стоимость</string>
     <string name="proj_tags">Тэги</string>
     <string name="proj_website">Сайт</string>
+
+    <string name="dangerous_zone">Опасная зона</string>
+    <string name="delete">Удалить</string>
 
 </resources>

@@ -2,31 +2,20 @@ package ru.citadel.rise.data.remote
 
 import org.json.JSONObject
 import ru.citadel.rise.App
-import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User
 
 class RemoteRepository {
     private val service = App.api
 
-    private val fakeData = listOf(
-        Project(1, "RISE", 1, "CITADEL",
-                "The best startup platform ever",
-            "1000000 рублей", "1 месяц", "http://bestApp.ever/RISE", "android,B2B,B2C,B2G,startup"),
-
-        Project(2, "CITADEL Education", 1, "CITADEL",
-            "The best education platform ever",
-            "1100000 рублей", "2 месяца", "http://bestApp.ever/Education", "web,AI,neutral networks")
-    )
 
     fun getServerStatus() = service.getServerStatus()
 
     fun getAllProjects() = service.getAllProjects()
 
-    fun getMyProjectsById(id: Int) = service.getMyProjectsByUser(id)
+    fun getProjectsByUser(id: Int) = service.getProjectsByUser(id)
 
-    //suspend fun getFavProjectsById(id: Int) = service.getFavProjectsByUser(id)
-    fun getFavProjectsById(id: Int) = Result(error= null, data = listOf(fakeData[0]))
+    fun getFavProjectsByUser(id: Int) = service.getFavProjectsByUser(id)
 
     fun authorize(login: Int, passwordToken: Int)
             = service.authorize(login, passwordToken)
@@ -38,7 +27,9 @@ class RemoteRepository {
 
     fun addProject(project: JSONObject) = service.addProject(project)
 
-    fun editProject(id: Int, new: Project) = service.editProject(id, new)
+    fun editProject(id: Int, new: JSONObject) = service.editProject(id, new)
+
+    fun deleteProject(id: Int) = service.deleteProject(id)
 
     fun editUser(id: Int, new: User) = service.editUser(id, new)
 

@@ -4,7 +4,7 @@ import androidx.room.*
 import ru.citadel.rise.data.model.*
 
 @Dao
-interface IDaoLocal {
+interface ILocalDao {
     // users dao
     @Query("SELECT * FROM users")
     fun getAllUsers(): List<User>
@@ -33,16 +33,14 @@ interface IDaoLocal {
 
 
     // projects dao
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT * FROM projects INNER JOIN user_with_their_projects ON projects.projectId=user_with_their_projects.projectId WHERE user_with_their_projects.userId=:userId")
+    @Query("SELECT * FROM projects WHERE contact=:userId")
     fun getUserTheirProjects(userId: Int): List<Project>
 
-    @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
-    @Query("SELECT * FROM projects JOIN user_with_fav_projects ON projects.projectId=user_with_fav_projects.projectId WHERE user_with_fav_projects.userId=:userId")
+    @Query("SELECT projectId, name, contact, contactName, descriptionLong, cost, deadlines, website, tags FROM projects JOIN user_with_fav_projects ON projects.projectId=user_with_fav_projects.projId WHERE user_with_fav_projects.userId=:userId")
     fun getUserFavProjects(userId: Int): List<Project>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertProject(project: Project)
+    fun insertProjects(projects: List<Project>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertUserWithTheirProject(userWithTheirProject: UserWithTheirProjects)
@@ -54,7 +52,7 @@ interface IDaoLocal {
     fun updateProject(project: Project)
 
     @Delete
-    fun deleteProject(project: Project)
+    fun deleteProjects(projects: List<Project>)
 
     @Delete
     fun deleteUserWithTheirProject(userWithTheirProject: UserWithTheirProjects)

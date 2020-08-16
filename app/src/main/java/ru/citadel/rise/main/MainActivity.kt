@@ -14,6 +14,7 @@ import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityMainBinding
 import ru.citadel.rise.App
 import ru.citadel.rise.Constants.PROJECTS_ALL
+import ru.citadel.rise.Constants.PROJECTS_BY_USER
 import ru.citadel.rise.Constants.PROJECTS_FAV
 import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.USER
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        showProjectsFragment(PROJECTS_ALL)
+        showProjectsFragment(PROJECTS_ALL, currentUser.userId)
 
         binding.navView.addBubbleListener(object : OnBubbleClickListener {
             override fun onBubbleClick(id: Int) {
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     }
                     R.id.navigation_rise -> {
                         if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProjectListFragment)
-                            showProjectsFragment(PROJECTS_ALL)
+                            showProjectsFragment(PROJECTS_ALL, currentUser.userId)
                     }
                 }
             }
@@ -91,10 +92,10 @@ class MainActivity : AppCompatActivity() {
         when(fragment!!.tag) {
             "chat" -> showChatsFragment()
             "profile", "projects_0", "chats" -> { onBackPressedDouble() }
-            "projects_$PROJECTS_FAV", "settings", "about_app", "about_me" -> showProfileFragment()
-            "project_$PROJECTS_ALL", "add_edit_project" -> showProjectsFragment(PROJECTS_ALL)
-            "project_$PROJECTS_MY" -> showAboutMeFragment()
-            "project_$PROJECTS_FAV" -> showProjectsFragment(PROJECTS_FAV)
+            "projects_$PROJECTS_FAV", "settings", "about_app", "about_me_$PROJECTS_MY" -> showProfileFragment()
+            "project_$PROJECTS_ALL", "add_project" -> showProjectsFragment(PROJECTS_ALL, currentUser.userId)
+            "project_$PROJECTS_MY" -> showAboutMeFragment(currentUser)
+            "project_$PROJECTS_FAV" -> showProjectsFragment(PROJECTS_FAV, currentUser.userId)
             else -> {}
         }
     }
@@ -132,10 +133,10 @@ class MainActivity : AppCompatActivity() {
         binding.projectListBar.root.visibility = View.GONE
     }
 
-    fun showProjectsFragment(type: Int){
+    fun showProjectsFragment(type: Int, userId: Int){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.containerMain, ProjectListFragment.newInstance(type), "projects_$type")
+            .replace(R.id.containerMain, ProjectListFragment.newInstance(type, userId), "projects_$type")
             .commitAllowingStateLoss()
         hideAllHeaderView()
         when(type) {
@@ -144,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 binding.navView.visibility = View.VISIBLE
                 binding.projectListBar.root.visibility = View.VISIBLE
             }
-            PROJECTS_MY -> { }
+            PROJECTS_MY, PROJECTS_BY_USER -> { }
             PROJECTS_FAV -> {
                 binding.header.root.visibility = View.VISIBLE
                 binding.navView.visibility = View.GONE
@@ -184,7 +185,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.containerMain, ProjectFragment.newInstance(project), "project_$typeFrom")
+            .replace(R.id.containerMain, ProjectFragment.newInstance(project, currentUser.userId), "project_$typeFrom")
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.VISIBLE
         binding.projectListBar.root.visibility = View.GONE
@@ -214,20 +215,32 @@ class MainActivity : AppCompatActivity() {
         binding.navView.visibility = View.GONE
     }
 
-    fun showAboutMeFragment(){
+    fun showAboutMeFragment(user: User){
+        val listType = if (user == currentUser) PROJECTS_MY else PROJECTS_BY_USER
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.containerMain, AboutMeFragment(), "about_me")
+            .replace(R.id.containerMain, AboutMeFragment.newInstance(user, listType), "about_me_$listType")
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.navView.visibility = View.GONE
     }
 
-    fun showAddEditProject(){
+    private fun showAddEditProject(){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             .replace(R.id.containerMain,
-                AddEditProjectFragment(), "add_edit_project")
+                AddEditProjectFragment.newInstance(null), "add_project")
+            .commitAllowingStateLoss()
+        binding.header.root.visibility = View.GONE
+        binding.projectListBar.root.visibility = View.GONE
+        binding.navView.visibility = View.GONE
+    }
+
+    fun showAddEditProject(project: Project){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .replace(R.id.containerMain,
+                AddEditProjectFragment.newInstance(project), "edit_project")
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.projectListBar.root.visibility = View.GONE

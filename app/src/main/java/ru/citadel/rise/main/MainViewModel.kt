@@ -5,18 +5,29 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.citadel.rise.data.local.LocalRepository
-import ru.citadel.rise.data.model.ChatShortView
-import ru.citadel.rise.data.model.User
-import ru.citadel.rise.data.model.UserChatRelation
+import ru.citadel.rise.data.model.*
 import ru.citadel.rise.data.remote.RemoteRepository
 
 class MainViewModel(private val localRepository: LocalRepository,
                     private val user: User) : ViewModel() {
     private val remoteRepository = RemoteRepository()
 
+    private val fakeData = listOf(
+        Project(1, "RISE", 1, "CITADEL",
+            "The best startup platform ever",
+            "1000000 рублей", "1 месяц", "http://bestApp.ever/RISE", "android,B2B,B2C,B2G,startup"),
+
+        Project(2, "CITADEL Education", 1, "CITADEL",
+            "The best education platform ever",
+            "1100000 рублей", "2 месяца", "http://bestApp.ever/Education", "web,AI,neutral networks")
+    )
+
     init {
         CoroutineScope(Dispatchers.IO).launch {
+            localRepository.insertProject(fakeData)
             localRepository.insertUser(user)
+            for(i in fakeData)
+                localRepository.deleteUserWithTheirProject(UserWithTheirProjects(user.userId, i.projectId))
             updateChats()
         }
     }

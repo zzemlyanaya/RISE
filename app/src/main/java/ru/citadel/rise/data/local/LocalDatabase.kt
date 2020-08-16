@@ -13,7 +13,7 @@ import ru.citadel.rise.data.model.*
     version = 1,
     exportSchema = false)
 abstract class LocalDatabase : RoomDatabase() {
-    abstract fun dao(): IDaoLocal
+    abstract fun dao(): ILocalDao
 
     companion object {
         @Volatile

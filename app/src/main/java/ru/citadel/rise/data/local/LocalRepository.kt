@@ -2,14 +2,14 @@ package ru.citadel.rise.data.local
 
 import ru.citadel.rise.data.model.*
 
-class LocalRepository(private val dao: IDaoLocal) {
+class LocalRepository(private val dao: ILocalDao) {
 
     companion object {
 
         // For Singleton instantiation
         @Volatile private var instance: LocalRepository? = null
 
-        fun getInstance(dao: IDaoLocal) =
+        fun getInstance(dao: ILocalDao) =
             instance
                 ?: synchronized(this) {
                     instance
@@ -39,15 +39,19 @@ class LocalRepository(private val dao: IDaoLocal) {
     fun deleteChat(chats: List<ChatShortView>) = dao.deleteChat(chats)
 
     // projects
-    fun insertProject(project: Project) = dao.insertProject(project)
+    fun insertProject(projects: List<Project>) = dao.insertProjects(projects)
 
     fun insertUserWithTheirProject(userWithTheirProject: UserWithTheirProjects) = dao.insertUserWithTheirProject(userWithTheirProject)
 
     fun insertUserWithFavProject(userWithFavProject: UserWithFavProjects) = dao.insertUserWithFavProject(userWithFavProject)
 
+    fun getUserWithTheirProjects(userId: Int) = dao.getUserTheirProjects(userId)
+
+    fun getUserWithFavProjects(userId: Int) = dao.getUserFavProjects(userId)
+
     fun updateProject(project: Project) = dao.updateProject(project)
 
-    fun deleteProject(project: Project) = dao.deleteProject(project)
+    fun deleteProject(projects: List<Project>) = dao.deleteProjects(projects)
 
     fun deleteUserWithTheirProject(userWithTheirProject: UserWithTheirProjects) = dao.deleteUserWithTheirProject(userWithTheirProject)
 

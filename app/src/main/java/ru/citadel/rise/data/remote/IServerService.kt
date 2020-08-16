@@ -1,10 +1,7 @@
 package ru.citadel.rise.data.remote
 
 import org.json.JSONObject
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 import ru.citadel.rise.data.model.*
 
 interface IServerService {
@@ -19,16 +16,19 @@ interface IServerService {
     fun getAllProjects(): Result<List<Project>>
 
     @GET("/projects/my/{id}")
-    fun getMyProjectsByUser(@Path("id")id: Int): Result<List<Project>>
+    fun getProjectsByUser(@Path("id")id: Int): Result<List<Project>>
 
     @GET("/projects/fav/{id}")
     fun getFavProjectsByUser(@Path("id")id: Int): Result<List<Project>>
 
     @POST("/projects")
-    fun addProject(project: JSONObject): Result<String>
+    fun addProject(@Body project: JSONObject): Result<String>
 
     @POST("/projects/{id}")
-    fun editProject(@Path("id")id: Int, new: Project): Result<String>
+    fun editProject(@Path("id")id: Int, new: JSONObject): Result<String>
+
+    @DELETE("/projects/{id}")
+    fun deleteProject(@Path("id")id: Int    ): Result<String>
 
     @GET("/login")
     fun authorize(@Query("id")id: Int,
