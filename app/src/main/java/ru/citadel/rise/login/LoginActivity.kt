@@ -17,6 +17,8 @@ import ru.avangard.rise.R
 import ru.avangard.rise.databinding.ActivityLoginBinding
 import ru.citadel.rise.App
 import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.data.local.LocalDatabase
+import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.local.PrefsConst.PREF_KEEP_LOGGIN
 import ru.citadel.rise.data.local.PrefsConst.PREF_USER_AUTH
 import ru.citadel.rise.data.model.User
@@ -33,6 +35,8 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
     private var backPressedOnce = false
     private val mHandler: Handler = Handler()
     private val mRunnable = Runnable { backPressedOnce = false }
+
+    private lateinit var localRepository: LocalRepository
 
     override fun onBackPressed() {
         if (backPressedOnce) {
@@ -57,6 +61,9 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
             textConnect.visibility = View.VISIBLE
         }
 
+        val dao = LocalDatabase.getDatabase(this)!!.dao()
+        localRepository = LocalRepository.getInstance(dao)
+
         connect()
     }
 
@@ -64,7 +71,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
         binding.textConnect.text = resources.getText(R.string.connecting)
         lifecycleScope.launch(Dispatchers.IO) {
             try {
-                val status = RemoteRepository().getServerStatus().data
+                RemoteRepository().getServerStatus().data
             }
             catch (e: Exception) {
                 withContext(Dispatchers.Main) { showExp() }
@@ -74,22 +81,13 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
         if (keep) {
             val auth = (App.prefs.getPref(PREF_USER_AUTH) as String).split('|')
             val id = Integer.parseInt(auth[0])
-            val hash = Integer.parseInt(auth[1])
-            login(id, hash)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val user = localRepository.getUserById(id)
+                withContext(Dispatchers.Main) { goOnMain(user) }
+            }
         }
         else
             showTabs()
-    }
-
-    fun login(id: Int, passHash: Int) {
-        lifecycleScope.launch(Dispatchers.IO) {
-            val result = RemoteRepository()
-                .authorize(id, passHash)
-            if (result.error == null)
-                withContext(Dispatchers.Main) { result.data?.let { goOnMain(it) } }
-            else
-                withContext(Dispatchers.Main) { showTabs() }
-        }
     }
 
     private fun showExp(){

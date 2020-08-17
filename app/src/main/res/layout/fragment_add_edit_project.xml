@@ -314,7 +314,6 @@
                         android:layout_marginTop="6dp"
                         android:layout_marginEnd="32dp"
                         android:layout_marginBottom="16dp"
-                        android:allowUndo="false"
                         android:backgroundTint="@color/accent_red"
                         android:fontFamily="@font/montserrat_semibold"
                         android:paddingTop="12dp"

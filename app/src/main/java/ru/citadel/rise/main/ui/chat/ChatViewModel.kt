@@ -2,14 +2,18 @@ package ru.citadel.rise.main.ui.chat
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import ru.citadel.rise.data.local.LocalRepository
+import ru.citadel.rise.data.model.ChatShortView
 import ru.citadel.rise.data.model.Message
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.remote.RemoteRepository
 
 
-class ChatViewModel : ViewModel() {
+class ChatViewModel(private val localRepository: LocalRepository) : ViewModel() {
 
     private val repository = RemoteRepository()
 
@@ -38,6 +42,16 @@ class ChatViewModel : ViewModel() {
                 emit(Resource.error(data = null, message = result.error))
         } catch (e: Exception){
             emit(Resource.error(data = null, message = e.message.toString()))
+        }
+    }
+
+    fun updateChatLastMessage(newChat: ChatShortView) = run {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                localRepository.updateChat(newChat)
+            }
+            catch (e: Exception){
+            }
         }
     }
     

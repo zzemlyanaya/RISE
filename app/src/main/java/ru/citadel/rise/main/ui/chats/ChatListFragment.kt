@@ -44,7 +44,7 @@ class ChatListFragment : Fragment() {
 
         val dao = LocalDatabase.getDatabase(requireContext())!!.dao()
         viewModel = ViewModelProviders
-            .of(this, ChatListViewModelFactory(LocalRepository(dao), userId))
+            .of(this, ChatListViewModelFactory(LocalRepository.getInstance(dao), userId))
             .get(ChatListViewModel::class.java)
 
         val binding: FragmentChatListBinding

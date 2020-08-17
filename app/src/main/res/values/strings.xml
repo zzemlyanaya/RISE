@@ -22,6 +22,7 @@
     <string name="prompt_password">Пароль</string>
     <string name="connecting">Соединяем с сервером…</string>
     <string name="connection_failed">Что-то пошло не так. Нажмите для повторного подключения.</string>
+    <string name="connection_on_list">Что-то пошло не так. Попробуйте снова.</string>
     <string name="personal_data">Продолжая вы даёте согласие на хранение и обработку персональных данных.</string>
     <string name="author_promo">Публикуйте свои проекты и находите инвесторов</string>
     <string name="author">Автор</string>

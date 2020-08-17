@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
         currentUser = Bundlizer.unbundle(User.serializer(), intent.extras?.getBundle(USER)!!)
 
         val dao = LocalDatabase.getDatabase(this)!!.dao()
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory(LocalRepository(dao), currentUser)).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, MainViewModelFactory(LocalRepository.getInstance(dao), currentUser)).get(MainViewModel::class.java)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
         if (backPressedOnce) {
             App.prefs.setPref(PREF_KEEP_LOGGIN, false)
             val intent = Intent(this, LoginActivity::class.java)
+            viewModel.logout()
             startActivity(intent)
             finish()
         }
@@ -246,4 +247,6 @@ class MainActivity : AppCompatActivity() {
         binding.projectListBar.root.visibility = View.GONE
         binding.navView.visibility = View.GONE
     }
+
+
 }

@@ -20,23 +20,17 @@ class AddEditProjectViewModel(
         try {
             val result = repository.addProject(project.toJSON())
             if(result.error == null) {
-                localRepository.insertProject(listOf(project))
-                localRepository.insertUserWithTheirProject(UserWithTheirProjects(userId, project.projectId))
-                emit(Resource.success(data = result.data))
-            }
-            else
-                emit(Resource.error(data = null, message = result.error))
-        } catch (e: Exception) {
-            emit(Resource.error(data = null, message = e.message.toString()))
-        }
-    }
-
-    fun editProject(project: Project) = liveData(Dispatchers.IO) {
-        emit(Resource.loading(data = null))
-        try {
-            val result = repository.editProject(project.projectId, project.toJSON())
-            if(result.error == null) {
-                localRepository.updateProject(project)
+                try {
+                    localRepository.updateProject(project)
+                } catch (e1: Exception) {
+                    localRepository.insertProject(listOf(project))
+                    localRepository.insertUserWithTheirProject(
+                        UserWithTheirProjects(
+                            userId,
+                            project.projectId
+                        )
+                    )
+                }
                 emit(Resource.success(data = result.data))
             }
             else

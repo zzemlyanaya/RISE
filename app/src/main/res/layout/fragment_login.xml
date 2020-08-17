@@ -43,7 +43,7 @@
             android:backgroundTint="@android:color/transparent"
             android:enabled="@{viewmodel.loginFormState.dataValid ? true : false}"
             android:fontFamily="@font/montserrat_medium"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:insetTop="0dp"
             android:insetBottom="0dp"
             android:text="@string/sign_in"

@@ -35,11 +35,6 @@ class ChatsRecyclerViewAdapter(
 
     override fun getItemCount(): Int = values.size
 
-    internal fun setData(data: List<ChatShortView>){
-        values = data
-        notifyDataSetChanged()
-    }
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ShapeableImageView = view.findViewById(R.id.chatImage)
         val from: TextView = view.findViewById(R.id.textFrom)

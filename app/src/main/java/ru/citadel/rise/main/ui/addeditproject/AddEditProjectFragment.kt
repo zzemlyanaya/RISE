@@ -46,7 +46,7 @@ class AddEditProjectFragment : Fragment() {
 
         val dao = LocalDatabase.getDatabase(requireContext())!!.dao()
         viewModel = ViewModelProviders
-            .of(this, AddEditProjectViewModelFactory(LocalRepository(dao), userId))
+            .of(this, AddEditProjectViewModelFactory(LocalRepository.getInstance(dao), userId))
             .get(AddEditProjectViewModel::class.java)
 
 

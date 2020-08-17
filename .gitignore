@@ -145,10 +145,8 @@ $RECYCLE.BIN/
 # auto-import.
 .idea/artifacts
 .idea/compiler.xml
-.idea/modules.xml
 .idea/*.iml
 .idea/modules
-*.iml
 *.ipr
 
 # CMake
@@ -161,7 +159,6 @@ cmake-build-*/
 *.iws
 
 # IntelliJ
-out/
 
 # mpeltonen/sbt-idea plugin
 .idea_modules/
@@ -202,10 +199,8 @@ gradle-app.setting
 
 ### Kotlin template
 # Compiled class file
-*.class
 
 # Log file
-*.log
 
 # BlueJ files
 *.ctxt

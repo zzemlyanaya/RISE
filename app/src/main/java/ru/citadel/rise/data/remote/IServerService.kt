@@ -32,7 +32,8 @@ interface IServerService {
 
     @GET("/login")
     fun authorize(@Query("id")id: Int,
-                  @Query("passwordToken")passwordToken: Int): Result<User>
+                  @Query("passwordToken")passwordToken: Int,
+                  @Query("keepAuth")keepAuth: Boolean): Result<User>
 
     @GET("/registr")
     fun registr(@Query("id")id: Int,

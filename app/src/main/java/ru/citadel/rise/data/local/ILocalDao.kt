@@ -9,6 +9,9 @@ interface ILocalDao {
     @Query("SELECT * FROM users")
     fun getAllUsers(): List<User>
 
+    @Query("SELECT * FROM users WHERE userId=:userId")
+    fun getUserById(userId: Int): User
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertUser(user: User)
 
@@ -22,7 +25,10 @@ interface ILocalDao {
     @Query("SELECT * FROM chats_short INNER JOIN user_chat_relation ON chats_short.chatId=user_chat_relation.chatId WHERE user_chat_relation.userId=:userId")
     fun getAllUserChats(userId: Int): List<ChatShortView>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Update
+    fun updateChat(chat: ChatShortView)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertChat(chat: List<ChatShortView>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

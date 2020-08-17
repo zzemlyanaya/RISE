@@ -17,8 +17,10 @@ class RemoteRepository {
 
     fun getFavProjectsByUser(id: Int) = service.getFavProjectsByUser(id)
 
-    fun authorize(login: Int, passwordToken: Int)
-            = service.authorize(login, passwordToken)
+    fun authorize(login: Int, passwordToken: Int, keepAuth: Boolean)
+            = service.authorize(login, passwordToken, keepAuth)
+
+    fun logout() = service.logout()
 
     fun registr(id: Int, name: String, passwordToken: Int, type: Int, email: String) : Result<User>
             = service.registr(id, name, passwordToken, type, email)

@@ -10,10 +10,10 @@ android {
 
     defaultConfig {
         applicationId "ru.citadel.rise"
-        minSdkVersion 23
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "1.3"
+        versionName "1.5"
     }
 
     buildTypes {
@@ -90,6 +90,8 @@ dependencies {
     implementation 'com.github.rumboalla.KryptoPrefs:kryptoprefs:0.4.3'
 
     // Socket.IO
-    implementation 'com.github.nkzawa:socket.io-client:0.6.0'
+    implementation ('com.github.nkzawa:socket.io-client:0.6.0'){
+        exclude group: 'org.json', module: 'json'
+    }
 
 }

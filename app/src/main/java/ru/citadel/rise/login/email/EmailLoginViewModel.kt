@@ -25,7 +25,7 @@ class EmailLoginViewModel : ViewModel() {
         saveLogin(isKeepLogin, id, password.hashCode())
         emit(Resource.loading(data = null))
         try {
-            val result: Result<User> = repository.authorize(id, password.hashCode())
+            val result: Result<User> = repository.authorize(id, password.hashCode(), isKeepLogin)
             if (result.error == null)
                 emit(Resource.success(data = result.data))
             else

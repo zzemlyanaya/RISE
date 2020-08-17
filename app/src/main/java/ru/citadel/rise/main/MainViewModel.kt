@@ -49,4 +49,8 @@ class MainViewModel(private val localRepository: LocalRepository,
             }
         }
     }
+
+    fun logout() {
+        remoteRepository.logout()
+    }
 }

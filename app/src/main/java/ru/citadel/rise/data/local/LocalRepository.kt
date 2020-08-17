@@ -23,6 +23,8 @@ class LocalRepository(private val dao: ILocalDao) {
     // users
     fun getAllUsers() = dao.getAllUsers()
 
+    fun getUserById(userId: Int) = dao.getUserById(userId)
+
     fun insertUser(user: User) = dao.insertUser(user)
 
     fun updateUser(user: User) = dao.updateUser(user)
@@ -31,6 +33,8 @@ class LocalRepository(private val dao: ILocalDao) {
 
     // chats
     fun getAllUserChats(userId: Int) = dao.getAllUserChats(userId)
+
+    fun updateChat(chat: ChatShortView) = dao.updateChat(chat)
 
     fun insertChat(chats: List<ChatShortView>) = dao.insertChat(chats)
 
