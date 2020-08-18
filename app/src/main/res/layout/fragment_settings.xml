@@ -13,32 +13,21 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="32dp"
+            android:id="@+id/imageView6"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:scaleType="fitXY"
             android:tint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_mail_outlined" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/imageView6"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginTop="24dp"
-            android:scaleType="fitXY"
-            android:tint="@color/white"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
             app:srcCompat="@drawable/ic_notification" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageView7"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginTop="24dp"
             android:scaleType="fitXY"
             android:tint="@color/white"
@@ -47,25 +36,13 @@
             app:srcCompat="@drawable/ic_translation" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="@string/prompt_email"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/notifications"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView6"
             app:layout_constraintStart_toEndOf="@+id/imageView6"
             app:layout_constraintTop_toTopOf="@+id/imageView6" />
@@ -77,37 +54,10 @@
             android:layout_marginStart="12dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="@string/language"
-            android:textSize="16sp"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageView7"
             app:layout_constraintStart_toEndOf="@+id/imageView7"
             app:layout_constraintTop_toTopOf="@+id/imageView7" />
-
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/butSettingsEmail"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/app_background"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_next"
-            android:tint="@color/icon_grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/settingsEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="@string/prompt_email"
-            android:textAlignment="textEnd"
-            android:textColor="@color/text_light"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/butSettingsEmail"
-            app:layout_constraintEnd_toStartOf="@+id/butSettingsEmail"
-            app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="@+id/butSettingsEmail" />
 
         <com.bitvale.switcher.SwitcherX
             android:id="@+id/notificationSwitcher"
@@ -120,21 +70,43 @@
             app:switcher_off_color="@color/icon_grey"
             app:switcher_on_color="@color/accent_red" />
 
-        <androidx.appcompat.widget.AppCompatSpinner
-            android:id="@+id/languageSpinner"
-            style="@android:style/Widget.Material.Light.Spinner"
-            android:layout_width="0dp"
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butEnglish"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/text_light"
-            android:backgroundTintMode="src_in"
-            android:entries="@array/languages"
-            android:spinnerMode="dropdown"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
-            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+            android:backgroundTint="@color/app_background"
+            android:fontFamily="@font/montserrat_regular"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/english"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="13sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="@+id/notificationSwitcher"
+            app:layout_constraintTop_toTopOf="@+id/textView7"
+            app:strokeColor="@color/white"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/butRussian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/accent_red"
+            android:fontFamily="@font/montserrat_regular"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:text="@string/russian"
+            android:textAppearance="@android:style/TextAppearance.Material.Widget.TextView"
+            android:textSize="13sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/butEnglish"
+            app:layout_constraintEnd_toStartOf="@+id/butEnglish"
+            app:layout_constraintTop_toTopOf="@+id/butEnglish"
+            app:layout_constraintVertical_bias="0.0"
+            app:strokeColor="@color/white"
+            app:strokeWidth="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
