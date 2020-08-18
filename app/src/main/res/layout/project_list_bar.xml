@@ -57,6 +57,7 @@
             app:srcCompat="@drawable/ic_adjust" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardAddProject"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

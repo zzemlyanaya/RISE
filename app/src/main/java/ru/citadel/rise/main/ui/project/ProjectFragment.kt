@@ -6,11 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentProjectBinding
 import ru.citadel.rise.Constants.PROJECT
 import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.IOnBack
+import ru.citadel.rise.data.local.LocalDatabase
+import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.main.MainActivity
 import ru.citadel.rise.main.ui.chat.UserShortView
@@ -25,6 +31,8 @@ class ProjectFragment : Fragment(), IOnBack {
     private lateinit var project: Project
     private var curUserId = 0
 
+    private lateinit var localRepository: LocalRepository
+
     override fun onBackPressed(): Boolean {
         return true
     }
@@ -35,6 +43,9 @@ class ProjectFragment : Fragment(), IOnBack {
             project = it.getSerializable(PROJECT) as Project
             curUserId = it.getInt(USER)
         }
+
+        val dao = LocalDatabase.getDatabase(requireContext())!!.dao()
+        localRepository = LocalRepository.getInstance(dao)
     }
 
     override fun onCreateView(
@@ -60,13 +71,24 @@ class ProjectFragment : Fragment(), IOnBack {
             binding.butContact.apply {
                 text = getString(R.string.but_contact)
                 setOnClickListener {
-                    val shortView = UserShortView(project.contact, project.contactName)
-                    (requireActivity() as MainActivity).showChatFragment(shortView, 0)
+                    contact()
+                    binding.projProgress.visibility = View.VISIBLE
                 }
             }
         }
 
         return binding.root
+    }
+
+    private fun contact() = run {
+        CoroutineScope(Dispatchers.IO).launch {
+            val id = localRepository.getChatIdByUsers(curUserId, project.contact)
+            val shortView = UserShortView(project.contact, project.contactName)
+            withContext(Dispatchers.Main) {
+                (requireActivity() as MainActivity).showChatFragment(shortView, id ?: 0)
+            }
+        }
+
     }
 
     companion object {

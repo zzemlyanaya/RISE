@@ -59,6 +59,7 @@ class AddEditProjectFragment : Fragment() {
             binding.tagTextView.setTagList(project!!.tags?.split(',') ?: emptyList())
         } else {
             binding.tagTextView.setTagList(ArrayList<String>())
+            binding.cardDangerousZone.visibility = View.GONE
         }
 
         binding.butCancel.setOnClickListener { activity.onBackPressed() }

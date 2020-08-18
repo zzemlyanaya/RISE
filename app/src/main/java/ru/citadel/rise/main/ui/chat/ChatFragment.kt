@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -54,25 +55,26 @@ class ChatFragment : Fragment(), IOnBack {
         savedInstanceState: Bundle?
     ): View? {
         currentUserId = (this.requireActivity() as MainActivity).currentUser.userId
-
         otherUserShortView = this.requireArguments()[Constants.USER] as UserShortView
-        chatId = this.requireArguments()[Constants.CHAT_ID] as Int
-//        if(chatId == 0)
-//            viewModel.createNewChat(currentUserId, otherUserShortView.id, "")
-//                .observe(viewLifecycleOwner, Observer {
-//                    when(it.status){
-//                        Status.LOADING -> {}
-//                        Status.SUCCESS -> { chatId = it.data!! }
-//                        Status.ERROR -> {
-//                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-//                        }
-//                    }
-//                })
 
         val dao = LocalDatabase.getDatabase(requireContext())!!.dao()
         viewModel = ViewModelProviders
-            .of(this, ChatViewModelFactory(LocalRepository.getInstance(dao)))
+            .of(this, ChatViewModelFactory(LocalRepository.getInstance(dao), currentUserId))
             .get(ChatViewModel::class.java)
+
+
+        chatId = this.requireArguments()[Constants.CHAT_ID] as Int
+        if(chatId == 0)
+            viewModel.createNewChat(currentUserId, otherUserShortView.id, "")
+                .observe(viewLifecycleOwner, Observer {
+                    when(it.status){
+                        Status.LOADING -> {}
+                        Status.SUCCESS -> { chatId = it.data!!.chatId }
+                        Status.ERROR -> {
+                            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
 
         val binding: FragmentChatBinding
                 = DataBindingUtil.inflate(inflater, R.layout.fragment_chat, container, false)

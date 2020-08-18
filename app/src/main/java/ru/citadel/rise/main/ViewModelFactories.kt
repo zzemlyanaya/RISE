@@ -33,8 +33,8 @@ class AddEditProjectViewModelFactory(private val repo: LocalRepository, val user
     }
 }
 
-class ChatViewModelFactory(private val repo: LocalRepository) : ViewModelProvider.Factory {
+class ChatViewModelFactory(private val repo: LocalRepository, private val userId: Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return ChatViewModel(repo) as T
+        return ChatViewModel(repo, userId) as T
     }
 }

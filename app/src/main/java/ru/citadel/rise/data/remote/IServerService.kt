@@ -58,9 +58,5 @@ interface IServerService {
     fun getMessagesByChat(@Path("id")id: Int): Result<List<Message>>
 
     @POST("/chats")
-    fun addChat(
-        @Query("user1")user1: Int,
-        @Query("user2")user2: Int,
-        @Query("lastMessage")lastMessage: String
-    ) : Result<Int>
+    fun addChat(@Body json: JSONObject) : Result<ChatShortView>
 }

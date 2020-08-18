@@ -1,6 +1,7 @@
 package ru.citadel.rise.main
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,7 +51,13 @@ class MainViewModel(private val localRepository: LocalRepository,
         }
     }
 
-    fun logout() {
-        remoteRepository.logout()
+    fun logout() = liveData(Dispatchers.IO){
+        try {
+            remoteRepository.logout()
+            emit("OK")
+        }
+        catch (e: Exception) {
+            emit(e.message)
+        }
     }
 }

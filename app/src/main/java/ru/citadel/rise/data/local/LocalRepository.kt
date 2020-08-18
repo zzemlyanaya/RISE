@@ -34,6 +34,8 @@ class LocalRepository(private val dao: ILocalDao) {
     // chats
     fun getAllUserChats(userId: Int) = dao.getAllUserChats(userId)
 
+    fun getChatIdByUsers(userFrom: Int, userTo: Int) = dao.getChatIdByUsers(userFrom, userTo)
+
     fun updateChat(chat: ChatShortView) = dao.updateChat(chat)
 
     fun insertChat(chats: List<ChatShortView>) = dao.insertChat(chats)

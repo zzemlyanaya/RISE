@@ -13,19 +13,18 @@
     <LinearLayout
         android:id="@+id/messLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/messBubble"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/messTime"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -35,32 +34,31 @@
                 android:id="@+id/messTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="18dp"
+                android:layout_marginStart="22dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginBottom="4dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:textColor="@color/text_dark"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@id/messBubble"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@id/messBubble"
+                app:layout_constraintTop_toBottomOf="@id/messText"
                 tools:text="0/0/00 00:00" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/messText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="20dp"
                 android:autoLink="web|email"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-                app:layout_constraintBottom_toTopOf="@+id/messTime"
                 app:layout_constraintEnd_toEndOf="@id/messBubble"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/messTime"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/messBubble"
                 tools:text="Some message text" />
         </androidx.constraintlayout.widget.ConstraintLayout>

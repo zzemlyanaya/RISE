@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.fxn.OnBubbleClickListener
 import dev.ahmedmourad.bundlizer.Bundlizer
@@ -17,6 +18,7 @@ import ru.citadel.rise.Constants.PROJECTS_ALL
 import ru.citadel.rise.Constants.PROJECTS_BY_USER
 import ru.citadel.rise.Constants.PROJECTS_FAV
 import ru.citadel.rise.Constants.PROJECTS_MY
+import ru.citadel.rise.Constants.TYPE_AUTHOR
 import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.data.local.LocalDatabase
 import ru.citadel.rise.data.local.LocalRepository
@@ -104,9 +106,13 @@ class MainActivity : AppCompatActivity() {
         if (backPressedOnce) {
             App.prefs.setPref(PREF_KEEP_LOGGIN, false)
             val intent = Intent(this, LoginActivity::class.java)
-            viewModel.logout()
-            startActivity(intent)
-            finish()
+            viewModel.logout().observe(this, Observer {
+                if (it == "OK"){
+                    startActivity(intent)
+                    finish()
+                } else
+                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+            })
         }
 
         backPressedOnce = true
@@ -140,11 +146,15 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.containerMain, ProjectListFragment.newInstance(type, userId), "projects_$type")
             .commitAllowingStateLoss()
         hideAllHeaderView()
+        if (currentUser.type == TYPE_AUTHOR)
+            binding.projectListBar.cardAddProject.visibility = View.VISIBLE
+        else
+            binding.projectListBar.cardAddProject.visibility = View.GONE
         when(type) {
             PROJECTS_ALL -> {
+                binding.projectListBar.root.visibility = View.VISIBLE
                 binding.header.root.visibility = View.GONE
                 binding.navView.visibility = View.VISIBLE
-                binding.projectListBar.root.visibility = View.VISIBLE
             }
             PROJECTS_MY, PROJECTS_BY_USER -> { }
             PROJECTS_FAV -> {

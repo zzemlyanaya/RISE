@@ -39,5 +39,5 @@ class RemoteRepository {
 
     fun getMessagesByChat(id: Int) = service.getMessagesByChat(id)
 
-    fun addChat(user1: Int, user2: Int, lastMdg: String) = service.addChat(user1, user2, lastMdg)
+    fun addChat(json: JSONObject) = service.addChat(json)
 }

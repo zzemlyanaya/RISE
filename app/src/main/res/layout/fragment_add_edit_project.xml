@@ -255,7 +255,7 @@
                 app:cornerRadius="44dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView2"
+                app:layout_constraintTop_toBottomOf="@+id/cardDangerousZone"
                 app:rippleColor="@color/ripple_red" />
 
             <com.google.android.material.button.MaterialButton
@@ -274,7 +274,7 @@
                 app:rippleColor="@color/ripple_red" />
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardView2"
+                android:id="@+id/cardDangerousZone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"

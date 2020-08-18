@@ -25,6 +25,9 @@ interface ILocalDao {
     @Query("SELECT * FROM chats_short INNER JOIN user_chat_relation ON chats_short.chatId=user_chat_relation.chatId WHERE user_chat_relation.userId=:userId")
     fun getAllUserChats(userId: Int): List<ChatShortView>
 
+    @Query("SELECT chatId FROM chats_short WHERE userId=:userFrom AND toId=:userTo")
+    fun getChatIdByUsers(userFrom: Int, userTo: Int): Int?
+
     @Update
     fun updateChat(chat: ChatShortView)
 
