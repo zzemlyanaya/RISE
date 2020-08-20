@@ -10,9 +10,6 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.fxn.OnBubbleClickListener
-import dev.ahmedmourad.bundlizer.Bundlizer
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.ActivityMainBinding
 import ru.citadel.rise.App
 import ru.citadel.rise.Constants.PROJECTS_ALL
 import ru.citadel.rise.Constants.PROJECTS_BY_USER
@@ -20,14 +17,17 @@ import ru.citadel.rise.Constants.PROJECTS_FAV
 import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.TYPE_AUTHOR
 import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.R
 import ru.citadel.rise.data.local.LocalDatabase
 import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.local.PrefsConst.PREF_KEEP_LOGGIN
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.databinding.ActivityMainBinding
 import ru.citadel.rise.login.LoginActivity
 import ru.citadel.rise.main.ui.aboutapp.AboutAppFragment
 import ru.citadel.rise.main.ui.aboutme.AboutMeFragment
+import ru.citadel.rise.main.ui.aboutme.EditUserFragment
 import ru.citadel.rise.main.ui.addeditproject.AddEditProjectFragment
 import ru.citadel.rise.main.ui.chat.ChatFragment
 import ru.citadel.rise.main.ui.chat.UserShortView
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        currentUser = Bundlizer.unbundle(User.serializer(), intent.extras?.getBundle(USER)!!)
+        currentUser = intent.extras!!.getBundle(USER)!!.getSerializable(USER) as User
 
         val dao = LocalDatabase.getDatabase(this)!!.dao()
         viewModel = ViewModelProviders.of(this, MainViewModelFactory(LocalRepository.getInstance(dao), currentUser)).get(MainViewModel::class.java)
@@ -96,7 +96,7 @@ class MainActivity : AppCompatActivity() {
             "profile", "projects_0", "chats" -> { onBackPressedDouble() }
             "projects_$PROJECTS_FAV", "settings", "about_app", "about_me_$PROJECTS_MY" -> showProfileFragment()
             "project_$PROJECTS_ALL" -> showProjectsFragment(PROJECTS_ALL, currentUser.userId)
-            "project_$PROJECTS_MY" -> showAboutMeFragment(currentUser)
+            "project_$PROJECTS_MY", "edit_user" -> showAboutMeFragment(currentUser)
             "project_$PROJECTS_FAV" -> showProjectsFragment(PROJECTS_FAV, currentUser.userId)
             "add_edit_project" -> (fragment as AddEditProjectFragment).onBack()
             else -> {}
@@ -250,9 +250,19 @@ class MainActivity : AppCompatActivity() {
 
     fun showAddEditProject(project: Project){
         supportFragmentManager.beginTransaction()
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .replace(R.id.containerMain,
                 AddEditProjectFragment.newInstance(project), "add_edit_project")
+            .commitAllowingStateLoss()
+        binding.header.root.visibility = View.GONE
+        binding.projectListBar.root.visibility = View.GONE
+        binding.navView.visibility = View.GONE
+    }
+
+    fun showEditUserFragment(){
+        supportFragmentManager.beginTransaction()
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .replace(R.id.containerMain, EditUserFragment.newInstance(currentUser), "edit_user")
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.projectListBar.root.visibility = View.GONE

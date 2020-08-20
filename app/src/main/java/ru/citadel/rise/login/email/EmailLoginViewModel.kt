@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import ru.avangard.rise.R
 import ru.citadel.rise.App
+import ru.citadel.rise.R
 import ru.citadel.rise.data.local.PrefsConst.PREF_KEEP_LOGGIN
 import ru.citadel.rise.data.local.PrefsConst.PREF_USER_AUTH
 import ru.citadel.rise.data.model.Resource

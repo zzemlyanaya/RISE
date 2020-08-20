@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -11,14 +12,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.android.material.textview.MaterialTextView
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentChatListBinding
+import ru.citadel.rise.R
 import ru.citadel.rise.Status
 import ru.citadel.rise.data.local.LocalDatabase
 import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.ChatShortView
 import ru.citadel.rise.data.model.Resource
+import ru.citadel.rise.databinding.FragmentChatListBinding
 import ru.citadel.rise.main.ChatListViewModelFactory
 import ru.citadel.rise.main.MainActivity
 import ru.citadel.rise.main.ui.chat.UserShortView
@@ -29,7 +29,6 @@ import ru.citadel.rise.main.ui.chat.UserShortView
 class ChatListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var textConnect: MaterialTextView
     private lateinit var refreshLayout: SwipeRefreshLayout
 
     private var userId = 0
@@ -56,9 +55,6 @@ class ChatListFragment : Fragment() {
         }
 
         recyclerView = binding.chatList
-        textConnect = binding.textConnect
-
-        textConnect.setOnClickListener { refreshData() }
 
         refreshLayout = binding.refreshLayout
         refreshLayout.setOnRefreshListener {
@@ -98,11 +94,10 @@ class ChatListFragment : Fragment() {
             Status.ERROR -> {
                 refreshLayout.isRefreshing = false
                 recyclerView.visibility = View.VISIBLE
-                textConnect.visibility = View.VISIBLE
+                Toast.makeText(requireContext(), getString(R.string.connection_on_list), Toast.LENGTH_SHORT).show()
             }
             Status.LOADING -> {
                 recyclerView.visibility = View.INVISIBLE
-                textConnect.visibility = View.INVISIBLE
             }
         }
     }

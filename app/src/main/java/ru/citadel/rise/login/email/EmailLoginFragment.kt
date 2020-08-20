@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.button.MaterialButton
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentLoginBinding
 import ru.citadel.rise.IOnBack
+import ru.citadel.rise.R
 import ru.citadel.rise.Status
 import ru.citadel.rise.afterTextChanged
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.databinding.FragmentLoginBinding
 
 class EmailLoginFragment : Fragment(), IOnBack {
 

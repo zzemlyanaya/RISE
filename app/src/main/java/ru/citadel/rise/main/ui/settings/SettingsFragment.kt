@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.google.android.material.button.MaterialButton
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentSettingsBinding
 import ru.citadel.rise.App
 import ru.citadel.rise.IOnBack
+import ru.citadel.rise.R
 import ru.citadel.rise.data.local.PrefsConst
 import ru.citadel.rise.data.local.PrefsConst.PREF_LANGUAGE
+import ru.citadel.rise.databinding.FragmentSettingsBinding
 
 
 /**

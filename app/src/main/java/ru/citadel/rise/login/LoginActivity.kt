@@ -9,20 +9,19 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.tabs.TabLayoutMediator
-import dev.ahmedmourad.bundlizer.Bundlizer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.ActivityLoginBinding
 import ru.citadel.rise.App
 import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.R
 import ru.citadel.rise.data.local.LocalDatabase
 import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.local.PrefsConst.PREF_KEEP_LOGGIN
 import ru.citadel.rise.data.local.PrefsConst.PREF_USER_AUTH
 import ru.citadel.rise.data.model.User
 import ru.citadel.rise.data.remote.RemoteRepository
+import ru.citadel.rise.databinding.ActivityLoginBinding
 import ru.citadel.rise.login.email.IOnLogin
 import ru.citadel.rise.login.registration.IOnCreateAccountListener
 import ru.citadel.rise.main.MainActivity
@@ -138,7 +137,7 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
 
     private fun goOnMain(user: User) {
         val intent = Intent(this, MainActivity::class.java)
-        val bundle: Bundle = Bundlizer.bundle(User.serializer(), user)
+        val bundle: Bundle = Bundle().apply { putSerializable(USER, user) }
         intent.putExtra(USER, bundle)
         startActivity(intent)
         finish()

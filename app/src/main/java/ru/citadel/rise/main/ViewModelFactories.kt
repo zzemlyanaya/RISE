@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.main.ui.aboutme.EditUserViewModel
 import ru.citadel.rise.main.ui.addeditproject.AddEditProjectViewModel
 import ru.citadel.rise.main.ui.chat.ChatViewModel
 import ru.citadel.rise.main.ui.chats.ChatListViewModel
@@ -36,5 +37,11 @@ class AddEditProjectViewModelFactory(private val repo: LocalRepository, val user
 class ChatViewModelFactory(private val repo: LocalRepository, private val userId: Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return ChatViewModel(repo, userId) as T
+    }
+}
+
+class EditUserViewModelFactory(private val repo: LocalRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+        return EditUserViewModel(repo) as T
     }
 }

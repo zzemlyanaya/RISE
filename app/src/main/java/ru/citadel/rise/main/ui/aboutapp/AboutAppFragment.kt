@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentAboutAppBinding
+import ru.citadel.rise.R
+import ru.citadel.rise.databinding.FragmentAboutAppBinding
 import ru.citadel.rise.main.MainActivity
 
 

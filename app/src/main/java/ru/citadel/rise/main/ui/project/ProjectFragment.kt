@@ -11,14 +11,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentProjectBinding
 import ru.citadel.rise.Constants.PROJECT
 import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.IOnBack
+import ru.citadel.rise.R
 import ru.citadel.rise.data.local.LocalDatabase
 import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.Project
+import ru.citadel.rise.databinding.FragmentProjectBinding
 import ru.citadel.rise.main.MainActivity
 import ru.citadel.rise.main.ui.chat.UserShortView
 
@@ -70,7 +70,7 @@ class ProjectFragment : Fragment(), IOnBack {
 
         if (project.contact == curUserId) {
             binding.butContact.apply {
-                text = getString(R.string.edit_project)
+                text = getString(R.string.edit)
                 setOnClickListener {
                     (requireActivity() as MainActivity).showAddEditProject(project)
                 }

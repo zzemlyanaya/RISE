@@ -12,18 +12,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.textview.MaterialTextView
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentProjectListBinding
 import ru.citadel.rise.Constants.LIST_TYPE
 import ru.citadel.rise.Constants.PROJECTS_ALL
 import ru.citadel.rise.Constants.PROJECTS_BY_USER
 import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.R
 import ru.citadel.rise.Status
 import ru.citadel.rise.data.local.LocalDatabase
 import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.Resource
+import ru.citadel.rise.databinding.FragmentProjectListBinding
 import ru.citadel.rise.main.MainActivity
 import ru.citadel.rise.main.ProjectListViewModelFactory
 

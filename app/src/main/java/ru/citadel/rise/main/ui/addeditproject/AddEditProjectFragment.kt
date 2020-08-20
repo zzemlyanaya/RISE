@@ -14,15 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.chip.Chip
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentAddEditProjectBinding
 import ru.citadel.rise.Constants.PROJECT
 import ru.citadel.rise.Constants.PROJECTS_ALL
+import ru.citadel.rise.R
 import ru.citadel.rise.Status
 import ru.citadel.rise.data.local.LocalDatabase
 import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.Project
 import ru.citadel.rise.data.model.Resource
+import ru.citadel.rise.databinding.FragmentAddEditProjectBinding
 import ru.citadel.rise.main.AddEditProjectViewModelFactory
 import ru.citadel.rise.main.MainActivity
 
@@ -129,14 +129,14 @@ class AddEditProjectFragment : Fragment() {
     private fun showStatus(it: Resource<String?>, proj: Project?) {
         when(it.status){
             Status.LOADING -> {
-                Toast.makeText(context, "Выполняем...", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.executing), Toast.LENGTH_SHORT).show()
             }
             Status.ERROR -> {
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
                 Log.d("SERVER", it.message.toString())
             }
             Status.SUCCESS -> {
-                Toast.makeText(context, "Успешно!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, getString(R.string.successful), Toast.LENGTH_SHORT).show()
                 if (proj != null)
                     (requireActivity() as MainActivity).showProjectFragment(proj, PROJECTS_ALL)
                 else

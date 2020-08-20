@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
-import ru.avangard.rise.R
+import ru.citadel.rise.R
 import ru.citadel.rise.data.model.Project
 
 class ProjectRecyclerViewAdapter(

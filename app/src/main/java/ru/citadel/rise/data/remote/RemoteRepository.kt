@@ -33,7 +33,7 @@ class RemoteRepository {
 
     fun deleteProject(id: Int) = service.deleteProject(id)
 
-    fun editUser(id: Int, new: User) = service.editUser(id, new)
+    fun updateUser(new: JSONObject) = service.updateUser(new)
 
     fun getChatsByUser(id: Int) = service.getAllUserChats(id)
 

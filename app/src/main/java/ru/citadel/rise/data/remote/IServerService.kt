@@ -48,8 +48,8 @@ interface IServerService {
     @GET("/users/{id}")
     fun getUserById(@Path("id")id: Int): Result<User>
 
-    @POST("/users/{id}")
-    fun editUser(@Path("id")id:Int, new: User): Result<String>
+    @POST("/users")
+    fun updateUser(@Body new: JSONObject): Result<String>
 
     @GET("/chats/by_user/{id}")
     fun getAllUserChats(@Path("id")id: Int): Result<List<ChatShortView>>

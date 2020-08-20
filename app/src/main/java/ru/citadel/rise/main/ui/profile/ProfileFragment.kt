@@ -11,9 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentProfileBinding
 import ru.citadel.rise.Constants.PROJECTS_FAV
+import ru.citadel.rise.R
+import ru.citadel.rise.databinding.FragmentProfileBinding
 import ru.citadel.rise.main.MainActivity
 
 class ProfileFragment : Fragment() {

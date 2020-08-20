@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import ru.avangard.rise.R
+import ru.citadel.rise.R
 import ru.citadel.rise.data.model.Resource
 import ru.citadel.rise.data.model.Result
 import ru.citadel.rise.data.model.User

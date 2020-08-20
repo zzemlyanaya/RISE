@@ -4,10 +4,8 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import kotlinx.serialization.Serializable
 import org.json.JSONObject
 
-@Serializable
 @Entity(tableName = "projects")
 data class Project(
     @PrimaryKey

@@ -9,26 +9,40 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.tabs.TabLayoutMediator
-import dev.ahmedmourad.bundlizer.Bundlizer
-import ru.avangard.rise.R
-import ru.avangard.rise.databinding.FragmentAboutMeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.citadel.rise.Constants.LIST_TYPE
 import ru.citadel.rise.Constants.PROJECTS_MY
 import ru.citadel.rise.Constants.USER
+import ru.citadel.rise.R
+import ru.citadel.rise.data.local.LocalDatabase
+import ru.citadel.rise.data.local.LocalRepository
 import ru.citadel.rise.data.model.User
+import ru.citadel.rise.databinding.FragmentAboutMeBinding
+import ru.citadel.rise.main.MainActivity
+import ru.citadel.rise.main.ui.chat.UserShortView
 
 class AboutMeFragment : Fragment() {
 
     private lateinit var viewModel: AboutMeViewModel
     private lateinit var user: User
+    private var curUserId = 0
     private var listType = 0
+
+    private lateinit var localRepository: LocalRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        user = Bundlizer.unbundle(User.serializer(), requireArguments().getBundle(USER)!!)
+        user = requireArguments().getBundle(USER)!!.getSerializable(USER) as User
         listType = arguments?.getInt(LIST_TYPE) ?: PROJECTS_MY
+        curUserId = (requireActivity() as MainActivity).currentUser.userId
+
+        val dao = LocalDatabase.getDatabase(requireContext())!!.dao()
+        localRepository = LocalRepository.getInstance(dao)
 
         val binding: FragmentAboutMeBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_about_me, container, false)
@@ -52,7 +66,31 @@ class AboutMeFragment : Fragment() {
 
         binding.aboutMeName.text = user.name
 
+        if (curUserId == user.userId)
+            binding.aboutMeButContact.apply {
+                text = getString(R.string.edit)
+                setOnClickListener {
+                    (requireActivity() as MainActivity).showEditUserFragment()
+                }
+            }
+        else
+            binding.aboutMeButContact.apply {
+                text = getString(R.string.but_contact)
+                setOnClickListener { contact() }
+            }
+
         return binding.root
+    }
+
+    private fun contact() = run {
+        CoroutineScope(Dispatchers.IO).launch {
+            val id = localRepository.getChatIdByUsers(curUserId, user.userId)
+            val shortView = UserShortView(user.userId, user.name)
+            withContext(Dispatchers.Main) {
+                (requireActivity() as MainActivity).showChatFragment(shortView, id ?: 0)
+            }
+        }
+
     }
 
 
@@ -69,14 +107,13 @@ class AboutMeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(AboutMeViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
     companion object {
         @JvmStatic
         fun newInstance(user: User, listType: Int): AboutMeFragment {
             val args = Bundle().apply {
-                val bundle: Bundle = Bundlizer.bundle(User.serializer(), user)
+                val bundle = Bundle().apply { putSerializable(USER, user) }
                 putBundle(USER, bundle)
                 putInt(LIST_TYPE, listType)
             }
