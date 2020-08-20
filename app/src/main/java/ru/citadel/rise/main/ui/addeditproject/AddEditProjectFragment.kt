@@ -5,13 +5,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.view.children
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.skyhope.materialtagview.model.TagModel
+import com.google.android.material.chip.Chip
 import ru.avangard.rise.R
 import ru.avangard.rise.databinding.FragmentAddEditProjectBinding
 import ru.citadel.rise.Constants.PROJECT
@@ -66,14 +68,26 @@ class AddEditProjectFragment : Fragment() {
             binding.textProjCost.setText(project!!.cost)
             binding.textProjTime.setText(project!!.deadlines)
             binding.textProjWebsite.setText(project!!.website)
-            binding.tagTextView.setTagList(project!!.tags?.split(',') ?: emptyList())
+            val tags = project!!.tags?.split(',') ?: emptyList()
+            for (i in tags){
+                val chip = Chip(binding.projTagsGroup.context)
+                chip.text = i
+                chip.isCloseIconVisible = true
+                chip.setOnCloseIconClickListener {
+                    binding.projTagsGroup.removeView(it)
+                }
+                binding.projTagsGroup.addView(chip)
+            }
         } else {
-            binding.tagTextView.setTagList(ArrayList<String>())
             binding.cardDangerousZone.visibility = View.GONE
         }
 
         binding.butCancel.setOnClickListener { onBack() }
         binding.butSaveProj.setOnClickListener {
+            val tags = ArrayList<String>()
+            for(i in binding.projTagsGroup.children)
+                tags.add((i as Chip).text.toString())
+
             val proj = Project(project?.projectId ?: 0,
                 binding.textProjName.text.toString(),
                 userId,
@@ -82,12 +96,28 @@ class AddEditProjectFragment : Fragment() {
                 binding.textProjCost.text.toString(),
                 binding.textProjTime.text.toString(),
                 binding.textProjWebsite.text.toString(),
-                tagsToString(binding.tagTextView.selectedTags)
+                tags.joinToString(",")
             )
             viewModel.addProject(proj).observe(viewLifecycleOwner, Observer { showStatus(it, proj) })
         }
 
-        binding.butDeleteProj.setOnClickListener {
+        binding.textTags.setOnEditorActionListener { textView, actionId, _ ->
+            when (actionId) {
+                EditorInfo.IME_ACTION_DONE -> {
+                    val chip = Chip(binding.projTagsGroup.context)
+                    chip.text = textView.text.toString()
+                    chip.isCloseIconVisible = true
+                    chip.setOnCloseIconClickListener {
+                        binding.projTagsGroup.removeView(it)
+                    }
+                    binding.projTagsGroup.addView(chip)
+                    textView.text = ""
+                }
+            }
+            false
+        }
+
+            binding.butDeleteProj.setOnClickListener {
             if (project == null)
                 return@setOnClickListener
             showDeleteDialog()
@@ -133,12 +163,6 @@ class AddEditProjectFragment : Fragment() {
             .show()
     }
 
-    private fun tagsToString(tags: List<TagModel>): String {
-        val res = ArrayList<String>()
-        for(i in tags)
-            res.add(i.tagText)
-        return res.joinToString(",")
-    }
 
     companion object {
         @JvmStatic

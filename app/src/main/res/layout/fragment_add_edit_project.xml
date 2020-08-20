@@ -163,7 +163,7 @@
                 android:id="@+id/inputProjAbout"
                 style="@style/TILWhite"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="170dp"
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/white"
                 android:textColorHint="@color/black"
@@ -223,19 +223,6 @@
                     android:textColor="@color/black" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.skyhope.materialtagview.TagView
-                android:id="@+id/tagTextView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="@+id/inputProjWebsite"
-                app:layout_constraintStart_toStartOf="@+id/inputProjWebsite"
-                app:layout_constraintTop_toBottomOf="@id/inputProjWebsite"
-                app:tag_background_color="@color/accent_red"
-                app:tag_limit="10000"
-                app:tag_separator="HASH_SEPARATOR"
-                app:tag_text_color="@color/white" />
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/butSaveProj"
                 android:layout_width="wrap_content"
@@ -273,18 +260,42 @@
                 app:layout_constraintEnd_toStartOf="@+id/butSaveProj"
                 app:rippleColor="@color/ripple_red" />
 
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/projTagsGroup"
+                style="@style/ChipStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:layout_constraintEnd_toEndOf="@+id/inputProjWebsite"
+                app:layout_constraintStart_toStartOf="@+id/inputProjWebsite"
+                app:layout_constraintTop_toBottomOf="@+id/inputProjWebsite">
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/textTags"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="@string/proj_tags"
+                android:imeOptions="actionDone"
+                android:inputType="textShortMessage"
+                app:layout_constraintEnd_toEndOf="@+id/inputProjWebsite"
+                app:layout_constraintStart_toStartOf="@+id/projTagsGroup"
+                app:layout_constraintTop_toBottomOf="@+id/projTagsGroup" />
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardDangerousZone"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 app:cardBackgroundColor="@color/app_background"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp"
                 app:cardForegroundColor="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="@+id/inputProjWebsite"
                 app:layout_constraintStart_toStartOf="@+id/inputProjWebsite"
-                app:layout_constraintTop_toBottomOf="@id/tagTextView"
+                app:layout_constraintTop_toBottomOf="@+id/textTags"
                 app:strokeColor="@color/accent_red"
                 app:strokeWidth="2dp">
 
@@ -325,6 +336,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 

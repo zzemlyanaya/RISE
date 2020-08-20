@@ -81,8 +81,6 @@ dependencies {
     // Chip menu&other custom view
     implementation  'com.fxn769:bubbletabbar:1.0.5'
     implementation 'com.bitvale:switcher:1.1.0'
-    implementation 'com.google.android:flexbox:1.0.0'
-    implementation 'com.github.mahimrocky:TagView:1.0.3'
 
     // Animations
 

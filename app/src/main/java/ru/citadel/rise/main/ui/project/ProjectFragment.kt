@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.google.android.material.chip.Chip
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,6 +60,13 @@ class ProjectFragment : Fragment(), IOnBack {
         binding.projTime.text = project.deadlines ?: resources.getString(R.string.empty_proj)
         binding.projWebsite.text = project.website ?: resources.getString(R.string.empty_proj)
         binding.projDescrLong.text = project.descriptionLong
+
+        val tags = project.tags?.split(',') ?: emptyList()
+        for (i in tags){
+            val chip = Chip(binding.tagsGroup.context)
+            chip.text = i
+            binding.tagsGroup.addView(chip)
+        }
 
         if (project.contact == curUserId) {
             binding.butContact.apply {
