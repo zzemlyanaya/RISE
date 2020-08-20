@@ -69,5 +69,7 @@
 
     <string name="dangerous_zone">Опасная зона</string>
     <string name="delete">Удалить</string>
+    <string name="attention">Внимание!</string>
+    <string name="delete_message">Похоже, вы собираетесь что-то удалить. Подтвердить действие?</string>
 
 </resources>

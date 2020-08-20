@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -29,6 +30,15 @@ class AddEditProjectFragment : Fragment() {
     private var project: Project? = null
     private var userId = 0
 
+    private lateinit var activity: MainActivity
+
+    fun onBack(){
+        if(project == null)
+            activity.showProjectsFragment(PROJECTS_ALL, userId)
+        else
+            activity.showProjectFragment(project!!, PROJECTS_ALL)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +50,7 @@ class AddEditProjectFragment : Fragment() {
             project = it.getSerializable(PROJECT) as Project?
         }
 
-        val activity = requireActivity() as MainActivity
+        activity = requireActivity() as MainActivity
         userId = activity.currentUser.userId
         val userName = activity.currentUser.name
 
@@ -62,7 +72,7 @@ class AddEditProjectFragment : Fragment() {
             binding.cardDangerousZone.visibility = View.GONE
         }
 
-        binding.butCancel.setOnClickListener { activity.onBackPressed() }
+        binding.butCancel.setOnClickListener { onBack() }
         binding.butSaveProj.setOnClickListener {
             val proj = Project(project?.projectId ?: 0,
                 binding.textProjName.text.toString(),
@@ -80,7 +90,7 @@ class AddEditProjectFragment : Fragment() {
         binding.butDeleteProj.setOnClickListener {
             if (project == null)
                 return@setOnClickListener
-            viewModel.deleteProject(project!!).observe(viewLifecycleOwner, Observer { showStatus(it, null) })
+            showDeleteDialog()
         }
 
         return binding.root
@@ -103,6 +113,24 @@ class AddEditProjectFragment : Fragment() {
                     (requireActivity() as MainActivity).showProjectsFragment(PROJECTS_ALL, userId)
             }
         }
+    }
+
+
+    private fun showDeleteDialog(){
+        val builder = AlertDialog.Builder(requireContext())
+
+        builder.setTitle(getString(R.string.attention))
+            .setMessage(getString(R.string.delete_message))
+            .setPositiveButton(getString(R.string.delete)) { _, _ ->
+                run {
+                    viewModel
+                        .deleteProject(project!!)
+                        .observe(viewLifecycleOwner, Observer { showStatus(it, null) })
+                }
+            }
+            .setNegativeButton(getString(R.string.cancel)) { dialog, _ -> run { dialog.cancel() } }
+            .create()
+            .show()
     }
 
     private fun tagsToString(tags: List<TagModel>): String {

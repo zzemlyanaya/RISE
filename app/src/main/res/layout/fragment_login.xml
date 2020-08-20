@@ -14,6 +14,30 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/butSignIn"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@android:color/transparent"
+            android:enabled="@{viewmodel.loginFormState.dataValid ? true : false}"
+            android:fontFamily="@font/montserrat_medium"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/sign_in"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@{viewmodel.loginFormState.dataValid ? @color/white : @color/text_dark}"
+            android:textSize="18sp"
+            app:cornerRadius="10dp"
+            app:layout_constraintEnd_toEndOf="@+id/inputPasswordLogin"
+            app:layout_constraintStart_toStartOf="@+id/inputPasswordLogin"
+            app:layout_constraintTop_toBottomOf="@+id/checkKeepLogin"
+            app:rippleColor="@color/white"
+            app:strokeColor="@color/white"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonBack1"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
@@ -32,32 +56,6 @@
             app:strokeColor="@color/accent_red"
             app:strokeWidth="2dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/butSignIn"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:backgroundTint="@android:color/transparent"
-            android:enabled="@{viewmodel.loginFormState.dataValid ? true : false}"
-            android:fontFamily="@font/montserrat_medium"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/sign_in"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@{viewmodel.loginFormState.dataValid ? @color/white : @color/text_dark}"
-            android:textSize="18sp"
-            app:cornerRadius="10dp"
-            app:layout_constraintEnd_toEndOf="@+id/inputPasswordLogin"
-            app:layout_constraintStart_toStartOf="@+id/inputPasswordLogin"
-            app:layout_constraintTop_toBottomOf="@+id/checkKeepLogin"
-            app:rippleColor="@color/white"
-            app:strokeColor="@color/white"
-            app:strokeWidth="2dp" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputLogin"
             style="@style/TILStyle"
@@ -72,6 +70,7 @@
             app:boxCornerRadiusBottomStart="44dp"
             app:boxCornerRadiusTopEnd="44dp"
             app:boxCornerRadiusTopStart="44dp"
+            app:boxStrokeColor="@color/border_light"
             app:boxStrokeWidth="2dp"
             app:errorEnabled="true"
             app:errorTextColor="@color/color_error"
@@ -109,6 +108,7 @@
             app:boxCornerRadiusBottomStart="44dp"
             app:boxCornerRadiusTopEnd="44dp"
             app:boxCornerRadiusTopStart="44dp"
+            app:boxStrokeColor="@color/border_light"
             app:boxStrokeWidth="2dp"
             app:errorEnabled="true"
             app:errorTextColor="@color/color_error"

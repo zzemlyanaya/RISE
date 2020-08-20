@@ -95,9 +95,10 @@ class MainActivity : AppCompatActivity() {
             "chat" -> showChatsFragment()
             "profile", "projects_0", "chats" -> { onBackPressedDouble() }
             "projects_$PROJECTS_FAV", "settings", "about_app", "about_me_$PROJECTS_MY" -> showProfileFragment()
-            "project_$PROJECTS_ALL", "add_project" -> showProjectsFragment(PROJECTS_ALL, currentUser.userId)
+            "project_$PROJECTS_ALL" -> showProjectsFragment(PROJECTS_ALL, currentUser.userId)
             "project_$PROJECTS_MY" -> showAboutMeFragment(currentUser)
             "project_$PROJECTS_FAV" -> showProjectsFragment(PROJECTS_FAV, currentUser.userId)
+            "add_edit_project" -> (fragment as AddEditProjectFragment).onBack()
             else -> {}
         }
     }
@@ -240,7 +241,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             .replace(R.id.containerMain,
-                AddEditProjectFragment.newInstance(null), "add_project")
+                AddEditProjectFragment.newInstance(null), "add_edit_project")
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.projectListBar.root.visibility = View.GONE
@@ -251,7 +252,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
             .replace(R.id.containerMain,
-                AddEditProjectFragment.newInstance(project), "edit_project")
+                AddEditProjectFragment.newInstance(project), "add_edit_project")
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.projectListBar.root.visibility = View.GONE
