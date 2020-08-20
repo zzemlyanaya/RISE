@@ -41,12 +41,9 @@ class MainViewModel(private val localRepository: LocalRepository,
         }
 
         if (remoteChatsList != null) {
-            val localChatList = localRepository.getAllUserChats(user.userId)
-            if (localChatList != remoteChatsList) {
-                localRepository.insertChat(remoteChatsList)
-                for (i in remoteChatsList) {
-                    localRepository.insertUserChatRelation(UserChatRelation(user.userId, i.chatId))
-                }
+            localRepository.insertChat(remoteChatsList)
+            for (i in remoteChatsList) {
+                localRepository.insertUserChatRelation(UserChatRelation(user.userId, i.chatId))
             }
         }
     }

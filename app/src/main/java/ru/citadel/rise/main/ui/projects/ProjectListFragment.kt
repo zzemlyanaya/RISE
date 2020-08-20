@@ -64,7 +64,7 @@ class ProjectListFragment : Fragment() {
 
         with(binding.projectList) {
             layoutManager = LinearLayoutManager(context)
-            adapter = ProjectRecyclerViewAdapter( {project -> showDetails(project) }, emptyList())
+            adapter = ProjectRecyclerViewAdapter({ project -> showDetails(project) }, emptyList())
         }
 
         refreshLayout.setOnRefreshListener {
@@ -81,19 +81,22 @@ class ProjectListFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         when (type) {
-            PROJECTS_ALL -> viewModel.fetchAllData().observe(viewLifecycleOwner, Observer { showData(it) })
-            PROJECTS_MY -> viewModel.fetchMyProjectsLocaly(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_ALL -> viewModel.fetchAllProjectsLocally().observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_MY -> viewModel.fetchMyProjectsLocally(userId).observe(viewLifecycleOwner, Observer { showData(it) })
             PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, Observer { showData(it) })
-            else -> viewModel.fetchFavProjectsLocaly(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+            else -> viewModel.fetchFavProjectsLocally(userId).observe(viewLifecycleOwner, Observer { showData(it) })
         }
     }
 
     private fun getData() {
         when (type) {
-            PROJECTS_ALL -> viewModel.fetchAllData().observe(viewLifecycleOwner, Observer { showData(it) })
-            PROJECTS_MY -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_ALL -> viewModel.fetchAllProjects().observe(viewLifecycleOwner, Observer { showData(it) })
+            PROJECTS_MY -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, Observer {
+                showData(it)
+                viewModel.updateMyProjects(userId, it.data ?: emptyList())
+            })
             PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId)
-            else -> viewModel.fetchFavProjectsLocaly(userId)
+            else -> viewModel.fetchFavProjectsLocally(userId)
         }
     }
 

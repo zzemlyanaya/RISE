@@ -30,12 +30,13 @@ class ChatListViewModel(private val localRepository: LocalRepository,
             val result: Result<List<ChatShortView>> = remoteRepository.getChatsByUser(curUserId)
             if (result.error == null) {
                 emit(Resource.success(data = result.data))
-                localRepository.insertChat(result.data.orEmpty())
+                localRepository.insertChat(result.data!!)
+                chats.postValue(result.data)
             }
             else
                 emit(Resource.error(data = null, message = result.error))
         } catch (e: Exception){
             emit(Resource.error(data = null, message = e.message.toString()))
         }
-        }
+    }
 }

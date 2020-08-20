@@ -42,7 +42,10 @@ interface ILocalDao {
 
 
     // projects dao
-    @Query("SELECT * FROM projects WHERE contact=:userId")
+    @Query("SELECT * FROM projects")
+    fun getAllProjects(): List<Project>
+
+    @Query("SELECT projectId, name, contact, contactName, descriptionLong, cost, deadlines, website, tags FROM projects JOIN user_with_their_projects ON projects.projectId=user_with_their_projects.projId WHERE user_with_their_projects.userId=:userId")
     fun getUserTheirProjects(userId: Int): List<Project>
 
     @Query("SELECT projectId, name, contact, contactName, descriptionLong, cost, deadlines, website, tags FROM projects JOIN user_with_fav_projects ON projects.projectId=user_with_fav_projects.projId WHERE user_with_fav_projects.userId=:userId")

@@ -29,7 +29,10 @@ class ChatsRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.from.text = item.toName
-        holder.lastMessage.text = item.lastMessage
+        if (item.lastMessage.length > 30)
+            holder.lastMessage.text = "${item.lastMessage.substring(0, 28)}..."
+        else
+            holder.lastMessage.text = item.lastMessage
         holder.itemView.setOnClickListener { onCardClickListener(item) }
     }
 

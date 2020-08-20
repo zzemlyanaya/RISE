@@ -45,6 +45,8 @@ class LocalRepository(private val dao: ILocalDao) {
     fun deleteChat(chats: List<ChatShortView>) = dao.deleteChat(chats)
 
     // projects
+    fun getAllProjects() = dao.getAllProjects()
+
     fun insertProject(projects: List<Project>) = dao.insertProjects(projects)
 
     fun insertUserWithTheirProject(userWithTheirProject: UserWithTheirProjects) = dao.insertUserWithTheirProject(userWithTheirProject)
