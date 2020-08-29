@@ -62,7 +62,7 @@ class ChatFragment : Fragment(), IOnBack {
         chatId = this.requireArguments()[Constants.CHAT_ID] as Int
         if(chatId == 0)
             viewModel.createNewChat(currentUserId, otherUserShortView.id, "")
-                .observe(viewLifecycleOwner, Observer {
+                .observe(viewLifecycleOwner, {
                     when(it.status){
                         Status.LOADING -> {}
                         Status.SUCCESS -> { chatId = it.data!!.chatId }

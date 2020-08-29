@@ -9,7 +9,7 @@ import ru.citadel.rise.data.model.*
 
 @Database(
     entities = [User::class, Project::class, UserWithTheirProjects::class, UserWithFavProjects::class,
-                ChatShortView::class, UserChatRelation::class, Chat::class],
+                ChatShortView::class, Chat::class],
     version = 1,
     exportSchema = false)
 abstract class LocalDatabase : RoomDatabase() {

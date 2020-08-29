@@ -1,12 +1,14 @@
 package ru.citadel.rise.main
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.citadel.rise.data.local.LocalRepository
-import ru.citadel.rise.data.model.*
+import ru.citadel.rise.data.model.ChatShortView
+import ru.citadel.rise.data.model.Project
+import ru.citadel.rise.data.model.User
+import ru.citadel.rise.data.model.UserWithTheirProjects
 import ru.citadel.rise.data.remote.RemoteRepository
 
 class MainViewModel(private val localRepository: LocalRepository,
@@ -40,21 +42,7 @@ class MainViewModel(private val localRepository: LocalRepository,
             null
         }
 
-        if (remoteChatsList != null) {
+        if (remoteChatsList != null)
             localRepository.insertChat(remoteChatsList)
-            for (i in remoteChatsList) {
-                localRepository.insertUserChatRelation(UserChatRelation(user.userId, i.chatId))
-            }
-        }
-    }
-
-    fun logout() = liveData(Dispatchers.IO){
-        try {
-            remoteRepository.logout()
-            emit("OK")
-        }
-        catch (e: Exception) {
-            emit(e.message)
-        }
     }
 }

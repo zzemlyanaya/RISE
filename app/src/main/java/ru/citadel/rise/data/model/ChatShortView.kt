@@ -16,7 +16,7 @@ data class ChatShortView(
    val userId: Int,
    @NonNull
    @ColumnInfo
-   val toID: Int,
+   val toId: Int,
    @NonNull
    @ColumnInfo
    val toName: String,

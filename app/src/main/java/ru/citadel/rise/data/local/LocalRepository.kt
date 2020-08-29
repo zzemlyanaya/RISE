@@ -40,8 +40,6 @@ class LocalRepository(private val dao: ILocalDao) {
 
     fun insertChat(chats: List<ChatShortView>) = dao.insertChat(chats)
 
-    fun insertUserChatRelation(userChatRelation: UserChatRelation) = dao.insertUserChatRelashion(userChatRelation)
-
     fun deleteChat(chats: List<ChatShortView>) = dao.deleteChat(chats)
 
     // projects

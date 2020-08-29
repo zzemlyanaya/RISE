@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -66,19 +65,19 @@ class ChatListFragment : Fragment() {
 
     private fun onChatClick(it: ChatShortView){
         (activity as MainActivity).showChatFragment(
-            UserShortView(it.toID, it.toName),
+            UserShortView(it.toId, it.toName),
             it.chatId
         )
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        viewModel.chats.observe(viewLifecycleOwner, Observer { showData(Resource.success(it)) })
+        viewModel.chats.observe(viewLifecycleOwner, { showData(Resource.success(it)) })
     }
 
     private fun refreshData(){
-        viewModel.fetchAllChatsRemotely().observe(viewLifecycleOwner, Observer { showData(it) })
+        viewModel.fetchAllChatsRemotely().observe(viewLifecycleOwner, { showData(it) })
     }
 
     private fun showData(it: Resource<List<ChatShortView>?>){

@@ -39,7 +39,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
     // Lifecycle&ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
@@ -87,5 +87,7 @@ dependencies {
     implementation ('com.github.nkzawa:socket.io-client:0.6.0'){
         exclude group: 'org.json', module: 'json'
     }
+
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
 }

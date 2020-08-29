@@ -14,7 +14,7 @@
     <!-- LoginActivity theme. -->
     <style name="AppTheme.Login">
         <item name="colorPrimary">@color/accent_red</item>
-        <item name="colorOnSurface">@color/accent_red</item>
+        <item name="colorOnSurface">@color/white</item>
         <item name="buttonStyle">@style/ButtonStyle</item>
     </style>
 
@@ -60,7 +60,6 @@
 
     <style name="TILStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-        <item name="iconPadding">8dp</item>
         <item name="hintTextColor">@color/text_dark</item>
         <item name="boxCornerRadiusBottomStart">44dp</item>
         <item name="boxCornerRadiusBottomEnd">44dp</item>

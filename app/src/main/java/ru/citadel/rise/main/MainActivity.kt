@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.fxn.OnBubbleClickListener
 import ru.citadel.rise.App
@@ -46,8 +45,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var backPressedOnce = false
-    private val mHandler: Handler = Handler()
-    private val mRunnable = Runnable { backPressedOnce = false }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +52,12 @@ class MainActivity : AppCompatActivity() {
         currentUser = intent.extras!!.getBundle(USER)!!.getSerializable(USER) as User
 
         val dao = LocalDatabase.getDatabase(this)!!.dao()
-        viewModel = ViewModelProviders.of(this, MainViewModelFactory(LocalRepository.getInstance(dao), currentUser)).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(
+            this, MainViewModelFactory(
+                LocalRepository.getInstance(dao),
+                currentUser
+            )
+        ).get(MainViewModel::class.java)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -66,15 +68,15 @@ class MainActivity : AppCompatActivity() {
             override fun onBubbleClick(id: Int) {
                 when (id) {
                     R.id.navigation_chats -> {
-                        if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ChatListFragment)
+                        if (supportFragmentManager.findFragmentById(R.id.containerMain) !is ChatListFragment)
                             showChatsFragment()
                     }
                     R.id.navigation_profile -> {
-                        if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProfileFragment)
+                        if (supportFragmentManager.findFragmentById(R.id.containerMain) !is ProfileFragment)
                             showProfileFragment()
                     }
                     R.id.navigation_rise -> {
-                        if (supportFragmentManager.findFragmentById(R.id.containerMain)  !is ProjectListFragment)
+                        if (supportFragmentManager.findFragmentById(R.id.containerMain) !is ProjectListFragment)
                             showProjectsFragment(PROJECTS_ALL, currentUser.userId)
                     }
                 }
@@ -93,7 +95,9 @@ class MainActivity : AppCompatActivity() {
         val fragment = supportFragmentManager.findFragmentById(R.id.containerMain)
         when(fragment!!.tag) {
             "chat" -> showChatsFragment()
-            "profile", "projects_0", "chats" -> { onBackPressedDouble() }
+            "profile", "projects_0", "chats" -> {
+                onBackPressedDouble()
+            }
             "projects_$PROJECTS_FAV", "settings", "about_app", "about_me_$PROJECTS_MY" -> showProfileFragment()
             "project_$PROJECTS_ALL" -> showProjectsFragment(PROJECTS_ALL, currentUser.userId)
             "project_$PROJECTS_MY", "edit_user" -> showAboutMeFragment(currentUser)
@@ -106,19 +110,18 @@ class MainActivity : AppCompatActivity() {
     private fun onBackPressedDouble(){
         if (backPressedOnce) {
             App.prefs.setPref(PREF_KEEP_LOGGIN, false)
-            val intent = Intent(this, LoginActivity::class.java)
-            viewModel.logout().observe(this, Observer {
-                if (it == "OK"){
-                    startActivity(intent)
-                    finish()
-                } else
-                    Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
-            })
+            val intent = Intent(this, LoginActivity::class.java).putExtra("LOGOUT", true)
+            startActivity(intent)
+            finish()
         }
 
         backPressedOnce = true
-        Toast.makeText(this@MainActivity, "Нажмите ещё раз для выхода из аккаунта", Toast.LENGTH_SHORT).show()
-        mHandler.postDelayed(mRunnable, 2000)
+        Toast.makeText(
+            this@MainActivity,
+            "Нажмите ещё раз для выхода из аккаунта",
+            Toast.LENGTH_SHORT
+        ).show()
+        Handler().postDelayed({ backPressedOnce = false }, 2000)
     }
 
     private fun showChatsFragment(){
@@ -144,20 +147,25 @@ class MainActivity : AppCompatActivity() {
     fun showProjectsFragment(type: Int, userId: Int){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.containerMain, ProjectListFragment.newInstance(type, userId), "projects_$type")
+            .replace(
+                R.id.containerMain,
+                ProjectListFragment.newInstance(type, userId),
+                "projects_$type"
+            )
             .commitAllowingStateLoss()
         hideAllHeaderView()
         if (currentUser.type == TYPE_AUTHOR)
-            binding.projectListBar.cardAddProject.visibility = View.VISIBLE
+            binding.projectListBar.butAddProject.visibility = View.VISIBLE
         else
-            binding.projectListBar.cardAddProject.visibility = View.GONE
+            binding.projectListBar.butAddProject.visibility = View.GONE
         when(type) {
             PROJECTS_ALL -> {
                 binding.projectListBar.root.visibility = View.VISIBLE
                 binding.header.root.visibility = View.GONE
                 binding.navView.visibility = View.VISIBLE
             }
-            PROJECTS_MY, PROJECTS_BY_USER -> { }
+            PROJECTS_MY, PROJECTS_BY_USER -> {
+            }
             PROJECTS_FAV -> {
                 binding.header.root.visibility = View.VISIBLE
                 binding.navView.visibility = View.GONE
@@ -197,7 +205,11 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.containerMain, ProjectFragment.newInstance(project, currentUser.userId), "project_$typeFrom")
+            .replace(
+                R.id.containerMain,
+                ProjectFragment.newInstance(project, currentUser.userId),
+                "project_$typeFrom"
+            )
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.VISIBLE
         binding.projectListBar.root.visibility = View.GONE
@@ -231,7 +243,11 @@ class MainActivity : AppCompatActivity() {
         val listType = if (user == currentUser) PROJECTS_MY else PROJECTS_BY_USER
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.containerMain, AboutMeFragment.newInstance(user, listType), "about_me_$listType")
+            .replace(
+                R.id.containerMain,
+                AboutMeFragment.newInstance(user, listType),
+                "about_me_$listType"
+            )
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.navView.visibility = View.GONE
@@ -240,8 +256,10 @@ class MainActivity : AppCompatActivity() {
     private fun showAddEditProject(){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE)
-            .replace(R.id.containerMain,
-                AddEditProjectFragment.newInstance(null), "add_edit_project")
+            .replace(
+                R.id.containerMain,
+                AddEditProjectFragment.newInstance(null), "add_edit_project"
+            )
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.projectListBar.root.visibility = View.GONE
@@ -251,8 +269,10 @@ class MainActivity : AppCompatActivity() {
     fun showAddEditProject(project: Project){
         supportFragmentManager.beginTransaction()
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .replace(R.id.containerMain,
-                AddEditProjectFragment.newInstance(project), "add_edit_project")
+            .replace(
+                R.id.containerMain,
+                AddEditProjectFragment.newInstance(project), "add_edit_project"
+            )
             .commitAllowingStateLoss()
         binding.header.root.visibility = View.GONE
         binding.projectListBar.root.visibility = View.GONE

@@ -22,7 +22,7 @@ interface ILocalDao {
     fun deleteUser(user: User)
 
     // chats dao
-    @Query("SELECT * FROM chats_short INNER JOIN user_chat_relation ON chats_short.chatId=user_chat_relation.chatId WHERE user_chat_relation.userId=:userId")
+    @Query("SELECT * FROM chats_short WHERE userId=:userId")
     fun getAllUserChats(userId: Int): List<ChatShortView>
 
     @Query("SELECT chatId FROM chats_short WHERE userId=:userFrom AND toId=:userTo")
@@ -33,9 +33,6 @@ interface ILocalDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertChat(chat: List<ChatShortView>)
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertUserChatRelashion(userChatRelation: UserChatRelation)
 
     @Delete
     fun deleteChat(chat: List<ChatShortView>)
@@ -51,7 +48,7 @@ interface ILocalDao {
     @Query("SELECT projectId, name, contact, contactName, descriptionLong, cost, deadlines, website, tags FROM projects JOIN user_with_fav_projects ON projects.projectId=user_with_fav_projects.projId WHERE user_with_fav_projects.userId=:userId")
     fun getUserFavProjects(userId: Int): List<Project>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertProjects(projects: List<Project>)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

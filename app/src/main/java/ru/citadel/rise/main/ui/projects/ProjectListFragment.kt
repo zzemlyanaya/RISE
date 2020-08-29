@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -74,24 +73,32 @@ class ProjectListFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        when (type) {
+            PROJECTS_ALL -> {
+                viewModel.fetchAllProjectsLocally().observe(viewLifecycleOwner, { showData(it) })
+                viewModel.fetchAllProjects().observe(viewLifecycleOwner, { showData(it) })
+            }
+            PROJECTS_MY -> viewModel.fetchMyProjectsLocally(userId).observe(viewLifecycleOwner,
+                { showData(it) })
+            PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner,
+                { showData(it) })
+            else -> viewModel.fetchFavProjectsLocally(userId).observe(viewLifecycleOwner,
+                { showData(it) })
+        }
+    }
+
     private fun showDetails(project: Project){
         (activity as MainActivity).showProjectFragment(project, type)
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        when (type) {
-            PROJECTS_ALL -> viewModel.fetchAllProjectsLocally().observe(viewLifecycleOwner, Observer { showData(it) })
-            PROJECTS_MY -> viewModel.fetchMyProjectsLocally(userId).observe(viewLifecycleOwner, Observer { showData(it) })
-            PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, Observer { showData(it) })
-            else -> viewModel.fetchFavProjectsLocally(userId).observe(viewLifecycleOwner, Observer { showData(it) })
-        }
-    }
 
     private fun getData() {
         when (type) {
-            PROJECTS_ALL -> viewModel.fetchAllProjects().observe(viewLifecycleOwner, Observer { showData(it) })
-            PROJECTS_MY -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, Observer {
+            PROJECTS_ALL -> viewModel.fetchAllProjects().observe(viewLifecycleOwner,
+                { showData(it) })
+            PROJECTS_MY -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, {
                 showData(it)
                 viewModel.updateMyProjects(userId, it.data ?: emptyList())
             })

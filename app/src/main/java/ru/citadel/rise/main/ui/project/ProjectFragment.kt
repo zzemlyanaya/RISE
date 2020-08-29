@@ -90,10 +90,10 @@ class ProjectFragment : Fragment(), IOnBack {
 
     private fun contact() = run {
         CoroutineScope(Dispatchers.IO).launch {
-            val id = localRepository.getChatIdByUsers(curUserId, project.contact)
+            val id = localRepository.getChatIdByUsers(curUserId, project.contact) ?: 0
             val shortView = UserShortView(project.contact, project.contactName)
             withContext(Dispatchers.Main) {
-                (requireActivity() as MainActivity).showChatFragment(shortView, id ?: 0)
+                (requireActivity() as MainActivity).showChatFragment(shortView, id)
             }
         }
 

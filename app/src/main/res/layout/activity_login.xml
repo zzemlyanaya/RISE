@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
         android:background="@drawable/im_background_login"
-        android:backgroundTint="#ED22272C"
+        android:backgroundTint="#ED111113"
         android:backgroundTintMode="src_over"
         android:fitsSystemWindows="true">
 

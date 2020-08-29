@@ -8,7 +8,7 @@
     app:cardBackgroundColor="@android:color/transparent"
     app:cardElevation="0dp"
     app:cardUseCompatPadding="false"
-    app:contentPadding="12dp">
+    app:contentPadding="8dp">
 
     <LinearLayout
         android:id="@+id/messLayout"
@@ -34,14 +34,13 @@
                 android:id="@+id/messTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="22dp"
                 android:layout_marginEnd="16dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:textColor="@color/text_dark"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/messBubble"
+                app:layout_constraintStart_toStartOf="@+id/messText"
                 app:layout_constraintTop_toBottomOf="@id/messText"
                 tools:text="0/0/00 00:00" />
 
@@ -49,7 +48,7 @@
                 android:id="@+id/messText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="26dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="20dp"
                 android:autoLink="web|email"

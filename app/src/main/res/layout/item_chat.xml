@@ -54,6 +54,7 @@
         android:padding="3dp"
         android:scaleType="centerInside"
         android:tint="@color/green_light"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/chatImage"
         app:shapeAppearanceOverlay="@style/roundedImageViewOval"

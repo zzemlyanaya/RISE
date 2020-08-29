@@ -43,14 +43,22 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
         }
 
         backPressedOnce = true
-        Toast.makeText(this, "Нажмите ещё раз для выхода из приложения", Toast.LENGTH_SHORT).show()
-        mHandler.postDelayed(mRunnable, 1500)
+        Toast.makeText(
+            this@LoginActivity,
+            "Нажмите ещё раз для выхода из аккаунта",
+            Toast.LENGTH_SHORT
+        ).show()
+        Handler().postDelayed({ backPressedOnce = false }, 2000)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (intent.getBooleanExtra("LOGOUT", false)) {
+            logout()
+        }
 
         binding.apply {
             viewPager.visibility = View.INVISIBLE
@@ -64,6 +72,15 @@ class LoginActivity : AppCompatActivity(), IOnCreateAccountListener, IOnLogin {
         localRepository = LocalRepository.getInstance(dao)
 
         connect()
+    }
+
+    private fun logout(){
+        lifecycleScope.launch(Dispatchers.IO) {
+            try { RemoteRepository().logout() }
+            catch (e: Exception) {
+
+            }
+        }
     }
 
     private fun connect(){
