@@ -23,22 +23,10 @@
                 android:layout_marginTop="32dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="@string/contacts"
-                android:textColor="@color/accent_red"
+                android:textColor="@color/white"
                 android:textSize="15sp"
                 app:layout_constraintStart_toStartOf="@+id/imageView8"
                 app:layout_constraintTop_toBottomOf="@+id/imageView8" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="@string/about_me"
-                android:textColor="@color/accent_red"
-                android:textSize="15sp"
-                app:layout_constraintStart_toStartOf="@+id/textView11"
-                app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imageView8"
@@ -46,11 +34,21 @@
                 android:layout_height="24dp"
                 android:layout_marginStart="22dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_location"
                 android:tint="@color/accent_red"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_location" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageView"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="32dp"
+                android:scaleType="fitXY"
+                android:tint="@color/accent_red"
+                app:layout_constraintStart_toStartOf="@+id/imageView8"
+                app:layout_constraintTop_toBottomOf="@+id/textView11"
+                app:srcCompat="@drawable/ic_info" />
 
             <TextView
                 android:id="@+id/aboutMeLocation"
@@ -68,14 +66,14 @@
                 android:id="@+id/aboutMeText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginStart="6dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/montserrat_regular"
                 android:text="@string/empty_about"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toTopOf="@+id/imageView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

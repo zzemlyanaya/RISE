@@ -156,7 +156,7 @@
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/montserrat_bold"
                             android:text="@string/proj_tags"
-                            android:textColor="@color/accent_red"
+                            android:textColor="@color/white"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="@+id/projDescrLong"
                             app:layout_constraintTop_toBottomOf="@+id/projDescrLong" />
@@ -169,7 +169,7 @@
                             android:layout_marginTop="16dp"
                             android:fontFamily="@font/montserrat_bold"
                             android:text="@string/proj_about"
-                            android:textColor="@color/accent_red"
+                            android:textColor="@color/white"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="@+id/imageView9"
                             app:layout_constraintTop_toBottomOf="@+id/imageView9" />

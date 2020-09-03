@@ -22,6 +22,10 @@ object Constants {
     const val TYPE_AUTHOR = 1
     const val TYPE_COMPANY = 0
 
+    const val SHOW_CANT_UPDATE = 0
+    const val SHOW_CANT_GET_LOCALLY = 1
+    const val SHOW_CANT_GET_REMOTELY = 2
+
 }
 
 fun Boolean?.toInt(): Int = if (this != null && this) 1 else 0

@@ -15,17 +15,23 @@ import ru.citadel.rise.data.remote.RemoteRepository
 class ProjectListViewModel(private val localRepository: LocalRepository) : ViewModel() {
     private val repository = RemoteRepository()
 
+    var isUpdated = false
+
     fun fetchAllProjects() = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
             val result: Result<List<Project>> = repository.getAllProjects()
             if (result.error == null) {
+                isUpdated = true
                 emit(Resource.success(data = result.data))
                 localRepository.insertProject(result.data!!)
             }
-            else
+            else {
                 emit(Resource.error(data = null, message = result.error))
+                isUpdated = false
+            }
         } catch (e: Exception){
+            isUpdated = false
             emit(Resource.error(data = null, message = e.message.toString()))
         }
     }
@@ -34,11 +40,16 @@ class ProjectListViewModel(private val localRepository: LocalRepository) : ViewM
         emit(Resource.loading(data = null))
         try {
             val result: Result<List<Project>> = repository.getProjectsByUser(id)
-            if (result.error == null)
+            if (result.error == null) {
+                isUpdated = true
                 emit(Resource.success(data = result.data))
-            else
+            }
+            else {
                 emit(Resource.error(data = null, message = result.error))
+                isUpdated = false
+            }
         } catch (e: Exception){
+            isUpdated = false
             emit(Resource.error(data = null, message = e.message.toString()))
         }
     }

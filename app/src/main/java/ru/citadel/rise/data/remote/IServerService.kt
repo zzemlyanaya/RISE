@@ -6,7 +6,7 @@ import ru.citadel.rise.data.model.*
 
 interface IServerService {
     companion object {
-        const val BASE_URL = "http://d5fbdfe30f8d.ngrok.io"
+        const val BASE_URL = "http://50a4a71bd630.ngrok.io"
     }
 
     @GET("/")

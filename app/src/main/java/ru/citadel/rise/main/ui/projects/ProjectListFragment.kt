@@ -1,5 +1,6 @@
 package ru.citadel.rise.main.ui.projects
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,6 +16,9 @@ import ru.citadel.rise.Constants.LIST_TYPE
 import ru.citadel.rise.Constants.PROJECTS_ALL
 import ru.citadel.rise.Constants.PROJECTS_BY_USER
 import ru.citadel.rise.Constants.PROJECTS_MY
+import ru.citadel.rise.Constants.SHOW_CANT_GET_LOCALLY
+import ru.citadel.rise.Constants.SHOW_CANT_GET_REMOTELY
+import ru.citadel.rise.Constants.SHOW_CANT_UPDATE
 import ru.citadel.rise.Constants.USER
 import ru.citadel.rise.R
 import ru.citadel.rise.Status
@@ -77,15 +81,15 @@ class ProjectListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         when (type) {
             PROJECTS_ALL -> {
-                viewModel.fetchAllProjectsLocally().observe(viewLifecycleOwner, { showData(it) })
-                viewModel.fetchAllProjects().observe(viewLifecycleOwner, { showData(it) })
+                viewModel.fetchAllProjectsLocally().observe(viewLifecycleOwner, { showData(it, SHOW_CANT_GET_LOCALLY) })
+                viewModel.fetchAllProjects().observe(viewLifecycleOwner, { showData(it, SHOW_CANT_UPDATE) })
             }
             PROJECTS_MY -> viewModel.fetchMyProjectsLocally(userId).observe(viewLifecycleOwner,
-                { showData(it) })
+                { showData(it, SHOW_CANT_GET_LOCALLY) })
             PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner,
-                { showData(it) })
+                { showData(it, SHOW_CANT_UPDATE) })
             else -> viewModel.fetchFavProjectsLocally(userId).observe(viewLifecycleOwner,
-                { showData(it) })
+                { showData(it, SHOW_CANT_GET_LOCALLY) })
         }
     }
 
@@ -97,9 +101,9 @@ class ProjectListFragment : Fragment() {
     private fun getData() {
         when (type) {
             PROJECTS_ALL -> viewModel.fetchAllProjects().observe(viewLifecycleOwner,
-                { showData(it) })
+                { showData(it, SHOW_CANT_UPDATE) })
             PROJECTS_MY -> viewModel.fetchProjectsByUser(userId).observe(viewLifecycleOwner, {
-                showData(it)
+                showData(it, SHOW_CANT_GET_LOCALLY)
                 viewModel.updateMyProjects(userId, it.data ?: emptyList())
             })
             PROJECTS_BY_USER -> viewModel.fetchProjectsByUser(userId)
@@ -107,10 +111,11 @@ class ProjectListFragment : Fragment() {
         }
     }
 
-    private fun showData(resource: Resource<List<Project>?>){
+    private fun showData(resource: Resource<List<Project>?>, errorOption: Int){
         when (resource.status) {
             Status.SUCCESS -> {
                 recyclerView.visibility = View.VISIBLE
+                textConnect.visibility = View.INVISIBLE
                 refreshLayout.isRefreshing = false
                 resource.data?.let { list ->
                     recyclerView.adapter =
@@ -123,7 +128,20 @@ class ProjectListFragment : Fragment() {
             Status.ERROR -> {
                 recyclerView.visibility = View.VISIBLE
                 refreshLayout.isRefreshing = false
-                textConnect.visibility = View.VISIBLE
+                if (errorOption == SHOW_CANT_UPDATE && !viewModel.isUpdated)
+                    AlertDialog.Builder(requireContext())
+                        .setMessage(R.string.cant_update)
+                        .setPositiveButton("OK") { dialog, _ -> run { dialog.cancel() } }
+                        .create()
+                        .show()
+                else if (errorOption == SHOW_CANT_GET_REMOTELY)
+                    AlertDialog.Builder(requireContext())
+                        .setMessage(R.string.connection_failed)
+                        .setPositiveButton("OK") { dialog, _ -> run { dialog.cancel() } }
+                        .create()
+                        .show()
+                else
+                    textConnect.visibility = View.VISIBLE
             }
             Status.LOADING -> {
                 recyclerView.visibility = View.INVISIBLE
